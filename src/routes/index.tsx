@@ -1,9 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
+// @ts-expect-error - vite raw import
 import landingHtml from "../../public/landing.html?raw";
 
-const landingDocument = landingHtml.includes("<base")
-  ? landingHtml
-  : landingHtml.replace(/<head(\s*[^>]*)>/i, '<head$1><base href="/" />');
+// Inject <base href="/"> so relative URLs inside the landing resolve correctly.
+const landingDocument: string = (landingHtml as string).includes("<base")
+  ? (landingHtml as string)
+  : (landingHtml as string).replace(
+      /<head(\s*[^>]*)>/i,
+      '<head$1><base href="/" />',
+    );
 
 export const Route = createFileRoute("/")({
   component: LandingFrame,

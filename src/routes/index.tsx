@@ -1,9 +1,21 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
-  // Redirect en el servidor: 0 JS de cliente, 0 flash, salto inmediato
-  beforeLoad: () => {
-    throw redirect({ href: "/landing.html" });
-  },
-  component: () => null,
+  component: LandingFrame,
 });
+
+function LandingFrame() {
+  return (
+    <iframe
+      src="/landing.html"
+      title="2CES Landing"
+      style={{
+        position: "fixed",
+        inset: 0,
+        width: "100%",
+        height: "100%",
+        border: "none",
+      }}
+    />
+  );
+}

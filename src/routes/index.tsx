@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-// @ts-expect-error - vite raw import
 import landingHtml from "../../public/landing.html?raw";
 
 // Inject <base href="/"> so relative URLs inside the landing resolve correctly.

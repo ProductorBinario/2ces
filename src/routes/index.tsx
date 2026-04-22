@@ -1,4 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
+import landingHtml from "../../public/landing.html?raw";
+
+const landingDocument = landingHtml.includes("<base")
+  ? landingHtml
+  : landingHtml.replace(/<head(\s*[^>]*)>/i, '<head$1><base href="/" />');
 
 export const Route = createFileRoute("/")({
   component: LandingFrame,
@@ -7,15 +12,9 @@ export const Route = createFileRoute("/")({
 function LandingFrame() {
   return (
     <iframe
-      src="/landing.html"
       title="2CES Landing"
-      style={{
-        position: "fixed",
-        inset: 0,
-        width: "100%",
-        height: "100%",
-        border: "none",
-      }}
+      srcDoc={landingDocument}
+      className="fixed inset-0 h-dvh w-full border-0 bg-background"
     />
   );
 }

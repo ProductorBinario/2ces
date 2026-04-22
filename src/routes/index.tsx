@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import landingHtml from "../../public/landing.html?raw&v=2";
+import landingHtml from "../../public/landing.html?raw";
 
 // Inject <base href="/"> so relative URLs inside the landing resolve correctly.
 const landingDocument: string = (landingHtml as string).includes("<base")

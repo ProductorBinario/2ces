@@ -1,8 +1,7 @@
-
-
 # Plan: Reescritura integral de copy + dashboard hero + correcciones funcionales
 
 ## Resumen
+
 Reescribir todo el copy de la landing con la nueva estructura (7 secciones), trasladar logo/toggles a una banda glass superior derecha en el hero, sustituir el panel hero por el "Dashboard de Eficiencia 2CES" con gráfica comparativa en vivo, centralizar el coste fijo en una sola constante, y conectar todos los botones a los canales reales con mensajes predefinidos.
 
 ---
@@ -34,7 +33,7 @@ Todos los nodos que muestren 1.65 usarán `data-bind="ces-fee"` y se rellenarán
   - Estilo glass: `background: rgba(10,20,40,0.60); backdrop-filter: blur(14px) saturate(140%); border: 1px solid rgba(255,255,255,.08); border-radius: 999px; padding: 8px 12px;`
   - Contenido: toggle idioma (ES/EN) + toggle tema (☀/🌙).
 - El logo "2CES" se mueve al hero como elemento principal arriba a la izquierda del badge.
-- Eliminar la insignia "2CES" duplicada que estaba en el panel — sustituida por el logo real.
+- Eliminar la insignia "2CES" duplicada que estaba en el panel — sustituida por el logo real. En el background colocar el logo de 2ces no la insignia 
 
 Resultado: hero limpio, sin header fijo, banda glass discreta arriba-derecha que no compite con el contenido.
 
@@ -43,6 +42,7 @@ Resultado: hero limpio, sin header fijo, banda glass discreta arriba-derecha que
 ## 3. Hero — nuevo copy + Dashboard de Eficiencia
 
 **Lado izquierdo (texto):**
+
 - Cintillo: "Optimización Premium en USDT-TRC20"
 - H1: "Deja de regalar tu dinero a la red: transfiere USDT con un costo fijo de **1.65** y máxima eficiencia."
 - Subtítulo: "Mientras el mercado te cobra hasta 4.4 USDT por movimiento, nuestra infraestructura te permite operar con un ahorro real del **62.5%**. Si no estás optimizando, estás perdiendo beneficios en cada transacción."
@@ -80,18 +80,21 @@ Card con bordes redondeados, soft shadow, dos badges flotantes (USDT esquina sup
 ---
 
 ## 4. Sección "El problema"
+
 - H2: "¿Sabes cuánto dinero estás dejando sobre la mesa?"
 - 3 tarjetas con `data-bind`: Mercado alto (4.40 fijo), Mercado promedio (live), 2CES (1.65 desde constante).
-- Frase impacto: "Con 2CES, si el mercado sube tú no gastas más; si el mercado baja, tú sigues pagando menos. Es matemática pura, no una promesa."
+- Frase impacto: "Con 2CES, si el mercado sube tú no pagas más; si el mercado baja, tú sigues gastando menos. Es matemática pura, más que una promesa."
 
 ## 5. Calculadora — "Bofetada de realidad"
-- H2: "Tu ineficiencia actual en cifras"
+
+- H2: "Tu coste actual en cifras"
 - Input: nº transacciones (default 10000).
 - Output: Gasto Mercado Máx (`tx*4.4`), Gasto 2CES (`tx*CES_FEE`), Pérdida (`tx*(4.4-CES_FEE)`).
 - Pregunta psicológica final.
 - CTA: "Calcular mi ahorro real" → WhatsApp con mensaje #2 que incluye el nº de transacciones seleccionado.
 
 ## 6. Proceso "Cero fricción" (3 pasos numerados)
+
 1. Sin cuentas ni registros
 2. Sin descargas peligrosas
 3. Asignación inmediata
@@ -99,26 +102,31 @@ Card con bordes redondeados, soft shadow, dos badges flotantes (USDT esquina sup
 Mantener estilo numerado secuencial con conector visual.
 
 ## 7. Confianza
+
 - H2: "Experiencia real para operaciones de alto nivel"
 - 2 bloques: Soporte Humano Real · Rapidez Garantizada (2-5s).
 
 ## 8. FAQ (7 preguntas del copy)
+
 Acordeón accesible con las preguntas/respuestas exactas suministradas.
 
 ## 9. Cierre + Contacto
+
 - H2: "El ahorro es real y es ahora."
 - Formulario con **solo textarea** (mensaje) + 3 botones que envían ese mismo mensaje por:
   - **WhatsApp** → `https://wa.me/{wa}?text={mensaje}`
   - **Telegram** → `https://t.me/{tg}?text={mensaje}` (con prefill via deep link)
   - **Email** → `mailto:{email}?subject=...&body={mensaje}`
 - Si textarea vacío → usa mensaje predefinido genérico del canal.
-- Las 3 tarjetas en azul (tonos distintos), iconos circulares con halo.
+- Las 3 tarjetas en azul (tonos distintos), iconos circulares con halo. Ordenado de forma horizontal con efecto glass
 
 ## 10. Botón flotante WhatsApp
+
 - Reemplazar icono teléfono por **mini-logo 2CES** (mismo badge "2CES" en gradiente azul que usamos en payments).
 - Mantener glass + borde azul + tooltip.
 
 ## 11. Footer
+
 "2CES — Seguridad, eficiencia y confianza en cada transacción. © 2026 Todos los derechos reservados."
 
 ---
@@ -144,6 +152,7 @@ Helper `openChannel(canal, mensaje)` que construye la URL con `encodeURIComponen
 ## 13. Auto-detección idioma + tema
 
 Al cargar:
+
 ```js
 // Idioma
 const userLang = (navigator.language||'es').slice(0,2);
@@ -162,6 +171,7 @@ Los toggles del hero-bar sobreescriben la auto-detección y guardan en `localSto
 ---
 
 ## 14. Auditoría final
+
 - Todos los botones con `aria-label` + handler verificado.
 - `rel="noopener noreferrer"` en externos.
 - `encodeURIComponent` en mensajes.
@@ -173,11 +183,12 @@ Los toggles del hero-bar sobreescriben la auto-detección y guardan en `localSto
 ---
 
 ## Archivos afectados
+
 - `src/assets/landing.html` — refactor mayor (HTML, CSS, JS).
 - `src/routes/index.tsx` — sin cambios.
 
 ---
 
 ## Pregunta antes de implementar
-**WhatsApp**: el número `+31 97010265771` tiene 12 dígitos (NL usa 11 con +31). Voy a usar `+31970102657` (11 dígitos). Si es otro, dímelo en una línea y lo cambio en la constante `CONTACT.wa` — un solo punto de edición.
 
+**WhatsApp**: el número `+31 97010265771` este es el número que me pasaro tiene 12 dígitos (NL usa 11 con +31). Voy a usar `+31970102657` (11 dígitos). Si es otro, dímelo en una línea y lo cambio en la constante `CONTACT.wa` — un solo punto de edición. El contacto de telegram es : @ask2ces el contacto de email es: [support@2cesenergy.com](mailto:support@2cesenergy.com)  realiza pruebas de conexión de funcionales de los botones  de diseños ux ui de carga, de seguridad y que toda la información que se da envivo cargue y sea la correcta 

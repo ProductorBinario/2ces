@@ -97,9 +97,15 @@
   .micro-trust .dotg{width:6px;height:6px;border-radius:50%;background:var(--c400);box-shadow:0 0 0 4px rgba(34,211,238,.15)}
 
   .brand{display:inline-flex;align-items:center;gap:10px}
-  .brand-mark{width:42px;height:42px;border-radius:12px;background:var(--grad);display:grid;place-items:center;color:#fff;font-family:'PT Sans Narrow';font-weight:700;font-size:18px;box-shadow:var(--shadow-soft)}
+  .brand-logo{height:44px;width:auto;display:block}
+  .brand-logo.sm{height:34px}
   .brand-name{font-family:'PT Sans Narrow';font-weight:700;font-size:22px}
   .brand-name span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  html[data-theme="light"] .brand-logo{filter:none}
+  html[data-theme="dark"] .brand-logo path[fill="#FFFFFF"],
+  html[data-theme="dark"] .brand-logo path[fill="#FFF"],
+  html[data-theme="dark"] .brand-logo path[fill="#1A1E20"],
+  html[data-theme="dark"] .brand-logo path[fill="#1C1C1C"]{fill:#eaf2ff}
 
   .dash{position:relative;border-radius:24px;background:linear-gradient(180deg,var(--surface),var(--surface-2));border:1px solid var(--bdr);box-shadow:var(--shadow-card);padding:22px;overflow:visible}
   .dash-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}

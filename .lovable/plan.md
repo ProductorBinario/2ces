@@ -33,7 +33,7 @@ Todos los nodos que muestren 1.65 usarán `data-bind="ces-fee"` y se rellenarán
   - Estilo glass: `background: rgba(10,20,40,0.60); backdrop-filter: blur(14px) saturate(140%); border: 1px solid rgba(255,255,255,.08); border-radius: 999px; padding: 8px 12px;`
   - Contenido: toggle idioma (ES/EN) + toggle tema (☀/🌙).
 - El logo "2CES" se mueve al hero como elemento principal arriba a la izquierda del badge.
-- Eliminar la insignia "2CES" duplicada que estaba en el panel — sustituida por el logo real. En el background colocar el logo de 2ces no la insignia 
+- Eliminar la insignia "2CES" duplicada que estaba en el panel — sustituida por el logo real. El backgroun de tener el logo , no la insignia 
 
 Resultado: hero limpio, sin header fijo, banda glass discreta arriba-derecha que no compite con el contenido.
 
@@ -52,7 +52,7 @@ Resultado: hero limpio, sin header fijo, banda glass discreta arriba-derecha que
 
 **Lado derecho (Dashboard de Eficiencia):**
 
-Card con bordes redondeados, soft shadow, dos badges flotantes (USDT esquina sup-izq, TRON esquina inf-der), y en el centro el logo 2CES como "puente" entre ambos.
+Card con bordes redondeados, soft shadow, dos badges flotantes (USDT esquina sup-izq, TRON esquina inf-der), y en el centro el logo 2CES como "puente" entre ambos. Debajo del toggle coloca el logo de trx que su valor actuizable en tiempo real
 
 ```text
 ┌─[USDT]──────────────────────┐
@@ -83,11 +83,11 @@ Card con bordes redondeados, soft shadow, dos badges flotantes (USDT esquina sup
 
 - H2: "¿Sabes cuánto dinero estás dejando sobre la mesa?"
 - 3 tarjetas con `data-bind`: Mercado alto (4.40 fijo), Mercado promedio (live), 2CES (1.65 desde constante).
-- Frase impacto: "Con 2CES, si el mercado sube tú no pagas más; si el mercado baja, tú sigues gastando menos. Es matemática pura, más que una promesa."
+- Frase impacto: "Con 2CES, si el mercado sube tú no gastas más; si el mercado baja, tú sigues pagando menos. Es matemática pura, no una promesa."
 
 ## 5. Calculadora — "Bofetada de realidad"
 
-- H2: "Tu coste actual en cifras"
+- H2: "Tu ineficiencia actual en cifras"
 - Input: nº transacciones (default 10000).
 - Output: Gasto Mercado Máx (`tx*4.4`), Gasto 2CES (`tx*CES_FEE`), Pérdida (`tx*(4.4-CES_FEE)`).
 - Pregunta psicológica final.
@@ -118,7 +118,7 @@ Acordeón accesible con las preguntas/respuestas exactas suministradas.
   - **Telegram** → `https://t.me/{tg}?text={mensaje}` (con prefill via deep link)
   - **Email** → `mailto:{email}?subject=...&body={mensaje}`
 - Si textarea vacío → usa mensaje predefinido genérico del canal.
-- Las 3 tarjetas en azul (tonos distintos), iconos circulares con halo. Ordenado de forma horizontal con efecto glass
+- Las 3 botone azul (tonos distintos), iconos circulares con halo.  Mantener el diseño de la landing  y optimizarlo  horizontal con efectos glass todo los botones debes tener el mismo estilo solo debe cambiar su tono de azul 
 
 ## 10. Botón flotante WhatsApp
 
@@ -191,4 +191,4 @@ Los toggles del hero-bar sobreescriben la auto-detección y guardan en `localSto
 
 ## Pregunta antes de implementar
 
-**WhatsApp**: el número `+31 97010265771` este es el número que me pasaro tiene 12 dígitos (NL usa 11 con +31). Voy a usar `+31970102657` (11 dígitos). Si es otro, dímelo en una línea y lo cambio en la constante `CONTACT.wa` — un solo punto de edición. El contacto de telegram es : @ask2ces el contacto de email es: [support@2cesenergy.com](mailto:support@2cesenergy.com)  realiza pruebas de conexión de funcionales de los botones  de diseños ux ui de carga, de seguridad y que toda la información que se da envivo cargue y sea la correcta 
+**WhatsApp**: el número `+31 97010265771 este es el número  del contacto de` tiene 12 dígitos (NL usa 11 con +31). Voy a usar `+31970102657` (11 dígitos). Si es otro, dímelo en una línea y lo cambio en la constante `CONTACT.wa` — un solo punto de edición. El contacto de telegram es : ask2ces el de email es  [support@2cesenergy.com](mailto:support@2cesenergy.com)   realiA una prueba de ux/ ui  y de funcionamiento que todos los botones estén funcionando con sus contacto correspondiente  los cambio de los valores en vivo deben  estar funcionando óptimamente sin mentir   realiza las pruebas  seoptimozado de carga seguridad y despliegue  

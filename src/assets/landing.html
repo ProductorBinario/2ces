@@ -49,9 +49,16 @@
   html{scroll-behavior:smooth}
   body{
     font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-    background:radial-gradient(1200px 800px at 80% -10%,rgba(29,92,255,.18),transparent 60%),radial-gradient(900px 600px at -10% 20%,rgba(6,182,212,.14),transparent 60%),var(--bg);
+    background:
+      url("/2ces-bg-mark.svg") no-repeat center center / min(58vmin,640px) auto,
+      radial-gradient(1200px 800px at 80% -10%,rgba(29,92,255,.18),transparent 60%),
+      radial-gradient(900px 600px at -10% 20%,rgba(6,182,212,.14),transparent 60%),
+      var(--bg);
+    background-attachment: fixed, fixed, fixed, fixed;
     color:var(--t1);min-height:100dvh;line-height:1.55;-webkit-font-smoothing:antialiased;
   }
+  html[data-theme="light"] body{background-blend-mode:luminosity,normal,normal,normal}
+  html[data-theme="dark"] body{background-blend-mode:screen,normal,normal,normal}
   h1,h2,h3,h4,p,.lead,.hero-sub,.card-lbl{hyphens:none;-webkit-hyphens:none;word-break:keep-all;overflow-wrap:break-word}
   h1,h2,h3{font-family:'PT Sans Narrow',Inter,sans-serif;letter-spacing:-.01em;line-height:1.1;margin:0}
   a{color:inherit;text-decoration:none}
@@ -90,9 +97,15 @@
   .micro-trust .dotg{width:6px;height:6px;border-radius:50%;background:var(--c400);box-shadow:0 0 0 4px rgba(34,211,238,.15)}
 
   .brand{display:inline-flex;align-items:center;gap:10px}
-  .brand-mark{width:42px;height:42px;border-radius:12px;background:var(--grad);display:grid;place-items:center;color:#fff;font-family:'PT Sans Narrow';font-weight:700;font-size:18px;box-shadow:var(--shadow-soft)}
+  .brand-logo{height:44px;width:auto;display:block}
+  .brand-logo.sm{height:34px}
   .brand-name{font-family:'PT Sans Narrow';font-weight:700;font-size:22px}
   .brand-name span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  html[data-theme="light"] .brand-logo{filter:none}
+  html[data-theme="dark"] .brand-logo path[fill="#FFFFFF"],
+  html[data-theme="dark"] .brand-logo path[fill="#FFF"],
+  html[data-theme="dark"] .brand-logo path[fill="#1A1E20"],
+  html[data-theme="dark"] .brand-logo path[fill="#1C1C1C"]{fill:#eaf2ff}
 
   .dash{position:relative;border-radius:24px;background:linear-gradient(180deg,var(--surface),var(--surface-2));border:1px solid var(--bdr);box-shadow:var(--shadow-card);padding:22px;overflow:visible}
   .dash-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}
@@ -138,15 +151,17 @@
   .prob-card.ces .v{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
   .impact{margin-top:24px;padding:18px 20px;border-radius:16px;background:var(--grad-soft);border:1px solid var(--bdr);font-size:15.5px}
 
-  .calc{display:grid;grid-template-columns:1fr 1.2fr;gap:24px;background:var(--surface);border:1px solid var(--bdr);border-radius:22px;padding:22px;box-shadow:var(--shadow-card)}
+  .calc{display:grid;grid-template-columns:1fr 1.2fr;gap:24px;background:var(--surface);border:1px solid var(--bdr);border-radius:22px;padding:22px;box-shadow:var(--shadow-card);min-width:0}
+  .calc>*{min-width:0}
   .calc-input label{font-size:12px;color:var(--t3);letter-spacing:.08em;text-transform:uppercase;font-weight:600}
-  .calc-input input{width:100%;margin-top:8px;padding:14px 16px;border-radius:14px;background:var(--surface-2);border:1px solid var(--bdr);color:var(--t1);font-size:18px;font-family:'PT Sans Narrow';font-weight:700}
+  .calc-input input{width:100%;margin-top:8px;padding:14px 16px;border-radius:14px;background:var(--surface-2);border:1px solid var(--bdr);color:var(--t1);font-size:18px;font-family:'PT Sans Narrow';font-weight:700;font-variant-numeric:tabular-nums;min-width:0}
   .calc-input input:focus{outline:none;border-color:var(--b400);box-shadow:0 0 0 4px rgba(63,124,255,.18)}
   .calc-input .helper{margin-top:8px;font-size:12px;color:var(--t3)}
-  .calc-out{display:grid;gap:12px}
-  .calc-row{display:grid;grid-template-columns:1fr auto;align-items:center;padding:14px 16px;border-radius:14px;background:var(--surface-2);border:1px solid var(--bdr-2)}
-  .calc-row .k{color:var(--t2);font-size:14px}
-  .calc-row .vv{font-family:'PT Sans Narrow';font-weight:700;font-size:22px;font-variant-numeric:tabular-nums}
+  .calc-out{display:grid;gap:12px;min-width:0}
+  .calc-row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 14px;padding:14px 16px;border-radius:14px;background:var(--surface-2);border:1px solid var(--bdr-2);min-width:0}
+  .calc-row .k{color:var(--t2);font-size:14px;flex:1 1 180px;min-width:0}
+  .calc-row .vv{font-family:'PT Sans Narrow';font-weight:700;font-size:clamp(16px,2.4vw,22px);font-variant-numeric:tabular-nums;text-align:right;word-break:break-all;overflow-wrap:anywhere;line-height:1.15;flex:0 1 auto;max-width:100%}
+  .calc-row .vv .num-val{display:inline-block;max-width:100%;word-break:break-all;overflow-wrap:anywhere}
   .calc-row.loss{background:linear-gradient(135deg,rgba(239,68,68,.10),rgba(249,115,22,.08));border-color:rgba(239,68,68,.25)}
   .calc-row.loss .vv{color:#fb7185}
   .calc-row.save{background:var(--grad-soft);border-color:rgba(29,92,255,.3)}
@@ -239,10 +254,9 @@
 
       <div class="hero-grid">
         <div class="hero-left">
-          <div class="brand" aria-label="2CES">
-            <div class="brand-mark" aria-hidden="true">2C</div>
-            <div class="brand-name">2<span>CES</span></div>
-          </div>
+          <a class="brand" href="#inicio" aria-label="2CES">
+            <img class="brand-logo" src="/2ces-logo.svg" alt="2CES" width="180" height="44" />
+          </a>
           <span class="eyebrow" style="margin-top:18px"><span class="dot"></span><span data-i18n="eyebrow">Optimización Premium en USDT-TRC20</span></span>
           <h1 data-i18n-html="h1">Deja de regalar tu dinero a la red: transfiere USDT con un costo fijo de <b><span data-bind="ces-fee">1.65</span></b> y máxima eficiencia.</h1>
           <p class="hero-sub" data-i18n-html="hsub">Mientras el mercado te cobra hasta <b>4.40 USDT</b> por movimiento, nuestra infraestructura te permite operar con un ahorro real del <b><span data-bind="save-vs-max">62.5%</span></b>. Si no estás optimizando, estás perdiendo beneficios en cada transacción.</p>
@@ -328,7 +342,7 @@
       <div class="calc">
         <div class="calc-input">
           <label for="tx" data-i18n="calcLbl">Nº de transacciones</label>
-          <input id="tx" type="number" min="1" step="1" value="10000" inputmode="numeric" />
+          <input id="tx" type="text" inputmode="numeric" autocomplete="off" value="10.000" aria-describedby="tx-helper" />
           <p class="helper" data-i18n="calcHelper">Ajusta el volumen real de tu operación.</p>
         </div>
         <div class="calc-out" aria-live="polite">
@@ -418,7 +432,7 @@
 
   <footer>
     <div class="wrap row">
-      <div class="brand"><div class="brand-mark" aria-hidden="true">2C</div><div class="brand-name">2<span>CES</span></div></div>
+      <a class="brand" href="#inicio" aria-label="2CES"><img class="brand-logo sm" src="/2ces-logo.svg" alt="2CES" width="140" height="34" /></a>
       <div data-i18n="footer">2CES — Seguridad, eficiencia y confianza en cada transacción. © 2026 Todos los derechos reservados.</div>
     </div>
   </footer>
@@ -426,7 +440,7 @@
 
 <a id="wa-float" href="#" rel="noopener noreferrer" aria-label="Abrir WhatsApp 2CES">
   <span class="badge2" aria-hidden="true">2CES</span>
-  <span class="lab">WhatsApp</span>
+  <span class="lab">: esto es</span>
 </a>
 
 <div id="toast" role="status" aria-live="polite"></div>
@@ -435,7 +449,7 @@
 (() => {
   const CES_FEE = 1.65;
   const MKT_MAX = 4.40;
-  const CONTACT = { wa:'+31970102657', tg:'ask2ces', email:'support@2cesenergy.com' };
+  const CONTACT = { wa:'+31970102655771', tg:'ask2ces', email:'support@2cesenergy.com' };
 
   const I18N = {
     es: {
@@ -615,9 +629,25 @@
     renderMarket();
   }
 
+  function getTx(){
+    const el = $('#tx'); if(!el) return 0;
+    const digits = (el.value || '').replace(/\D+/g,'').slice(0, 12); // cap 12 digits
+    return digits ? parseInt(digits, 10) : 0;
+  }
+  function formatTxInput(){
+    const el = $('#tx'); if(!el) return;
+    const tx = getTx();
+    const start = el.selectionStart;
+    const before = el.value;
+    const formatted = tx ? fmtInt(tx) : '';
+    if(formatted !== before){
+      el.value = formatted;
+      // best-effort caret restore at end-relative position
+      try{ el.setSelectionRange(formatted.length, formatted.length); }catch(_){}
+    }
+  }
   function updateCalc(){
-    const txEl = $('#tx'); if(!txEl) return;
-    const tx = Math.max(0, parseInt(txEl.value || '0', 10) || 0);
+    const tx = getTx();
     const max = tx * MKT_MAX;
     const ces = tx * CES_FEE;
     const loss = max - ces;
@@ -654,7 +684,7 @@
     const kind = btn.dataset.cta;
     if(kind === 'hero1') return openChannel('wa', dict.hero1);
     if(kind === 'hero2' || kind === 'calc'){
-      const tx = parseInt(($('#tx')?.value)||'10000',10) || 10000;
+      const tx = getTx() || 10000;
       return openChannel('wa', dict.hero2(fmtInt(tx)));
     }
     if(kind === 'wa') return openChannel('wa', dict.wa);
@@ -709,7 +739,8 @@
 
     document.addEventListener('click', ctaHandler);
 
-    $('#tx')?.addEventListener('input', updateCalc);
+    $('#tx')?.addEventListener('input', () => { formatTxInput(); updateCalc(); });
+    $('#tx')?.addEventListener('blur', () => { formatTxInput(); updateCalc(); });
 
     const msg = $('#msg'), counter = $('#msg-counter');
     msg?.addEventListener('input', () => { counter.textContent = `${msg.value.length} / 1000`; });

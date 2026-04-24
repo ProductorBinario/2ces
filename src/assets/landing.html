@@ -629,9 +629,25 @@
     renderMarket();
   }
 
+  function getTx(){
+    const el = $('#tx'); if(!el) return 0;
+    const digits = (el.value || '').replace(/\D+/g,'').slice(0, 12); // cap 12 digits
+    return digits ? parseInt(digits, 10) : 0;
+  }
+  function formatTxInput(){
+    const el = $('#tx'); if(!el) return;
+    const tx = getTx();
+    const start = el.selectionStart;
+    const before = el.value;
+    const formatted = tx ? fmtInt(tx) : '';
+    if(formatted !== before){
+      el.value = formatted;
+      // best-effort caret restore at end-relative position
+      try{ el.setSelectionRange(formatted.length, formatted.length); }catch(_){}
+    }
+  }
   function updateCalc(){
-    const txEl = $('#tx'); if(!txEl) return;
-    const tx = Math.max(0, parseInt(txEl.value || '0', 10) || 0);
+    const tx = getTx();
     const max = tx * MKT_MAX;
     const ces = tx * CES_FEE;
     const loss = max - ces;

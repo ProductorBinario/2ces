@@ -684,7 +684,7 @@
     const kind = btn.dataset.cta;
     if(kind === 'hero1') return openChannel('wa', dict.hero1);
     if(kind === 'hero2' || kind === 'calc'){
-      const tx = parseInt(($('#tx')?.value)||'10000',10) || 10000;
+      const tx = getTx() || 10000;
       return openChannel('wa', dict.hero2(fmtInt(tx)));
     }
     if(kind === 'wa') return openChannel('wa', dict.wa);
@@ -739,7 +739,8 @@
 
     document.addEventListener('click', ctaHandler);
 
-    $('#tx')?.addEventListener('input', updateCalc);
+    $('#tx')?.addEventListener('input', () => { formatTxInput(); updateCalc(); });
+    $('#tx')?.addEventListener('blur', () => { formatTxInput(); updateCalc(); });
 
     const msg = $('#msg'), counter = $('#msg-counter');
     msg?.addEventListener('input', () => { counter.textContent = `${msg.value.length} / 1000`; });

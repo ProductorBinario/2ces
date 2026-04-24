@@ -1,984 +1,721 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es" data-theme="dark">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="dark light">
-<title>2CES — Optimiza tus comisiones USDT en TRON | 1,6 USDT fijo</title>
-<meta name="description" content="2CES reduce cada transacción USDT-TRC20 a 1,6 USDT. Ahorra hasta 62% sin apps ni contratos. Verificable en blockchain TRON.">
-<meta name="keywords" content="USDT, TRC20, TRON, comisiones, energía TRX, ahorro, blockchain, transacciones cripto">
-<meta name="robots" content="index, follow">
-<link rel="canonical" href="https://2cesenergy.com/">
-<meta property="og:url" content="https://2cesenergy.com/">
-<meta property="og:type" content="website">
-<meta property="og:title" content="2CES — 1,6 USDT por transacción en TRON">
-<meta property="og:description" content="Ahorra hasta 62% en comisiones USDT. Sin registros. Verificable en blockchain.">
-<meta property="og:image" content="https://2cesenergy.com/og.jpg">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="2CES — 1,6 USDT por transacción en TRON">
-<meta name="twitter:description" content="Ahorra hasta 62% en comisiones USDT-TRC20. Verificable en blockchain.">
-<meta name="theme-color" content="#04061A">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&display=swap"></noscript>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#0a1220" />
+<title>2CES — Costo fijo 1.65 USDT-TRC20 · Optimización Premium en Tron</title>
+<meta name="description" content="Deja de regalar dinero a la red Tron. Transfiere USDT con un costo fijo de 1.65 USDT y ahorra hasta el 62.5% frente al mercado. Activación inmediata, sin registros." />
+<meta name="keywords" content="USDT TRC20, optimización Tron, energía Tron, costos USDT, 2CES, ahorro USDT, transferencias USDT" />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+<link rel="canonical" href="https://2ces.energy/" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="2CES — Costo fijo 1.65 USDT en TRC20" />
+<meta property="og:description" content="Optimiza tus envíos USDT-TRC20 con un costo fijo de 1.65 USDT. Ahorro real del 62.5% vs. mercado." />
+<meta property="og:url" content="https://2ces.energy/" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="2CES — Costo fijo 1.65 USDT en TRC20" />
+<meta name="twitter:description" content="Optimiza tus envíos USDT-TRC20 con un costo fijo de 1.65 USDT." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://api.coingecko.com" />
+<link href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Service","name":"2CES","description":"Optimización de comisiones USDT en red TRON a 1,6 USDT por transacción.","provider":{"@type":"Organization","name":"2CES Energy","url":"https://2cesenergy.com/"},"areaServed":"Worldwide","offers":{"@type":"Offer","priceSpecification":{"@type":"PriceSpecification","price":"1.60","priceCurrency":"USDT"}}}
+{"@context":"https://schema.org","@type":"Service","serviceType":"USDT-TRC20 transaction cost optimization","provider":{"@type":"Organization","name":"2CES","url":"https://2ces.energy"},"areaServed":"Worldwide","offers":{"@type":"Offer","price":"1.65","priceCurrency":"USDT","priceSpecification":{"@type":"UnitPriceSpecification","price":"1.65","priceCurrency":"USDT","unitText":"per USDT-TRC20 transfer"}}}
 </script>
 <style>
-:root{
-  --b950:#020818;--b900:#060F2A;--b800:#0C1E52;--b700:#132870;--b600:#1A3898;
-  --b500:#2452CC;--b400:#4070E8;--b300:#6A92FF;--b200:#A8BFFF;
-  --c600:#0080A8;--c500:#0EA5C8;--c400:#2EC4E8;--c300:#72D8F5;
-  --grad:linear-gradient(135deg,var(--b500) 0%,var(--c500) 100%);
-  --grad-dark:linear-gradient(135deg,var(--b600) 0%,var(--c600) 100%);
-  --font:"PT Sans Narrow",sans-serif;
-  --r:10px;--r-lg:18px;--r-xl:26px;--r-f:999px;
-  --hdr-h:64px;--tx:200ms ease;--tx-thm:550ms ease;
-}
-[data-theme="dark"]{
-  --bg:#04061A;--bg2:#060920;--bg3:#080C28;--card-rgb:8,14,44;
-  --t1:#EDF2FF;--t2:#94AEFF;--t3:#4A6099;
-  --bdr:rgba(14,165,200,0.14);--bdr2:rgba(26,56,152,0.12);
-  --glow-b:rgba(26,56,152,0.18);--glow-c:rgba(14,165,200,0.13);
-  --sh:0 8px 40px rgba(0,0,0,0.60);--sh-sm:0 2px 12px rgba(0,0,0,0.40);
-  --glass-scroll:rgba(var(--card-rgb),0.30);--glass-stop:rgba(var(--card-rgb),0.60);
-  --bg-logo-opacity:0.06;
-}
-[data-theme="light"]{
-  --bg:#EEF3FF;--bg2:#E4ECFF;--bg3:#D8E4FF;--card-rgb:255,255,255;
-  --t1:#040C28;--t2:#2A3E88;--t3:#6272A8;
-  --bdr:rgba(26,56,152,0.14);--bdr2:rgba(26,56,152,0.08);
-  --glow-b:rgba(26,56,152,0.07);--glow-c:rgba(14,165,200,0.06);
-  --sh:0 6px 28px rgba(10,20,80,0.10);--sh-sm:0 2px 8px rgba(10,20,80,0.07);
-  --glass-scroll:rgba(var(--card-rgb),0.30);--glass-stop:rgba(var(--card-rgb),0.60);
-  --bg-logo-opacity:0.07;
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;hyphens:none;-webkit-hyphens:none;-ms-hyphens:none;word-break:normal;overflow-wrap:break-word}
-html{scroll-behavior:smooth;scroll-padding-top:calc(var(--hdr-h)+16px);-webkit-text-size-adjust:100%;font-size:16px}
-body{background:var(--bg);color:var(--t1);font-family:var(--font);font-size:1rem;line-height:1.65;overflow-x:hidden;transition:background var(--tx-thm),color var(--tx-thm);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-ul,ol{list-style:none}
-a{color:inherit;text-decoration:none}
-img,svg{max-width:100%;display:block}
-button,input,select,textarea{font-family:inherit}
-:focus-visible{outline:2px solid var(--c500);outline-offset:3px;border-radius:var(--r)}
-h1,h2,h3,h4,h5,h6,.hero-sub,.lead,.card-lbl{font-family:var(--font);word-break:keep-all;overflow-wrap:break-word;hyphens:none}
-h1,h2,h3,h4,h5,h6{font-weight:700;line-height:1.1;letter-spacing:-0.015em;color:var(--t1);transition:color var(--tx-thm)}
-h1{font-size:clamp(36px,5.5vw,72px)}
-h2{font-size:clamp(28px,4vw,54px)}
-h3{font-size:clamp(19px,2.3vw,27px)}
-h4{font-size:clamp(15px,1.5vw,19px)}
-em{font-style:normal;color:var(--c500)}
-p{color:var(--t2);font-weight:400;transition:color var(--tx-thm)}
-.lead{font-size:clamp(15px,1.6vw,18px);color:var(--t2);line-height:1.72}
-.wrap{max-width:1140px;margin:0 auto;padding:0 clamp(18px,4vw,40px)}
-.sec{padding:clamp(72px,10vw,120px) 0;position:relative;z-index:1}
-#inicio{background:linear-gradient(180deg,var(--bg) 0%,rgba(26,56,152,0.05) 100%)}
-#problema{background:linear-gradient(180deg,rgba(26,56,152,0.06) 0%,rgba(14,165,200,0.04) 100%)}
-#como{background:linear-gradient(180deg,rgba(14,165,200,0.04) 0%,var(--bg2) 100%)}
-#calculadora{background:linear-gradient(180deg,var(--bg2) 0%,rgba(26,56,152,0.07) 100%)}
-#clientes{background:linear-gradient(180deg,rgba(26,56,152,0.06) 0%,var(--bg3) 100%)}
-#confianza{background:linear-gradient(180deg,var(--bg3) 0%,rgba(14,165,200,0.05) 100%)}
-#faq{background:linear-gradient(180deg,rgba(14,165,200,0.04) 0%,var(--bg2) 100%)}
-#contacto{background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%)}
-.sec-head{margin-bottom:clamp(40px,6vw,72px)}
-.sec-head.center{text-align:center;max-width:640px;margin-left:auto;margin-right:auto}
-.sec-head h2{margin:14px 0 16px}
+  :root{
+    --b50:#eaf2ff;--b100:#cfe0ff;--b200:#9fc0ff;--b300:#6f9eff;--b400:#3f7cff;
+    --b500:#1d5cff;--b600:#1346d6;--b700:#0e35a8;--b800:#0a2780;--b900:#061a55;
+    --c400:#22d3ee;--c500:#06b6d4;--c600:#0891b2;
+    --grad:linear-gradient(135deg,var(--b500),var(--c500));
+    --grad-soft:linear-gradient(135deg,rgba(29,92,255,.18),rgba(6,182,212,.18));
+    --shadow-soft:0 10px 30px -10px rgba(8,30,90,.35),0 2px 8px rgba(8,30,90,.18);
+    --shadow-card:0 24px 60px -28px rgba(8,30,90,.55);
+    --ease:cubic-bezier(.2,.8,.2,1);
+  }
+  html[data-theme="dark"]{
+    --bg:#070d1c;--surface:rgba(255,255,255,.04);--surface-2:rgba(255,255,255,.06);
+    --t1:#eaf2ff;--t2:#b9c6e3;--t3:#7d8bb0;--bdr:rgba(255,255,255,.10);--bdr-2:rgba(255,255,255,.06);
+    --glass:rgba(10,20,40,.55);
+  }
+  html[data-theme="light"]{
+    --bg:#f5f8ff;--surface:#ffffff;--surface-2:#f3f6ff;
+    --t1:#0a1530;--t2:#33446b;--t3:#5e6e93;--bdr:rgba(10,30,80,.10);--bdr-2:rgba(10,30,80,.06);
+    --glass:rgba(255,255,255,.7);
+  }
+  *,*:before,*:after{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    background:radial-gradient(1200px 800px at 80% -10%,rgba(29,92,255,.18),transparent 60%),radial-gradient(900px 600px at -10% 20%,rgba(6,182,212,.14),transparent 60%),var(--bg);
+    color:var(--t1);min-height:100dvh;line-height:1.55;-webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4,p,.lead,.hero-sub,.card-lbl{hyphens:none;-webkit-hyphens:none;word-break:keep-all;overflow-wrap:break-word}
+  h1,h2,h3{font-family:'PT Sans Narrow',Inter,sans-serif;letter-spacing:-.01em;line-height:1.1;margin:0}
+  a{color:inherit;text-decoration:none}
+  img,svg{display:block;max-width:100%}
+  button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+  :focus-visible{outline:2px solid var(--b400);outline-offset:2px;border-radius:8px}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
-/* ===== HEADER ===== */
-#hdr{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--hdr-h);background:transparent;border-bottom:1px solid transparent;transition:background 500ms ease,box-shadow 500ms ease,border-color 500ms ease}
-#hdr.hdr-active{background:rgba(var(--card-rgb),0.60);backdrop-filter:blur(20px) saturate(1.6);-webkit-backdrop-filter:blur(20px) saturate(1.6);border-bottom-color:var(--bdr);box-shadow:0 2px 20px rgba(0,0,0,0.15)}
-.hdr-inner{display:flex;align-items:center;justify-content:space-between;height:var(--hdr-h);padding:0 clamp(18px,4vw,40px);max-width:1140px;margin:0 auto}
-#hdr-logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
-#hdr-logo-svg{width:28px;height:28px;transition:width 300ms ease,height 300ms ease}
-#hdr.hdr-active #hdr-logo-svg{width:40px;height:40px}
-.hdr-logo-text{display:flex;flex-direction:column;opacity:0;transform:translateX(-6px);transition:opacity 300ms ease,transform 300ms ease;pointer-events:none}
-#hdr.hdr-active .hdr-logo-text{opacity:1;transform:translateX(0);pointer-events:auto}
-.hdr-logo-name{font-weight:700;font-size:17px;color:var(--t1);line-height:1;letter-spacing:-0.01em}
-.hdr-logo-sub{font-size:10px;font-weight:400;color:var(--t3);letter-spacing:0.05em;line-height:1}
-.hdr-nav{display:flex;gap:28px;opacity:0;transition:opacity 300ms ease;pointer-events:none}
-#hdr.hdr-active .hdr-nav{opacity:1;pointer-events:auto}
-.hdr-nav a{font-size:14px;font-weight:700;color:var(--t2);letter-spacing:0.02em;position:relative;padding-bottom:2px;transition:color var(--tx)}
-.hdr-nav a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1.5px;background:var(--c500);transition:width var(--tx);border-radius:2px}
-.hdr-nav a:hover{color:var(--t1)}
-.hdr-nav a:hover::after{width:100%}
-.hdr-controls{display:flex;gap:8px;align-items:center}
-.ctrl{display:flex;align-items:center;justify-content:center;height:34px;min-width:34px;padding:0 10px;background:transparent;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1.5px solid var(--bdr);border-radius:var(--r);color:var(--t2);font-size:12px;font-weight:700;letter-spacing:0.08em;cursor:pointer;transition:border-color var(--tx),color var(--tx),transform 150ms ease}
-.ctrl:hover{border-color:var(--c500);color:var(--c500);transform:translateY(-1px)}
-.ctrl:active{transform:translateY(0)}
-.ctrl svg{stroke:currentColor;fill:none;stroke-width:2}
-[data-theme="dark"] .ico-moon{display:none}
-[data-theme="light"] .ico-sun{display:none}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+  section{padding:clamp(56px,8vw,110px) 0;position:relative}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:var(--grad-soft);border:1px solid var(--bdr);color:var(--t1);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--b400);box-shadow:0 0 0 4px rgba(63,124,255,.18)}
 
-#bg-logo{position:fixed;inset:0;z-index:0;pointer-events:none;display:flex;align-items:center;justify-content:center;overflow:hidden}
-#bg-logo svg{width:min(88vw,88vh);height:min(88vw,88vh);opacity:var(--bg-logo-opacity);transition:opacity var(--tx-thm)}
+  .skip{position:absolute;left:-9999px;top:0}
+  .skip:focus{left:12px;top:12px;padding:10px 14px;background:var(--b500);color:#fff;border-radius:10px;z-index:1000}
 
-.card{background:var(--glass-stop);backdrop-filter:blur(20px) saturate(1.5);-webkit-backdrop-filter:blur(20px) saturate(1.5);border:1px solid var(--bdr);border-radius:var(--r-lg);box-shadow:var(--sh);transition:background 400ms ease,border-color 400ms ease,box-shadow var(--tx),transform var(--tx)}
-body.is-scrolling .card{background:var(--glass-scroll)}
-.card:hover{transform:translateY(-4px);border-color:rgba(14,165,200,0.25);box-shadow:var(--sh),0 0 0 1px rgba(14,165,200,0.10)}
-body.is-scrolling .card:hover{transform:none}
+  .sec-hero{position:relative;padding:clamp(72px,10vw,120px) 0 clamp(48px,7vw,90px);overflow:hidden}
+  .hero-bar{position:absolute;top:14px;right:14px;display:flex;align-items:center;gap:6px;padding:6px 8px;border-radius:999px;background:color-mix(in oklab,var(--glass) 60%,transparent);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);border:1px solid var(--bdr);z-index:5;box-shadow:var(--shadow-soft)}
+  .hero-bar button{display:inline-flex;align-items:center;justify-content:center;height:34px;min-width:38px;padding:0 10px;border-radius:999px;color:var(--t1);font-weight:700;font-size:13px;transition:background .2s var(--ease)}
+  .hero-bar button:hover{background:var(--surface-2)}
+  .hero-bar .sep{width:1px;height:18px;background:var(--bdr)}
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,4vw,56px);align-items:center}
+  .hero-left h1{font-size:clamp(34px,5.4vw,60px);font-weight:700;margin:18px 0 14px}
+  .hero-left h1 b{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero-sub{color:var(--t2);font-size:clamp(15px,1.6vw,18px);max-width:58ch;margin:0 0 22px}
+  .hero-sub b{color:var(--t1)}
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:18px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;border-radius:14px;font-weight:700;font-size:14.5px;border:1px solid transparent;transition:transform .15s var(--ease),box-shadow .2s var(--ease),background .2s var(--ease)}
+  .btn:hover{transform:translateY(-1px)}
+  .btn-primary{background:var(--grad);color:#fff;box-shadow:0 14px 30px -12px rgba(29,92,255,.55)}
+  .btn-primary:hover{box-shadow:0 18px 40px -12px rgba(29,92,255,.7)}
+  .btn-ghost{background:var(--surface);color:var(--t1);border-color:var(--bdr);backdrop-filter:blur(8px)}
+  .btn-ghost:hover{background:var(--surface-2);border-color:var(--b400)}
+  .micro-trust{color:var(--t3);font-size:13px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
+  .micro-trust span{display:inline-flex;align-items:center;gap:6px}
+  .micro-trust .dotg{width:6px;height:6px;border-radius:50%;background:var(--c400);box-shadow:0 0 0 4px rgba(34,211,238,.15)}
 
-/* ===== BUTTONS ===== */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:700;font-size:clamp(14px,1.4vw,16px);letter-spacing:0.02em;padding:clamp(11px,1.2vw,14px) clamp(20px,2vw,28px);border-radius:var(--r-f);border:1.5px solid transparent;cursor:pointer;white-space:nowrap;position:relative;overflow:hidden;transition:background 200ms ease,border-color 200ms ease,color 200ms ease,transform 140ms ease,box-shadow 200ms ease}
-.btn::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,0);transition:background 140ms ease;border-radius:inherit;pointer-events:none}
-.btn:hover::after{background:rgba(255,255,255,0.07)}
-.btn:active::after{background:rgba(255,255,255,0.14)}
-.btn-prim{background:var(--grad);color:#fff;box-shadow:0 4px 18px rgba(26,56,152,0.32)}
-.btn-prim:hover{background:var(--grad-dark);transform:translateY(-2px);box-shadow:0 8px 28px rgba(14,165,200,0.32)}
-.btn-prim:active{transform:translateY(0)}
-.btn-ghost{background:transparent;color:var(--t1);border-color:var(--bdr)}
-.btn-ghost:hover{border-color:var(--c500);color:var(--c500);background:rgba(14,165,200,0.05)}
-.btn-lg{font-size:clamp(15px,1.5vw,17px);padding:clamp(13px,1.4vw,16px) clamp(24px,2.5vw,36px)}
+  .brand{display:inline-flex;align-items:center;gap:10px}
+  .brand-mark{width:42px;height:42px;border-radius:12px;background:var(--grad);display:grid;place-items:center;color:#fff;font-family:'PT Sans Narrow';font-weight:700;font-size:18px;box-shadow:var(--shadow-soft)}
+  .brand-name{font-family:'PT Sans Narrow';font-weight:700;font-size:22px}
+  .brand-name span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 
-.badge{display:inline-flex;align-items:center;gap:7px;font-size:10.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--c500);background:rgba(14,165,200,0.07);border:1px solid rgba(14,165,200,0.18);padding:5px 13px;border-radius:var(--r-f);margin-bottom:18px}
-.badge::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--c500);flex-shrink:0}
+  .dash{position:relative;border-radius:24px;background:linear-gradient(180deg,var(--surface),var(--surface-2));border:1px solid var(--bdr);box-shadow:var(--shadow-card);padding:22px;overflow:visible}
+  .dash-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}
+  .dash-title{font-family:'PT Sans Narrow';font-weight:700;font-size:18px}
+  .toggle{position:relative;width:46px;height:26px;border-radius:999px;background:var(--grad);box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
+  .toggle::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:left .25s var(--ease);box-shadow:0 2px 6px rgba(0,0,0,.2);transform:translateX(20px)}
+  .trx-row{display:flex;align-items:center;gap:10px;margin:6px 0 14px;padding:10px 12px;border-radius:14px;background:var(--surface-2);border:1px solid var(--bdr-2)}
+  .trx-row svg{width:28px;height:28px;flex:0 0 auto}
+  .trx-row .lbl{font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:.08em}
+  .trx-row .val{font-family:'PT Sans Narrow';font-size:18px;font-weight:700}
+  .trx-row .val b{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .eff-label{font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:.1em;margin:6px 0}
+  .eff-line{height:42px;width:100%}
+  .bars{display:grid;gap:10px;margin:10px 0 14px}
+  .bar{display:grid;grid-template-columns:90px 1fr 80px;gap:10px;align-items:center;font-size:12.5px}
+  .bar .name{color:var(--t2);white-space:nowrap}
+  .bar .track{height:12px;border-radius:999px;background:var(--surface-2);border:1px solid var(--bdr-2);overflow:hidden}
+  .bar .fill{height:100%;border-radius:999px;transition:width .6s var(--ease)}
+  .bar.max .fill{background:linear-gradient(90deg,#ef4444,#f97316)}
+  .bar.mid .fill{background:linear-gradient(90deg,#f59e0b,#fbbf24)}
+  .bar.ces .fill{background:var(--grad)}
+  .bar .num{font-family:'PT Sans Narrow';font-weight:700;text-align:right;font-variant-numeric:tabular-nums}
+  .bar .num small{color:var(--t3);font-weight:400;margin-left:3px}
+  .badge-float{position:absolute;font-family:'PT Sans Narrow';font-weight:700;font-size:11px;letter-spacing:.08em;padding:5px 10px;border-radius:999px;background:var(--surface);border:1px solid var(--bdr);box-shadow:var(--shadow-soft);color:var(--t1)}
+  .badge-usdt{top:-10px;left:14px}
+  .badge-tron{bottom:-10px;right:14px}
+  .live-note{font-size:11.5px;color:var(--t3);margin-top:6px;display:flex;align-items:center;gap:6px}
+  .live-note::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--c400);box-shadow:0 0 0 4px rgba(34,211,238,.15)}
+  .dash-foot{margin-top:10px;font-size:12.5px;color:var(--t2)}
 
-.live-note{font-size:11px;font-weight:400;color:var(--t3);text-align:center;margin-top:10px;line-height:1.5;display:flex;align-items:center;justify-content:center;gap:6px}
-.live-note::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--c500);animation:pulse-dot 2.4s infinite ease;flex-shrink:0}
-@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+  .sec-title{font-size:clamp(26px,3.4vw,40px);font-weight:700;margin:14px 0 10px}
+  .sec-lead{color:var(--t2);max-width:62ch;margin:0 0 28px;font-size:clamp(15px,1.4vw,17px)}
 
-.trust-row{display:flex;flex-wrap:wrap;gap:clamp(14px,2vw,24px)}
-.trust-row li{display:flex;align-items:center;gap:8px;font-size:clamp(12px,1.2vw,14px);font-weight:700;color:var(--t3);letter-spacing:0.02em}
-.dot{width:6px;height:6px;border-radius:50%;background:var(--c500);flex-shrink:0;animation:pulse-dot 2.8s infinite ease}
+  .prob-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .prob-card{padding:22px;border-radius:18px;background:var(--surface);border:1px solid var(--bdr);box-shadow:var(--shadow-soft);transition:transform .2s var(--ease),border-color .2s var(--ease)}
+  .prob-card:hover{transform:translateY(-2px);border-color:var(--b400)}
+  .prob-card .tag{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);font-weight:600}
+  .prob-card .v{font-family:'PT Sans Narrow';font-weight:700;font-size:42px;margin:8px 0 4px}
+  .prob-card .v small{font-size:14px;color:var(--t3);margin-left:4px}
+  .prob-card .d{color:var(--t2);font-size:14px}
+  .prob-card.max .v{color:#f97316}
+  .prob-card.mid .v{color:#fbbf24}
+  .prob-card.ces .v{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .impact{margin-top:24px;padding:18px 20px;border-radius:16px;background:var(--grad-soft);border:1px solid var(--bdr);font-size:15.5px}
 
-/* ===== HERO ===== */
-.sec-hero{padding-top:calc(var(--hdr-h) + clamp(40px,8vw,80px));overflow:hidden}
-.sec-hero::before{content:'';position:absolute;top:-200px;right:-150px;width:600px;height:600px;background:radial-gradient(circle,var(--glow-b) 0%,transparent 65%);pointer-events:none;z-index:0}
-.sec-hero::after{content:'';position:absolute;bottom:-60px;left:-80px;width:450px;height:450px;background:radial-gradient(circle,var(--glow-c) 0%,transparent 68%);pointer-events:none;z-index:0}
-.hero-grid{display:grid;grid-template-columns:1fr minmax(300px,420px);gap:clamp(28px,4vw,60px);align-items:center;position:relative;z-index:1}
-.hero-copy h1{margin-bottom:clamp(14px,2vw,20px)}
-.hero-sub{font-size:clamp(16px,1.7vw,19px);font-weight:400;color:var(--t2);line-height:1.7;margin-bottom:clamp(28px,3vw,40px);max-width:500px}
-.hero-sub strong{color:var(--t1);font-weight:700}
-.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:clamp(22px,3vw,36px)}
+  .calc{display:grid;grid-template-columns:1fr 1.2fr;gap:24px;background:var(--surface);border:1px solid var(--bdr);border-radius:22px;padding:22px;box-shadow:var(--shadow-card)}
+  .calc-input label{font-size:12px;color:var(--t3);letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+  .calc-input input{width:100%;margin-top:8px;padding:14px 16px;border-radius:14px;background:var(--surface-2);border:1px solid var(--bdr);color:var(--t1);font-size:18px;font-family:'PT Sans Narrow';font-weight:700}
+  .calc-input input:focus{outline:none;border-color:var(--b400);box-shadow:0 0 0 4px rgba(63,124,255,.18)}
+  .calc-input .helper{margin-top:8px;font-size:12px;color:var(--t3)}
+  .calc-out{display:grid;gap:12px}
+  .calc-row{display:grid;grid-template-columns:1fr auto;align-items:center;padding:14px 16px;border-radius:14px;background:var(--surface-2);border:1px solid var(--bdr-2)}
+  .calc-row .k{color:var(--t2);font-size:14px}
+  .calc-row .vv{font-family:'PT Sans Narrow';font-weight:700;font-size:22px;font-variant-numeric:tabular-nums}
+  .calc-row.loss{background:linear-gradient(135deg,rgba(239,68,68,.10),rgba(249,115,22,.08));border-color:rgba(239,68,68,.25)}
+  .calc-row.loss .vv{color:#fb7185}
+  .calc-row.save{background:var(--grad-soft);border-color:rgba(29,92,255,.3)}
+  .calc-row.save .vv{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 
-/* Payments panel (hero right) */
-.pay-card{padding:clamp(22px,2.5vw,30px);position:relative;overflow:hidden}
-.pay-card::before{content:'';position:absolute;top:0;left:20%;right:20%;height:1px;background:linear-gradient(90deg,transparent,var(--c500),transparent);opacity:0.6}
-.card-lbl{font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--t3);margin-bottom:18px}
-.pay-strip{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:var(--r);background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);margin-bottom:10px}
-[data-theme="light"] .pay-strip{background:rgba(0,0,0,0.02);border-color:rgba(0,0,0,0.07)}
-.pay-strip-best{background:rgba(14,165,200,0.07);border-color:rgba(14,165,200,0.22)}
-.pay-ico{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08)}
-[data-theme="light"] .pay-ico{background:rgba(0,0,0,0.03);border-color:rgba(0,0,0,0.06)}
-.pay-ico-trx{background:linear-gradient(135deg,#FF060A 0%,#C70309 100%);border-color:transparent}
-.pay-ico-2ces{background:var(--grad);border-color:transparent;color:#fff;font-weight:700;font-size:11px;letter-spacing:0.02em}
-.pay-meta{flex:1;min-width:0}
-.pay-name{font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--t3);margin-bottom:3px}
-.pay-val{font-weight:700;font-size:clamp(20px,2.2vw,26px);letter-spacing:-0.02em;line-height:1;color:var(--t1)}
-.pay-val-best{color:var(--c500)}
-.pay-unit{font-size:12px;font-weight:400;color:var(--t3);margin-left:3px}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;position:relative}
+  .step{position:relative;padding:22px;border-radius:18px;background:var(--surface);border:1px solid var(--bdr);margin:0 8px}
+  .step:first-child{margin-left:0}
+  .step:last-child{margin-right:0}
+  .step .num{display:inline-grid;place-items:center;width:42px;height:42px;border-radius:12px;background:var(--grad);color:#fff;font-family:'PT Sans Narrow';font-weight:700;font-size:20px;box-shadow:var(--shadow-soft)}
+  .step h3{margin:14px 0 6px;font-size:20px}
+  .step p{margin:0;color:var(--t2);font-size:14.5px}
+  .step::after{content:"→";position:absolute;right:-18px;top:50%;transform:translateY(-50%);font-size:22px;color:var(--b400);font-weight:700;z-index:2}
+  .step:last-child::after{content:none}
 
-/* SVG savings chart inside pay card */
-.pay-chart{margin-top:14px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:var(--r);padding:12px 10px 8px}
-[data-theme="light"] .pay-chart{background:rgba(0,0,0,0.02);border-color:rgba(0,0,0,0.06)}
-.pay-chart-hdr{display:flex;justify-content:space-between;align-items:center;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--t3);margin-bottom:6px;padding:0 4px}
-.pay-chart-svg{width:100%;height:80px;display:block}
-.pay-chart-foot{display:flex;justify-content:space-between;font-size:10px;color:var(--t3);padding:4px 4px 0;font-weight:700}
+  .trust-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .trust-card{padding:22px;border-radius:18px;background:var(--surface);border:1px solid var(--bdr);display:flex;gap:14px;align-items:flex-start}
+  .trust-ico{width:44px;height:44px;border-radius:12px;background:var(--grad-soft);display:grid;place-items:center;color:var(--b400);flex:0 0 auto}
+  .trust-card h3{font-size:18px;margin:0 0 4px}
+  .trust-card p{margin:0;color:var(--t2);font-size:14.5px}
 
-/* ===== STATS / problema ===== */
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,1.8vw,20px)}
-.stat-card{padding:clamp(22px,2.5vw,30px) clamp(16px,2vw,24px);text-align:center}
-.stat-n{display:block;font-size:clamp(30px,4vw,50px);font-weight:700;letter-spacing:-0.02em;line-height:1;color:var(--c500);margin-bottom:10px}
-.stat-card p{font-size:clamp(12px,1.2vw,14px);font-weight:400;color:var(--t2);line-height:1.5}
+  .faq{display:grid;gap:10px}
+  .qa{border:1px solid var(--bdr);border-radius:14px;background:var(--surface);overflow:hidden}
+  .qa summary{list-style:none;padding:16px 20px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;gap:12px;align-items:center}
+  .qa summary::-webkit-details-marker{display:none}
+  .qa summary::after{content:"+";font-size:22px;color:var(--b400);font-weight:700}
+  .qa[open] summary::after{content:"−"}
+  .qa .a{padding:0 20px 18px;color:var(--t2);font-size:14.5px}
 
-/* ===== STEPS — sequential numbered ===== */
-.steps-seq{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:clamp(40px,5vw,64px);position:relative}
-.step-item{padding:clamp(28px,3vw,38px) clamp(20px,2.5vw,30px);position:relative;text-align:center}
-.step-num{display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;background:var(--grad);color:#fff;font-weight:700;font-size:22px;margin:0 auto 16px;box-shadow:0 4px 14px rgba(36,82,204,0.35)}
-.step-item h3{font-size:clamp(17px,1.8vw,22px);margin-bottom:10px}
-.step-item p{font-size:clamp(13px,1.3vw,15px);font-weight:400;line-height:1.6}
-.step-item:not(:last-child)::after{content:'';position:absolute;top:50px;right:-8px;width:16px;height:2px;background:linear-gradient(90deg,var(--b500),var(--c500));border-radius:2px;display:none}
-@media (min-width:768px){.step-item:not(:last-child)::after{display:block;width:calc(100% - 96px);right:auto;left:calc(50% + 48px);top:48px;height:2px}}
+  .contact-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:start}
+  .form-card{padding:22px;border-radius:22px;background:var(--surface);border:1px solid var(--bdr);box-shadow:var(--shadow-card)}
+  .form-card h3{font-size:22px;margin:0 0 6px}
+  .form-card .hint{color:var(--t3);font-size:13px;margin:0 0 14px}
+  .form-card textarea{width:100%;min-height:140px;padding:14px;border-radius:14px;background:var(--surface-2);border:1px solid var(--bdr);color:var(--t1);font:inherit;resize:vertical}
+  .form-card textarea:focus{outline:none;border-color:var(--b400);box-shadow:0 0 0 4px rgba(63,124,255,.18)}
+  .form-card .counter{display:flex;justify-content:space-between;font-size:12px;color:var(--t3);margin-top:6px}
+  .channels{display:grid;gap:12px}
+  .ch{display:flex;align-items:center;gap:14px;padding:16px;border-radius:16px;background:var(--surface);border:1px solid var(--bdr);transition:transform .15s var(--ease),border-color .2s var(--ease);text-align:left;width:100%}
+  .ch:hover{transform:translateY(-1px);border-color:currentColor}
+  .ch .ico{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;color:#fff;flex:0 0 auto;box-shadow:var(--shadow-soft)}
+  .ch .meta .t{font-weight:700;font-size:15px}
+  .ch .meta .s{color:var(--t3);font-size:12.5px}
+  .ch.email{color:var(--b400)} .ch.email .ico{background:linear-gradient(135deg,var(--b300),var(--b500))}
+  .ch.tg{color:var(--b500)} .ch.tg .ico{background:linear-gradient(135deg,var(--b400),var(--b700))}
+  .ch.wa{color:var(--c500)} .ch.wa .ico{background:linear-gradient(135deg,var(--c400),var(--b500))}
 
-/* ===== CALCULATOR ===== */
-.calc-wrap{max-width:880px;margin:0 auto;padding:clamp(28px,3.5vw,48px) clamp(22px,3vw,44px);position:relative;overflow:hidden}
-.calc-wrap::before{content:'';position:absolute;top:0;left:15%;right:15%;height:1px;background:linear-gradient(90deg,transparent,var(--c500),transparent);opacity:0.5}
-.calc-top{margin-bottom:clamp(24px,3vw,36px)}
-.calc-slider-hdr{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;flex-wrap:wrap;gap:8px}
-.calc-slider-hdr label{font-size:clamp(14px,1.4vw,16px);font-weight:700;color:var(--t2)}
-#tx-val{font-size:clamp(20px,2.2vw,28px);font-weight:700;color:var(--t1);letter-spacing:-0.02em}
-.calc-slider{-webkit-appearance:none;appearance:none;width:100%;height:5px;border-radius:var(--r-f);background:rgba(255,255,255,0.07);outline:none;cursor:pointer}
-[data-theme="light"] .calc-slider{background:rgba(0,0,0,0.10)}
-.calc-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;background:var(--c500);cursor:pointer;border:3px solid var(--bg);box-shadow:0 0 0 1px var(--c500),0 3px 10px rgba(14,165,200,0.40);transition:transform 140ms ease}
-.calc-slider::-webkit-slider-thumb:hover{transform:scale(1.18)}
-.calc-slider::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--c500);cursor:pointer;border:3px solid var(--bg)}
-.calc-ticks{display:flex;justify-content:space-between;margin-top:7px}
-.calc-ticks span{font-size:11px;font-weight:700;color:var(--t3)}
-.calc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(10px,1.5vw,16px);margin-bottom:14px}
-.c-box{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:var(--r);padding:clamp(16px,2vw,22px) clamp(10px,1.5vw,18px);text-align:center}
-[data-theme="light"] .c-box{background:rgba(0,0,0,0.02);border-color:rgba(0,0,0,0.07)}
-.c-box-hi{background:rgba(14,165,200,0.08);border-color:rgba(14,165,200,0.22)}
-.c-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;color:var(--t3);margin-bottom:8px}
-.c-val{font-size:clamp(18px,2vw,28px);font-weight:700;letter-spacing:-0.02em;line-height:1;color:var(--t1);margin-bottom:4px}
-.c-val.accent{color:var(--c500)}
-.c-unit{font-size:11px;font-weight:400;color:var(--t3)}
-.calc-cta{text-align:center;margin-top:18px}
-.calc-hint{font-size:12px;font-weight:700;color:var(--t3);letter-spacing:0.04em;margin-top:12px}
+  footer{padding:28px 0;border-top:1px solid var(--bdr);color:var(--t3);font-size:13px}
+  footer .row{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
 
-/* ===== PROFILES ===== */
-.profiles-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2vw,24px)}
-.prof-card{padding:clamp(28px,3.5vw,44px) clamp(22px,3vw,38px)}
-.prof-tag{display:inline-flex;align-items:center;gap:7px;font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:5px 13px;border-radius:var(--r-f);margin-bottom:20px;color:var(--c500);background:rgba(14,165,200,0.08);border:1px solid rgba(14,165,200,0.16)}
-.prof-tag-alt{color:var(--b300);background:rgba(26,56,152,0.08);border-color:rgba(26,56,152,0.16)}
-[data-theme="light"] .prof-tag-alt{color:var(--b500)}
-.prof-card h3{font-size:clamp(18px,2vw,24px);margin-bottom:12px}
-.prof-card>p{font-size:clamp(13px,1.4vw,15px);font-weight:400;margin-bottom:22px;line-height:1.65}
-.feat-list{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
-.feat-list li{display:flex;align-items:flex-start;gap:10px;font-size:clamp(13px,1.3vw,14.5px);font-weight:400;color:var(--t2);line-height:1.5}
-.feat-list li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--c500);flex-shrink:0;margin-top:7px}
-.feat-list-alt li::before{background:var(--b400)}
-.prof-link{display:inline-flex;align-items:center;gap:7px;font-size:clamp(13px,1.3vw,14.5px);font-weight:700;color:var(--c500);transition:gap var(--tx)}
-.prof-link:hover{gap:11px}
-.prof-link-alt{color:var(--b300)}
-[data-theme="light"] .prof-link-alt{color:var(--b500)}
+  #wa-float{position:fixed;right:18px;bottom:18px;z-index:50;display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:999px;background:color-mix(in oklab,var(--glass) 70%,transparent);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);border:1px solid var(--bdr);box-shadow:var(--shadow-card);transition:transform .2s var(--ease)}
+  #wa-float:hover{transform:translateY(-2px)}
+  #wa-float .badge2{width:30px;height:30px;border-radius:9px;background:var(--grad);display:grid;place-items:center;color:#fff;font-family:'PT Sans Narrow';font-weight:700;font-size:11px}
+  #wa-float .lab{font-size:13px;font-weight:700;color:var(--t1)}
 
-/* ===== TRUST ===== */
-.trust-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,22px);margin-top:clamp(40px,5vw,64px)}
-.trust-card{padding:clamp(24px,3vw,34px) clamp(18px,2.5vw,28px)}
-.trust-ico{width:44px;height:44px;background:rgba(14,165,200,0.07);border:1px solid rgba(14,165,200,0.14);border-radius:var(--r);display:flex;align-items:center;justify-content:center;color:var(--c500);margin-bottom:18px}
-.trust-card h4{font-size:clamp(15px,1.5vw,18px);margin-bottom:9px}
-.trust-card p{font-size:clamp(13px,1.3vw,14.5px);font-weight:400;line-height:1.65}
+  #toast{position:fixed;left:50%;bottom:80px;transform:translateX(-50%) translateY(20px);padding:12px 18px;border-radius:14px;background:var(--grad);color:#fff;box-shadow:var(--shadow-card);opacity:0;pointer-events:none;transition:opacity .25s var(--ease),transform .25s var(--ease);z-index:60;font-weight:600;font-size:14px;max-width:90vw;text-align:center}
+  #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
-/* ===== FAQ ===== */
-.faq-list{max-width:760px;margin:clamp(40px,5vw,64px) auto 0}
-.faq-item{border-bottom:1px solid rgba(255,255,255,0.06)}
-[data-theme="light"] .faq-item{border-bottom-color:rgba(0,0,0,0.08)}
-.faq-btn{width:100%;display:flex;justify-content:space-between;align-items:center;gap:14px;padding:20px 0;background:transparent;border:none;color:var(--t1);font-weight:700;font-size:clamp(15px,1.5vw,17px);text-align:left;cursor:pointer;transition:color var(--tx)}
-.faq-btn:hover{color:var(--c500)}
-.faq-icon{flex-shrink:0;width:22px;height:22px;display:flex;align-items:center;justify-content:center;color:var(--c500);transition:transform 250ms ease}
-.faq-item.open .faq-icon{transform:rotate(45deg)}
-.faq-ans{max-height:0;overflow:hidden;transition:max-height 350ms ease,padding 350ms ease}
-.faq-item.open .faq-ans{max-height:400px;padding:0 0 22px}
-.faq-ans p{font-size:clamp(13px,1.3vw,15px);line-height:1.7;color:var(--t2)}
-
-/* ===== CONTACT (azul harmonizado) ===== */
-.contact-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:clamp(20px,3vw,40px);margin-top:clamp(40px,5vw,64px)}
-.contact-cards{display:flex;flex-direction:column;gap:14px}
-.contact-card{display:flex;align-items:center;gap:16px;padding:18px 20px;border-radius:var(--r-lg);background:var(--glass-stop);border:1.5px solid var(--bdr);transition:transform var(--tx),border-color var(--tx),box-shadow var(--tx);position:relative;overflow:hidden}
-.contact-card:hover{transform:translateY(-2px);border-color:var(--c500);box-shadow:0 8px 24px rgba(14,165,200,0.18)}
-.cc-ico{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#fff;position:relative}
-.cc-ico::after{content:'';position:absolute;inset:-6px;border-radius:50%;border:1.5px solid currentColor;opacity:0.25}
-.cc-ico-mail{background:var(--b400);color:var(--b400)}
-.cc-ico-mail svg{color:#fff}
-.cc-ico-tg{background:var(--b500);color:var(--b500)}
-.cc-ico-tg svg{color:#fff}
-.cc-ico-wa{background:var(--c500);color:var(--c500)}
-.cc-ico-wa svg{color:#fff}
-.cc-meta{flex:1;min-width:0}
-.cc-label{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--t3);margin-bottom:3px}
-.cc-text{font-weight:700;font-size:clamp(14px,1.4vw,16px);color:var(--t1)}
-.cc-desc{font-size:12px;color:var(--t3);margin-top:2px}
-.contact-form{padding:clamp(24px,3vw,36px);display:flex;flex-direction:column;gap:14px}
-.contact-form h3{font-size:clamp(18px,2vw,24px);margin-bottom:4px}
-.contact-form p.form-sub{font-size:13px;color:var(--t3);margin-bottom:8px}
-.form-field{display:flex;flex-direction:column;gap:6px}
-.form-field label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--t3)}
-.form-field textarea{width:100%;padding:14px 16px;background:rgba(255,255,255,0.04);border:1.5px solid var(--bdr);border-radius:var(--r);color:var(--t1);font-size:14px;line-height:1.6;resize:vertical;min-height:140px;transition:border-color var(--tx),background var(--tx)}
-[data-theme="light"] .form-field textarea{background:rgba(0,0,0,0.02)}
-.form-field textarea:focus{outline:none;border-color:var(--c500);background:rgba(14,165,200,0.04)}
-.form-error{font-size:12px;color:#FF6B8A;min-height:16px}
-.form-secure{font-size:12px;color:var(--t3);text-align:center;display:flex;align-items:center;justify-content:center;gap:6px}
-.form-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--grad);color:#fff;padding:14px 22px;border-radius:var(--r-f);font-weight:700;font-size:14px;box-shadow:0 8px 28px rgba(14,165,200,0.4);opacity:0;pointer-events:none;transition:opacity 300ms ease,transform 300ms ease;z-index:300}
-.form-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-
-/* Footer */
-#footer{padding:40px 0 28px;border-top:1px solid var(--bdr);background:var(--bg)}
-.footer-inner{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:18px}
-.footer-brand{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--t2)}
-.footer-links{display:flex;gap:22px;flex-wrap:wrap}
-.footer-links a{font-size:13px;color:var(--t3);transition:color var(--tx)}
-.footer-links a:hover{color:var(--c500)}
-.footer-copy{font-size:12px;color:var(--t3);width:100%;text-align:center;margin-top:10px}
-
-/* WhatsApp float — azul ahora */
-#wa-float{position:fixed;bottom:22px;right:22px;width:56px;height:56px;border-radius:50%;background:var(--c500);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(14,165,200,0.4);border:1.5px solid rgba(14,165,200,0.4);z-index:150;transition:transform 200ms ease,box-shadow 200ms ease,background 200ms ease}
-#wa-float:hover{background:var(--b500);transform:scale(1.08);box-shadow:0 12px 30px rgba(36,82,204,0.5)}
-#wa-float svg{width:28px;height:28px;color:#fff}
-
-/* Sticky CTA */
-#sticky-cta{position:fixed;bottom:0;left:0;right:0;padding:12px 16px;background:rgba(var(--card-rgb),0.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--bdr);display:flex;justify-content:center;gap:12px;z-index:140;transform:translateY(100%);transition:transform 300ms ease}
-#sticky-cta.show{transform:translateY(0)}
-#sticky-cta .btn{font-size:13px;padding:10px 18px}
-
-.skip{position:absolute;top:-40px;left:0;background:var(--c500);color:#fff;padding:8px 14px;z-index:300;border-radius:0 0 var(--r) 0}
-.skip:focus{top:0}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width:1023px){
-  .hero-grid{grid-template-columns:1fr}
-  .stats-grid{grid-template-columns:repeat(2,1fr)}
-  .calc-grid{grid-template-columns:repeat(2,1fr)}
-  .trust-grid{grid-template-columns:repeat(2,1fr)}
-  .contact-grid{grid-template-columns:1fr}
-  .hdr-nav{display:none}
-}
-@media (max-width:639px){
-  .steps-seq{grid-template-columns:1fr}
-  .profiles-grid{grid-template-columns:1fr}
-  .trust-grid{grid-template-columns:1fr}
-  .stats-grid{grid-template-columns:1fr 1fr}
-  .footer-inner{flex-direction:column;text-align:center}
-  .step-item:not(:last-child)::after{display:none}
-}
-
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:0.01ms !important;transition-duration:0.01ms !important}
-}
+  @media (max-width:980px){
+    .hero-grid{grid-template-columns:1fr}
+    .calc{grid-template-columns:1fr}
+    .contact-grid{grid-template-columns:1fr}
+    .prob-grid{grid-template-columns:1fr 1fr}
+    .steps{grid-template-columns:1fr;gap:14px}
+    .step{margin:0}
+    .step::after{content:"↓";right:50%;top:auto;bottom:-22px;transform:translateX(50%)}
+    .trust-grid{grid-template-columns:1fr}
+  }
+  @media (max-width:560px){
+    .prob-grid{grid-template-columns:1fr}
+    .bar{grid-template-columns:72px 1fr 70px;font-size:11.5px}
+    .hero-bar button{font-size:12px;height:32px;min-width:34px;padding:0 8px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    html{scroll-behavior:auto}
+  }
 </style>
 </head>
 <body>
+<a href="#main" class="skip" data-i18n="skip">Saltar al contenido</a>
 
-<a href="#inicio" class="skip" data-i18n="skip">Saltar al contenido</a>
-
-<div id="bg-logo" aria-hidden="true">
-  <svg viewBox="0 0 200 200" fill="none"><circle cx="100" cy="100" r="80" stroke="url(#bg-g)" stroke-width="1.5"/><text x="100" y="115" text-anchor="middle" font-family="PT Sans Narrow" font-weight="700" font-size="44" fill="url(#bg-g)">2CES</text><defs><linearGradient id="bg-g" x1="0" y1="0" x2="200" y2="200"><stop offset="0%" stop-color="#2452CC"/><stop offset="100%" stop-color="#0EA5C8"/></linearGradient></defs></svg>
-</div>
-
-<header id="hdr">
-  <div class="hdr-inner">
-    <a href="#inicio" id="hdr-logo" aria-label="2CES Inicio">
-      <svg id="hdr-logo-svg" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" stroke="url(#lg)" stroke-width="2"/><text x="20" y="26" text-anchor="middle" font-family="PT Sans Narrow" font-weight="700" font-size="14" fill="url(#lg)">2CES</text><defs><linearGradient id="lg" x1="0" y1="0" x2="40" y2="40"><stop offset="0%" stop-color="#2452CC"/><stop offset="100%" stop-color="#0EA5C8"/></linearGradient></defs></svg>
-      <div class="hdr-logo-text">
-        <span class="hdr-logo-name">2CES</span>
-        <span class="hdr-logo-sub" data-i18n="hdrSub">Energy</span>
-      </div>
-    </a>
-    <nav class="hdr-nav" aria-label="Principal">
-      <a href="#problema" data-i18n="navProblem">El problema</a>
-      <a href="#como" data-i18n="navHow">Cómo</a>
-      <a href="#calculadora" data-i18n="navCalc">Calculadora</a>
-      <a href="#faq" data-i18n="navFaq">FAQ</a>
-      <a href="#contacto" data-i18n="navContact">Contacto</a>
-    </nav>
-  </div>
-  <div class="hdr-controls">
-    <button class="ctrl" id="lang-btn" aria-label="Cambiar idioma"><span id="lang-label">EN</span></button>
-    <button class="ctrl" id="theme-btn" aria-label="Cambiar tema">
-      <svg class="ico-sun" viewBox="0 0 24 24" width="16" height="16"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-      <svg class="ico-moon" viewBox="0 0 24 24" width="16" height="16"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-    </button>
-  </div>
-</header>
-
-<main>
-
-<!-- ============== HERO ============== -->
-<section id="inicio" class="sec sec-hero">
-  <div class="wrap">
-    <div class="hero-grid">
-      <div class="hero-copy">
-        <span class="badge" data-i18n="heroBadge">Ahorra hasta 62% en comisiones</span>
-        <h1 data-i18n="heroTitle">Optimiza tus comisiones <em>USDT</em> en TRON</h1>
-        <p class="hero-sub"><strong data-i18n="heroSub1">1,6 USDT por transacción.</strong> <span data-i18n="heroSub2">Sin apps, sin contratos, sin registros. Verificable en blockchain.</span></p>
-        <div class="hero-actions">
-          <a href="#calculadora" class="btn btn-prim btn-lg" data-i18n="heroCta1">Calcular mi ahorro</a>
-          <a href="#como" class="btn btn-ghost btn-lg" data-i18n="heroCta2">Ver cómo funciona</a>
-        </div>
-        <ul class="trust-row">
-          <li><span class="dot"></span><span data-i18n="trust1">Verificable on-chain</span></li>
-          <li><span class="dot"></span><span data-i18n="trust2">Sin custodia</span></li>
-          <li><span class="dot"></span><span data-i18n="trust3">Soporte humano</span></li>
-        </ul>
+<main id="main">
+  <section class="sec-hero" id="inicio">
+    <div class="wrap">
+      <div class="hero-bar" role="group" aria-label="Preferencias">
+        <button id="lang-toggle" aria-label="Cambiar idioma" type="button">EN</button>
+        <span class="sep" aria-hidden="true"></span>
+        <button id="theme-toggle" aria-label="Cambiar tema" type="button">🌙</button>
       </div>
 
-      <aside class="card pay-card hero-card-wrap" aria-label="Comparativa en vivo">
-        <div class="card-lbl" data-i18n="payHdr">Comparativa en vivo</div>
-
-        <div class="pay-strip">
-          <div class="pay-ico pay-ico-trx" aria-hidden="true">
-            <svg viewBox="0 0 64 64" width="22" height="22"><path d="M55 14L9 18l24 33 22-37zM33 47L13 21l38 -3-18 29z" fill="#fff"/></svg>
+      <div class="hero-grid">
+        <div class="hero-left">
+          <div class="brand" aria-label="2CES">
+            <div class="brand-mark" aria-hidden="true">2C</div>
+            <div class="brand-name">2<span>CES</span></div>
           </div>
-          <div class="pay-meta">
-            <div class="pay-name" data-i18n="payTrxLbl">TRX · token de TRON</div>
-            <div><span class="pay-val" data-bind="trx-usd">—</span><span class="pay-unit">USD</span></div>
+          <span class="eyebrow" style="margin-top:18px"><span class="dot"></span><span data-i18n="eyebrow">Optimización Premium en USDT-TRC20</span></span>
+          <h1 data-i18n-html="h1">Deja de regalar tu dinero a la red: transfiere USDT con un costo fijo de <b><span data-bind="ces-fee">1.65</span></b> y máxima eficiencia.</h1>
+          <p class="hero-sub" data-i18n-html="hsub">Mientras el mercado te cobra hasta <b>4.40 USDT</b> por movimiento, nuestra infraestructura te permite operar con un ahorro real del <b><span data-bind="save-vs-max">62.5%</span></b>. Si no estás optimizando, estás perdiendo beneficios en cada transacción.</p>
+          <div class="cta-row">
+            <button class="btn btn-primary" data-cta="hero1" type="button" aria-label="Hablar con un asesor por WhatsApp"><span data-i18n="cta1">Hablar con un asesor ahora</span></button>
+            <button class="btn btn-ghost" data-cta="hero2" type="button" aria-label="Ver mi ahorro proyectado por WhatsApp"><span data-i18n="cta2">Ver mi ahorro proyectado</span></button>
+          </div>
+          <div class="micro-trust">
+            <span><span class="dotg"></span><span data-i18n="t1">Activación inmediata</span></span>
+            <span><span class="dotg"></span><span data-i18n="t2">Sin registros</span></span>
+            <span><span class="dotg"></span><span data-i18n="t3">Costos 100% predecibles</span></span>
           </div>
         </div>
 
-        <div class="pay-strip">
-          <div class="pay-ico" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        <aside class="dash" aria-label="Dashboard de eficiencia 2CES">
+          <span class="badge-float badge-usdt">USDT</span>
+          <div class="dash-head">
+            <div class="dash-title" data-i18n="payments">Payments</div>
+            <div class="toggle" role="img" aria-label="Optimización activa"></div>
           </div>
-          <div class="pay-meta">
-            <div class="pay-name" data-i18n="payMktLbl">Costo de mercado promedio</div>
-            <div><span class="pay-val" data-bind="mkt-rate">—</span><span class="pay-unit">USDT</span></div>
+
+          <div class="trx-row" aria-live="polite">
+            <svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="tg" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#ff060a"/><stop offset="1" stop-color="#b8050a"/></linearGradient></defs><circle cx="32" cy="32" r="32" fill="url(#tg)"/><path d="M16 20l24-4 12 14-22 30L16 20zm5 3l8 13 13-10-21-3zm10 17l13-10-6 18-7-8z" fill="#fff"/></svg>
+            <div style="flex:1;min-width:0">
+              <div class="lbl"><span data-i18n="trxToken">TRX · token de Tron</span></div>
+              <div class="val"><b><span data-bind="trx-usd">—</span></b> USD</div>
+            </div>
+          </div>
+
+          <div class="eff-label" data-i18n="efficiency">Eficiencia</div>
+          <svg class="eff-line" viewBox="0 0 300 42" preserveAspectRatio="none" aria-hidden="true">
+            <defs><linearGradient id="eg" x1="0" x2="1"><stop offset="0" stop-color="#1d5cff" stop-opacity="0"/><stop offset="1" stop-color="#06b6d4" stop-opacity=".55"/></linearGradient></defs>
+            <path d="M0 38 L60 32 L120 28 L180 18 L240 12 L300 6 L300 42 L0 42 Z" fill="url(#eg)"/>
+            <path d="M0 38 L60 32 L120 28 L180 18 L240 12 L300 6" fill="none" stroke="#1d5cff" stroke-width="2"/>
+          </svg>
+
+          <div class="bars" role="list">
+            <div class="bar max" role="listitem"><div class="name" data-i18n="bMax">Mercado máx.</div><div class="track"><div class="fill" id="bar-max" style="width:100%"></div></div><div class="num">4.40<small>USDT</small></div></div>
+            <div class="bar mid" role="listitem"><div class="name" data-i18n="bMid">Mercado medio</div><div class="track"><div class="fill" id="bar-mid" style="width:75%"></div></div><div class="num"><span data-bind="mkt-rate">—</span><small>USDT</small></div></div>
+            <div class="bar ces" role="listitem"><div class="name">2CES</div><div class="track"><div class="fill" id="bar-ces" style="width:36%"></div></div><div class="num"><span data-bind="ces-fee">1.65</span><small>USDT</small></div></div>
+          </div>
+
+          <div class="live-note"><span data-i18n="liveNote">Coste medio calculado en vivo · puede variar y presentar un pequeño desfase.</span></div>
+          <div class="dash-foot" data-i18n="dashFoot">· Estrategia confiable y alineada a tu operación actual.</div>
+
+          <span class="badge-float badge-tron">TRON</span>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section id="problema">
+    <div class="wrap">
+      <span class="eyebrow"><span class="dot"></span><span data-i18n="ebProb">El problema</span></span>
+      <h2 class="sec-title" data-i18n="probTitle">¿Sabes cuánto dinero estás dejando sobre la mesa?</h2>
+      <p class="sec-lead" data-i18n="probLead">Cada vez que envías USDT en la red Tron, consumes recursos a precios variables y abusivos que nadie te explica.</p>
+      <div class="prob-grid">
+        <div class="prob-card max">
+          <div class="tag" data-i18n="pcMax">Mercado alto te cobra</div>
+          <div class="v">4.40<small>USDT</small></div>
+          <div class="d" data-i18n="pcMaxD">Por transacción en horas pico de la red Tron.</div>
+        </div>
+        <div class="prob-card mid">
+          <div class="tag" data-i18n="pcMid">Mercado promedio te cobra</div>
+          <div class="v"><span data-bind="mkt-rate">—</span><small>USDT</small></div>
+          <div class="d"><span data-i18n="liveNote">Coste medio calculado en vivo · puede variar y presentar un pequeño desfase.</span></div>
+        </div>
+        <div class="prob-card ces">
+          <div class="tag" data-i18n="pcCes">2CES te garantiza un fijo de</div>
+          <div class="v"><span data-bind="ces-fee">1.65</span><small>USDT</small></div>
+          <div class="d" data-i18n="pcCesD">Mismo precio hoy, mañana y siempre. Matemática pura.</div>
+        </div>
+      </div>
+      <div class="impact" data-i18n="probImpact">Con 2CES, si el mercado sube tú no gastas más; si el mercado baja, tú sigues pagando menos. Es matemática pura, no una promesa.</div>
+    </div>
+  </section>
+
+  <section id="calculadora">
+    <div class="wrap">
+      <span class="eyebrow"><span class="dot"></span><span data-i18n="ebCalc">Bofetada de realidad</span></span>
+      <h2 class="sec-title" data-i18n="calcTitle">Tu ineficiencia actual en cifras</h2>
+      <p class="sec-lead" data-i18n="calcLead">Imagina tus transacciones mensuales. Mira la diferencia entre operar con 2CES o seguir como el resto.</p>
+      <div class="calc">
+        <div class="calc-input">
+          <label for="tx" data-i18n="calcLbl">Nº de transacciones</label>
+          <input id="tx" type="number" min="1" step="1" value="10000" inputmode="numeric" />
+          <p class="helper" data-i18n="calcHelper">Ajusta el volumen real de tu operación.</p>
+        </div>
+        <div class="calc-out" aria-live="polite">
+          <div class="calc-row"><div class="k" data-i18n="calcMax">Gasto Mercado Máximo (4.40 USDT)</div><div class="vv"><span id="o-max">—</span> USDT</div></div>
+          <div class="calc-row save"><div class="k"><span data-i18n="calcCes">Gasto con 2CES</span> (<span data-bind="ces-fee">1.65</span> USDT)</div><div class="vv"><span id="o-ces">—</span> USDT</div></div>
+          <div class="calc-row loss"><div class="k" data-i18n="calcLoss">Tu pérdida por no actuar</div><div class="vv"><span id="o-loss">—</span> USDT</div></div>
+          <div style="margin-top:6px">
+            <button class="btn btn-primary" data-cta="calc" type="button" aria-label="Calcular mi ahorro real por WhatsApp"><span data-i18n="calcCta">Calcular mi ahorro real</span></button>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="pay-strip pay-strip-best">
-          <div class="pay-ico pay-ico-2ces" aria-hidden="true">2CES</div>
-          <div class="pay-meta">
-            <div class="pay-name" data-i18n="payOptLbl">Costo optimizado 2CES</div>
-            <div><span class="pay-val pay-val-best" data-bind="ces-rate">1,60</span><span class="pay-unit">USDT</span></div>
-          </div>
+  <section id="proceso">
+    <div class="wrap">
+      <span class="eyebrow"><span class="dot"></span><span data-i18n="ebProc">Cero fricción</span></span>
+      <h2 class="sec-title" data-i18n="procTitle">Operativo en 5 minutos. Sin burocracia.</h2>
+      <p class="sec-lead" data-i18n="procLead">Si sabes copiar y pegar una dirección de wallet, ya sabes usar 2CES.</p>
+      <div class="steps">
+        <div class="step"><div class="num">1</div><h3 data-i18n="s1t">Sin cuentas ni registros</h3><p data-i18n="s1d">No queremos tus datos, queremos tu eficiencia. Cero formularios.</p></div>
+        <div class="step"><div class="num">2</div><h3 data-i18n="s2t">Sin descargas peligrosas</h3><p data-i18n="s2d">Tu seguridad es primero. Nada que instalar, nada que clickar.</p></div>
+        <div class="step"><div class="num">3</div><h3 data-i18n="s3t">Asignación inmediata</h3><p data-i18n="s3d">Indicas tu wallet y activamos los recursos. Así de simple.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="confianza">
+    <div class="wrap">
+      <span class="eyebrow"><span class="dot"></span><span data-i18n="ebTrust">Confianza</span></span>
+      <h2 class="sec-title" data-i18n="trustTitle">Experiencia real para operaciones de alto nivel</h2>
+      <p class="sec-lead" data-i18n="trustLead">No somos una web nueva experimentando con tu dinero. Llevamos más de un año optimizando transacciones de USDT en Tron con resultados comprobables.</p>
+      <div class="trust-grid">
+        <div class="trust-card">
+          <div class="trust-ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div><h3 data-i18n="tr1t">Soporte humano real</h3><p data-i18n="tr1d">Olvida los bots. Tienes un equipo dedicado a un mensaje de distancia por Telegram o WhatsApp.</p></div>
         </div>
-
-        <div class="pay-chart" aria-hidden="true">
-          <div class="pay-chart-hdr">
-            <span data-i18n="chartHdr">Comparativa de ahorro</span>
-            <span data-bind="saving-pct">—</span>
-          </div>
-          <svg class="pay-chart-svg" id="pay-chart" viewBox="0 0 300 80" preserveAspectRatio="none"></svg>
-          <div class="pay-chart-foot">
-            <span>Mercado</span>
-            <span>2CES</span>
-          </div>
+        <div class="trust-card">
+          <div class="trust-ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+          <div><h3 data-i18n="tr2t">Rapidez garantizada</h3><p data-i18n="tr2d">Tras cada pago, tus recursos se refrescan en 2 a 5 segundos. Sin demoras.</p></div>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="live-note" data-i18n="liveNote">Valor calculado en vivo · puede variar y presentar un pequeño desfase</div>
-      </aside>
+  <section id="faq">
+    <div class="wrap">
+      <span class="eyebrow"><span class="dot"></span><span data-i18n="ebFaq">Preguntas frecuentes</span></span>
+      <h2 class="sec-title" data-i18n="faqTitle">Respuestas para mentes analíticas</h2>
+      <div class="faq" id="faq-list"></div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============== PROBLEMA ============== -->
-<section id="problema" class="sec">
-  <div class="wrap">
-    <div class="sec-head center">
-      <span class="badge" data-i18n="probBadge">El problema</span>
-      <h2 data-i18n="probTitle">Pagas más de lo que crees por cada USDT</h2>
-      <p class="lead" data-i18n="probLead">Las wallets cobran comisiones variables que pueden duplicarse en horas pico. 2CES fija el costo.</p>
-    </div>
-    <div class="stats-grid">
-      <div class="card stat-card"><span class="stat-n" data-bind="cost-max">4,40</span><p data-i18n="statMax">Costo máximo USDT-TRC20</p></div>
-      <div class="card stat-card"><span class="stat-n" data-bind="mkt-rate">3,30</span><p data-i18n="statAvg">Promedio mercado actual</p></div>
-      <div class="card stat-card"><span class="stat-n" data-bind="ces-rate">1,60</span><p data-i18n="statCes">Con 2CES (fijo)</p></div>
-      <div class="card stat-card"><span class="stat-n" data-bind="saving-pct">62%</span><p data-i18n="statSave">Ahorro promedio</p></div>
-    </div>
-    <p class="live-note" data-i18n="liveNote" style="margin-top:18px">Valor calculado en vivo · puede variar y presentar un pequeño desfase</p>
-  </div>
-</section>
-
-<!-- ============== CÓMO — pasos secuenciales ============== -->
-<section id="como" class="sec">
-  <div class="wrap">
-    <div class="sec-head center">
-      <span class="badge" data-i18n="howBadge">Operativo en 5 minutos</span>
-      <h2 data-i18n="howTitle">Tres pasos. Sin fricción.</h2>
-      <p class="lead" data-i18n="howLead">Proceso secuencial. Cada paso depende del anterior y se completa en minutos.</p>
-    </div>
-    <ol class="steps-seq">
-      <li class="card step-item">
-        <div class="step-num">1</div>
-        <h3 data-i18n="step1Title">Contáctanos</h3>
-        <p data-i18n="step1Desc">Escríbenos por WhatsApp, Telegram o el formulario. Te respondemos en minutos.</p>
-      </li>
-      <li class="card step-item">
-        <div class="step-num">2</div>
-        <h3 data-i18n="step2Title">Confirmas tu wallet</h3>
-        <p data-i18n="step2Desc">Nos envías la dirección TRON desde la que vas a operar. No pedimos claves.</p>
-      </li>
-      <li class="card step-item">
-        <div class="step-num">3</div>
-        <h3 data-i18n="step3Title">Operas optimizado</h3>
-        <p data-i18n="step3Desc">Tus transacciones USDT-TRC20 quedan a 1,6 USDT fijo, verificable on-chain.</p>
-      </li>
-    </ol>
-  </div>
-</section>
-
-<!-- ============== CALCULADORA ============== -->
-<section id="calculadora" class="sec">
-  <div class="wrap">
-    <div class="sec-head center">
-      <span class="badge" data-i18n="calcBadge">Calculadora</span>
-      <h2 data-i18n="calcTitle">Calcula tu ahorro mensual</h2>
-      <p class="lead" data-i18n="calcLead">Ajusta el volumen de transacciones y mira lo que ahorras al mes.</p>
-    </div>
-    <div class="card calc-wrap">
-      <div class="calc-top">
-        <div class="calc-slider-hdr">
-          <label for="tx-slider" data-i18n="calcLabel">Transacciones por mes</label>
-          <span id="tx-val">100</span>
+  <section id="contacto">
+    <div class="wrap">
+      <span class="eyebrow"><span class="dot"></span><span data-i18n="ebContact">Contacto directo</span></span>
+      <h2 class="sec-title" data-i18n="contactTitle">El ahorro es real y es ahora.</h2>
+      <p class="sec-lead" data-i18n="contactLead">No dejes que otra transacción se lleve dinero que debería ser tu utilidad. Elige tu canal preferido.</p>
+      <div class="contact-grid">
+        <form class="form-card" id="lead-form" novalidate onsubmit="return false;">
+          <h3 data-i18n="formTitle">Vamos a optimizar costos</h3>
+          <p class="hint" data-i18n="formHint">Tu mensaje se envía por un canal seguro. Sin registros.</p>
+          <label for="msg" class="sr-only" data-i18n="formLbl">Tu mensaje</label>
+          <textarea id="msg" maxlength="1000" placeholder="Cuéntanos tu volumen aproximado y qué quieres optimizar..." data-i18n-attr="placeholder|formPh" aria-describedby="msg-counter"></textarea>
+          <div class="counter"><span id="msg-counter">0 / 1000</span><span data-i18n="formSecure">Canal seguro</span></div>
+          <div class="cta-row" style="margin-top:14px">
+            <button type="button" class="btn btn-primary" data-cta="form-wa" aria-label="Enviar mensaje por WhatsApp"><span data-i18n="formBtn">Empezar a optimizar</span></button>
+          </div>
+        </form>
+        <div class="channels">
+          <button class="ch wa" data-cta="wa" type="button" aria-label="Contactar por WhatsApp">
+            <div class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.52 3.48A11.78 11.78 0 0 0 12.04 0C5.5 0 .2 5.3.2 11.84c0 2.09.55 4.13 1.6 5.93L0 24l6.4-1.68a11.8 11.8 0 0 0 5.64 1.43h.01c6.54 0 11.84-5.3 11.84-11.84 0-3.16-1.23-6.13-3.37-8.43zM12.05 21.7a9.83 9.83 0 0 1-5.01-1.37l-.36-.21-3.8 1 1.02-3.7-.23-.38a9.82 9.82 0 0 1-1.5-5.2c0-5.43 4.42-9.85 9.86-9.85 2.63 0 5.1 1.03 6.96 2.89a9.78 9.78 0 0 1 2.88 6.97c0 5.44-4.42 9.86-9.82 9.86zm5.39-7.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.66.15-.2.3-.76.97-.93 1.17-.17.2-.34.22-.64.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.34.45-.51.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.66-1.6-.91-2.18-.24-.58-.49-.5-.66-.51l-.56-.01c-.2 0-.5.07-.77.37-.27.3-1.02 1-1.02 2.43 0 1.43 1.04 2.81 1.19 3 .15.2 2.06 3.14 4.99 4.41.7.3 1.24.48 1.66.61.7.22 1.33.19 1.83.12.56-.08 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.34z"/></svg></div>
+            <div class="meta"><div class="t">WhatsApp</div><div class="s" data-i18n="waSub">Respuesta inmediata</div></div>
+          </button>
+          <button class="ch tg" data-cta="tg" type="button" aria-label="Contactar por Telegram">
+            <div class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M9.78 16.27 9.6 19.6c.36 0 .51-.15.7-.34l1.67-1.6 3.47 2.54c.64.35 1.1.17 1.27-.59l2.3-10.8c.22-1-.36-1.4-.99-1.16L3.16 12.55c-.99.4-.97.97-.17 1.22l3.92 1.22 9.1-5.74c.43-.27.82-.12.5.17l-7.36 6.85z"/></svg></div>
+            <div class="meta"><div class="t">Telegram</div><div class="s" data-i18n="tgSub">Canal rápido y seguro</div></div>
+          </button>
+          <button class="ch email" data-cta="email" type="button" aria-label="Contactar por Email">
+            <div class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></div>
+            <div class="meta"><div class="t">Email</div><div class="s" data-i18n="emailSub">Consulta corporativa</div></div>
+          </button>
         </div>
-        <input id="tx-slider" class="calc-slider" type="range" min="10" max="2000" step="10" value="100" aria-label="Transacciones por mes">
-        <div class="calc-ticks"><span>10</span><span>500</span><span>1000</span><span>2000</span></div>
-      </div>
-      <div class="calc-grid">
-        <div class="c-box"><div class="c-lbl" data-i18n="calcMkt">Mercado</div><div class="c-val"><span id="calc-mkt">330</span></div><div class="c-unit">USDT/mes</div></div>
-        <div class="c-box"><div class="c-lbl" data-i18n="calcCes">Con 2CES</div><div class="c-val"><span id="calc-ces">160</span></div><div class="c-unit">USDT/mes</div></div>
-        <div class="c-box c-box-hi"><div class="c-lbl" data-i18n="calcSave">Ahorras</div><div class="c-val accent"><span id="calc-save">170</span></div><div class="c-unit">USDT/mes</div></div>
-        <div class="c-box c-box-hi"><div class="c-lbl" data-i18n="calcPct">% ahorro</div><div class="c-val accent"><span id="calc-pct">52</span>%</div><div class="c-unit">vs mercado</div></div>
-      </div>
-      <p class="live-note" data-i18n="liveNote">Valor calculado en vivo · puede variar y presentar un pequeño desfase</p>
-      <div class="calc-cta">
-        <a href="#contacto" class="btn btn-prim btn-lg" data-i18n="calcCta">Empezar a optimizar</a>
-        <p class="calc-hint" data-i18n="calcHint">SIN COMPROMISO · RESPUESTA EN MINUTOS</p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============== CLIENTES ============== -->
-<section id="clientes" class="sec">
-  <div class="wrap">
-    <div class="sec-head center">
-      <span class="badge" data-i18n="cliBadge">Para quién</span>
-      <h2 data-i18n="cliTitle">Diseñado para alto volumen</h2>
+  <footer>
+    <div class="wrap row">
+      <div class="brand"><div class="brand-mark" aria-hidden="true">2C</div><div class="brand-name">2<span>CES</span></div></div>
+      <div data-i18n="footer">2CES — Seguridad, eficiencia y confianza en cada transacción. © 2026 Todos los derechos reservados.</div>
     </div>
-    <div class="profiles-grid">
-      <div class="card prof-card">
-        <span class="prof-tag" data-i18n="profCorp">Corporativo</span>
-        <h3 data-i18n="profCorpTitle">Empresas y exchanges</h3>
-        <p data-i18n="profCorpDesc">Optimiza miles de transferencias mensuales sin cambiar tu stack.</p>
-        <ul class="feat-list">
-          <li data-i18n="profCorp1">Volumen ilimitado</li>
-          <li data-i18n="profCorp2">SLA dedicado</li>
-          <li data-i18n="profCorp3">Reportes mensuales</li>
-        </ul>
-        <a href="#contacto" class="prof-link" data-i18n="profCta">Hablar con ventas →</a>
-      </div>
-      <div class="card prof-card">
-        <span class="prof-tag prof-tag-alt" data-i18n="profInd">Individual</span>
-        <h3 data-i18n="profIndTitle">Traders y freelancers</h3>
-        <p data-i18n="profIndDesc">Si mueves USDT con frecuencia, 2CES paga su valor desde la primera semana.</p>
-        <ul class="feat-list feat-list-alt">
-          <li data-i18n="profInd1">Sin mínimo de volumen</li>
-          <li data-i18n="profInd2">Pago por uso</li>
-          <li data-i18n="profInd3">Soporte 1 a 1</li>
-        </ul>
-        <a href="#contacto" class="prof-link prof-link-alt" data-i18n="profCta2">Empezar ahora →</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============== CONFIANZA ============== -->
-<section id="confianza" class="sec">
-  <div class="wrap">
-    <div class="sec-head center">
-      <span class="badge" data-i18n="trustBadge">Confianza</span>
-      <h2 data-i18n="trustTitle">Datos verificables. Sin promesas vacías.</h2>
-    </div>
-    <div class="trust-grid">
-      <div class="card trust-card">
-        <div class="trust-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg></div>
-        <h4 data-i18n="trustC1Title">100% on-chain</h4>
-        <p data-i18n="trustC1Desc">Cada transacción es verificable en TRONScan. Sin cajas negras.</p>
-      </div>
-      <div class="card trust-card">
-        <div class="trust-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6l-8-4z"/></svg></div>
-        <h4 data-i18n="trustC2Title">Sin custodia</h4>
-        <p data-i18n="trustC2Desc">Tus fondos nunca pasan por nosotros. Mantienes el control total.</p>
-      </div>
-      <div class="card trust-card">
-        <div class="trust-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
-        <h4 data-i18n="trustC3Title">Activación inmediata</h4>
-        <p data-i18n="trustC3Desc">En menos de 5 minutos estás operando con tarifa optimizada.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============== FAQ ============== -->
-<section id="faq" class="sec">
-  <div class="wrap">
-    <div class="sec-head center">
-      <span class="badge" data-i18n="faqBadge">Preguntas frecuentes</span>
-      <h2 data-i18n="faqTitle">Resolvemos tus dudas</h2>
-    </div>
-    <div class="faq-list">
-      <div class="faq-item">
-        <button class="faq-btn" aria-expanded="false"><span data-i18n="faq1Q">¿Cómo logran 1,6 USDT por transacción?</span><span class="faq-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></button>
-        <div class="faq-ans"><p data-i18n="faq1A">Optimizamos el uso de energía TRX en la red TRON, eliminando el sobreconsumo que cobran las wallets.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-btn" aria-expanded="false"><span data-i18n="faq2Q">¿Necesito instalar algo?</span><span class="faq-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></button>
-        <div class="faq-ans"><p data-i18n="faq2A">No. Sigues usando tu wallet habitual. Solo nos das tu dirección TRON y nosotros optimizamos.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-btn" aria-expanded="false"><span data-i18n="faq3Q">¿Es seguro?</span><span class="faq-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></button>
-        <div class="faq-ans"><p data-i18n="faq3A">Totalmente. Nunca tenemos custodia de tus fondos. Todo es verificable en blockchain.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-btn" aria-expanded="false"><span data-i18n="faq4Q">¿Cómo se paga el servicio?</span><span class="faq-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></button>
-        <div class="faq-ans"><p data-i18n="faq4A">El costo de 1,6 USDT es la tarifa total por transacción. No hay suscripciones ni cargos ocultos.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============== CONTACTO ============== -->
-<section id="contacto" class="sec">
-  <div class="wrap">
-    <div class="sec-head center">
-      <span class="badge" data-i18n="ctBadge">Contacto</span>
-      <h2 data-i18n="ctTitle">Vamos a optimizar costos</h2>
-      <p class="lead" data-i18n="ctLead">Cuéntanos tu volumen y te respondemos con un plan a medida.</p>
-    </div>
-    <div class="contact-grid">
-      <div class="contact-cards">
-        <a id="email-card" class="contact-card" href="mailto:hola@2cesenergy.com" rel="noopener noreferrer">
-          <div class="cc-ico cc-ico-mail" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l9 6 9-6M3 7v10a2 2 0 002 2h14a2 2 0 002-2V7M3 7l9-4 9 4"/></svg></div>
-          <div class="cc-meta">
-            <div class="cc-label">Email</div>
-            <div class="cc-text">hola@2cesenergy.com</div>
-            <div class="cc-desc" data-i18n="ccEmailDesc">Respuesta en horas</div>
-          </div>
-        </a>
-        <a id="tg-card" class="contact-card" href="https://t.me/2cesenergy" target="_blank" rel="noopener noreferrer">
-          <div class="cc-ico cc-ico-tg" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M22 3L2 11l5 2 2 7 4-4 5 4 4-17z"/></svg></div>
-          <div class="cc-meta">
-            <div class="cc-label">Telegram</div>
-            <div class="cc-text">@2cesenergy</div>
-            <div class="cc-desc" data-i18n="ccTgDesc">Chat en vivo</div>
-          </div>
-        </a>
-        <a id="wa-card" class="contact-card" href="https://wa.me/0000000000" target="_blank" rel="noopener noreferrer">
-          <div class="cc-ico cc-ico-wa" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.4A10 10 0 1012 2zm5 14.3c-.2.6-1.2 1.2-1.7 1.3-.5.1-1.1.1-1.7-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5.1-4.5-.1-.2-1.2-1.6-1.2-3 0-1.5.7-2.2 1-2.5.2-.3.5-.4.7-.4h.5c.2 0 .4 0 .6.5l.9 2c.1.2.1.4 0 .5l-.3.5-.4.5c-.1.1-.3.3-.1.5.2.3.9 1.4 1.9 2.3 1.3 1.1 2.4 1.5 2.7 1.6.3.1.5.1.7-.1l.8-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.6.3.1.2.1.7-.1 1.3z"/></svg></div>
-          <div class="cc-meta">
-            <div class="cc-label">WhatsApp</div>
-            <div class="cc-text" data-i18n="ccWaText">Chatea con nosotros</div>
-            <div class="cc-desc" data-i18n="ccWaDesc">Respuesta inmediata</div>
-          </div>
-        </a>
-      </div>
-
-      <form class="card contact-form" id="contact-form" novalidate>
-        <h3 data-i18n="formTitle">Vamos a optimizar costos</h3>
-        <p class="form-sub" data-i18n="formSub">Escribe tu mensaje. Te contactamos en minutos.</p>
-        <div class="form-field">
-          <label for="msg" data-i18n="formMsgLabel">Mensaje</label>
-          <textarea id="msg" name="msg" maxlength="1000" required aria-describedby="msg-err" data-i18n-placeholder="formMsgPh" placeholder="Cuéntanos tu volumen mensual y cómo operas hoy..."></textarea>
-          <div id="msg-err" class="form-error" aria-live="polite"></div>
-        </div>
-        <button type="submit" class="btn btn-prim btn-lg" data-i18n="formBtn">Empezar a optimizar</button>
-        <div class="form-secure"><span class="dot"></span><span data-i18n="formSecure">Tu mensaje se envía por un canal seguro</span></div>
-      </form>
-    </div>
-  </div>
-</section>
-
+  </footer>
 </main>
 
-<footer id="footer">
-  <div class="wrap footer-inner">
-    <div class="footer-brand">
-      <svg width="28" height="28" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" stroke="url(#fg)" stroke-width="2"/><text x="20" y="26" text-anchor="middle" font-family="PT Sans Narrow" font-weight="700" font-size="14" fill="url(#fg)">2CES</text><defs><linearGradient id="fg" x1="0" y1="0" x2="40" y2="40"><stop offset="0%" stop-color="#2452CC"/><stop offset="100%" stop-color="#0EA5C8"/></linearGradient></defs></svg>
-      <span>2CES Energy</span>
-    </div>
-    <div class="footer-links">
-      <a href="#problema" data-i18n="navProblem">El problema</a>
-      <a href="#calculadora" data-i18n="navCalc">Calculadora</a>
-      <a href="#faq" data-i18n="navFaq">FAQ</a>
-      <a href="#contacto" data-i18n="navContact">Contacto</a>
-    </div>
-    <div class="footer-copy">© <span id="yr"></span> 2CES Energy · <span data-i18n="footerRights">Todos los derechos reservados</span></div>
-  </div>
-</footer>
-
-<a id="wa-float" href="https://wa.me/0000000000" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.4A10 10 0 1012 2zm5 14.3c-.2.6-1.2 1.2-1.7 1.3-.5.1-1.1.1-1.7-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5.1-4.5-.1-.2-1.2-1.6-1.2-3 0-1.5.7-2.2 1-2.5.2-.3.5-.4.7-.4h.5c.2 0 .4 0 .6.5l.9 2c.1.2.1.4 0 .5l-.3.5-.4.5c-.1.1-.3.3-.1.5.2.3.9 1.4 1.9 2.3 1.3 1.1 2.4 1.5 2.7 1.6.3.1.5.1.7-.1l.8-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.6.3.1.2.1.7-.1 1.3z"/></svg>
+<a id="wa-float" href="#" rel="noopener noreferrer" aria-label="Abrir WhatsApp 2CES">
+  <span class="badge2" aria-hidden="true">2CES</span>
+  <span class="lab">WhatsApp</span>
 </a>
 
-<div id="sticky-cta">
-  <a href="#calculadora" class="btn btn-ghost" data-i18n="stickyCalc">Calcular</a>
-  <a href="#contacto" class="btn btn-prim" data-i18n="stickyCta">Empezar</a>
-</div>
+<div id="toast" role="status" aria-live="polite"></div>
 
-<div class="form-toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(() => {
+  const CES_FEE = 1.65;
+  const MKT_MAX = 4.40;
+  const CONTACT = { wa:'+31970102657', tg:'ask2ces', email:'support@2cesenergy.com' };
 
-<script defer>
-(function(){
-  'use strict';
-
-  // ===== i18n =====
   const I18N = {
-    es:{
-      skip:"Saltar al contenido",hdrSub:"Energy",
-      navProblem:"El problema",navHow:"Cómo",navCalc:"Calculadora",navFaq:"FAQ",navContact:"Contacto",
-      heroBadge:"Ahorra hasta 62% en comisiones",
-      heroTitle:"Optimiza tus comisiones <em>USDT</em> en TRON",
-      heroSub1:"1,6 USDT por transacción.",heroSub2:"Sin apps, sin contratos, sin registros. Verificable en blockchain.",
-      heroCta1:"Calcular mi ahorro",heroCta2:"Ver cómo funciona",
-      trust1:"Verificable on-chain",trust2:"Sin custodia",trust3:"Soporte humano",
-      payHdr:"Comparativa en vivo",payTrxLbl:"TRX · token de TRON",payMktLbl:"Costo de mercado promedio",payOptLbl:"Costo optimizado 2CES",
-      chartHdr:"Comparativa de ahorro",
-      liveNote:"Valor calculado en vivo · puede variar y presentar un pequeño desfase",
-      probBadge:"El problema",probTitle:"Pagas más de lo que crees por cada USDT",probLead:"Las wallets cobran comisiones variables que pueden duplicarse en horas pico. 2CES fija el costo.",
-      statMax:"Costo máximo USDT-TRC20",statAvg:"Promedio mercado actual",statCes:"Con 2CES (fijo)",statSave:"Ahorro promedio",
-      howBadge:"Operativo en 5 minutos",howTitle:"Tres pasos. Sin fricción.",howLead:"Proceso secuencial. Cada paso depende del anterior y se completa en minutos.",
-      step1Title:"Contáctanos",step1Desc:"Escríbenos por WhatsApp, Telegram o el formulario. Te respondemos en minutos.",
-      step2Title:"Confirmas tu wallet",step2Desc:"Nos envías la dirección TRON desde la que vas a operar. No pedimos claves.",
-      step3Title:"Operas optimizado",step3Desc:"Tus transacciones USDT-TRC20 quedan a 1,6 USDT fijo, verificable on-chain.",
-      calcBadge:"Calculadora",calcTitle:"Calcula tu ahorro mensual",calcLead:"Ajusta el volumen de transacciones y mira lo que ahorras al mes.",
-      calcLabel:"Transacciones por mes",calcMkt:"Mercado",calcCes:"Con 2CES",calcSave:"Ahorras",calcPct:"% ahorro",
-      calcCta:"Empezar a optimizar",calcHint:"SIN COMPROMISO · RESPUESTA EN MINUTOS",
-      cliBadge:"Para quién",cliTitle:"Diseñado para alto volumen",
-      profCorp:"Corporativo",profCorpTitle:"Empresas y exchanges",profCorpDesc:"Optimiza miles de transferencias mensuales sin cambiar tu stack.",
-      profCorp1:"Volumen ilimitado",profCorp2:"SLA dedicado",profCorp3:"Reportes mensuales",profCta:"Hablar con ventas →",
-      profInd:"Individual",profIndTitle:"Traders y freelancers",profIndDesc:"Si mueves USDT con frecuencia, 2CES paga su valor desde la primera semana.",
-      profInd1:"Sin mínimo de volumen",profInd2:"Pago por uso",profInd3:"Soporte 1 a 1",profCta2:"Empezar ahora →",
-      trustBadge:"Confianza",trustTitle:"Datos verificables. Sin promesas vacías.",
-      trustC1Title:"100% on-chain",trustC1Desc:"Cada transacción es verificable en TRONScan. Sin cajas negras.",
-      trustC2Title:"Sin custodia",trustC2Desc:"Tus fondos nunca pasan por nosotros. Mantienes el control total.",
-      trustC3Title:"Activación inmediata",trustC3Desc:"En menos de 5 minutos estás operando con tarifa optimizada.",
-      faqBadge:"Preguntas frecuentes",faqTitle:"Resolvemos tus dudas",
-      faq1Q:"¿Cómo logran 1,6 USDT por transacción?",faq1A:"Optimizamos el uso de energía TRX en la red TRON, eliminando el sobreconsumo que cobran las wallets.",
-      faq2Q:"¿Necesito instalar algo?",faq2A:"No. Sigues usando tu wallet habitual. Solo nos das tu dirección TRON y nosotros optimizamos.",
-      faq3Q:"¿Es seguro?",faq3A:"Totalmente. Nunca tenemos custodia de tus fondos. Todo es verificable en blockchain.",
-      faq4Q:"¿Cómo se paga el servicio?",faq4A:"El costo de 1,6 USDT es la tarifa total por transacción. No hay suscripciones ni cargos ocultos.",
-      ctBadge:"Contacto",ctTitle:"Vamos a optimizar costos",ctLead:"Cuéntanos tu volumen y te respondemos con un plan a medida.",
-      ccEmailDesc:"Respuesta en horas",ccTgDesc:"Chat en vivo",ccWaText:"Chatea con nosotros",ccWaDesc:"Respuesta inmediata",
-      formTitle:"Vamos a optimizar costos",formSub:"Escribe tu mensaje. Te contactamos en minutos.",
-      formMsgLabel:"Mensaje",formMsgPh:"Cuéntanos tu volumen mensual y cómo operas hoy...",
-      formBtn:"Empezar a optimizar",formSecure:"Tu mensaje se envía por un canal seguro",
-      formErrEmpty:"Por favor escribe un mensaje",toastSent:"Mensaje listo para enviar — gracias por confiar en 2CES",
-      stickyCalc:"Calcular",stickyCta:"Empezar",footerRights:"Todos los derechos reservados"
+    es: {
+      skip:'Saltar al contenido',
+      eyebrow:'Optimización Premium en USDT-TRC20',
+      h1:'Deja de regalar tu dinero a la red: transfiere USDT con un costo fijo de <b><span data-bind="ces-fee">1.65</span></b> y máxima eficiencia.',
+      hsub:'Mientras el mercado te cobra hasta <b>4.40 USDT</b> por movimiento, nuestra infraestructura te permite operar con un ahorro real del <b><span data-bind="save-vs-max">62.5%</span></b>. Si no estás optimizando, estás perdiendo beneficios en cada transacción.',
+      cta1:'Hablar con un asesor ahora', cta2:'Ver mi ahorro proyectado',
+      t1:'Activación inmediata', t2:'Sin registros', t3:'Costos 100% predecibles',
+      payments:'Payments', trxToken:'TRX · token de Tron', efficiency:'Eficiencia',
+      bMax:'Mercado máx.', bMid:'Mercado medio',
+      liveNote:'Coste medio calculado en vivo · puede variar y presentar un pequeño desfase.',
+      dashFoot:'· Estrategia confiable y alineada a tu operación actual.',
+      ebProb:'El problema',
+      probTitle:'¿Sabes cuánto dinero estás dejando sobre la mesa?',
+      probLead:'Cada vez que envías USDT en la red Tron, consumes recursos a precios variables y abusivos que nadie te explica.',
+      pcMax:'Mercado alto te cobra', pcMaxD:'Por transacción en horas pico de la red Tron.',
+      pcMid:'Mercado promedio te cobra',
+      pcCes:'2CES te garantiza un fijo de', pcCesD:'Mismo precio hoy, mañana y siempre. Matemática pura.',
+      probImpact:'Con 2CES, si el mercado sube tú no gastas más; si el mercado baja, tú sigues pagando menos. Es matemática pura, no una promesa.',
+      ebCalc:'Bofetada de realidad',
+      calcTitle:'Tu ineficiencia actual en cifras',
+      calcLead:'Imagina tus transacciones mensuales. Mira la diferencia entre operar con 2CES o seguir como el resto.',
+      calcLbl:'Nº de transacciones', calcHelper:'Ajusta el volumen real de tu operación.',
+      calcMax:'Gasto Mercado Máximo (4.40 USDT)', calcCes:'Gasto con 2CES',
+      calcLoss:'Tu pérdida por no actuar', calcCta:'Calcular mi ahorro real',
+      ebProc:'Cero fricción',
+      procTitle:'Operativo en 5 minutos. Sin burocracia.',
+      procLead:'Si sabes copiar y pegar una dirección de wallet, ya sabes usar 2CES.',
+      s1t:'Sin cuentas ni registros', s1d:'No queremos tus datos, queremos tu eficiencia. Cero formularios.',
+      s2t:'Sin descargas peligrosas', s2d:'Tu seguridad es primero. Nada que instalar, nada que clickar.',
+      s3t:'Asignación inmediata', s3d:'Indicas tu wallet y activamos los recursos. Así de simple.',
+      ebTrust:'Confianza',
+      trustTitle:'Experiencia real para operaciones de alto nivel',
+      trustLead:'No somos una web nueva experimentando con tu dinero. Llevamos más de un año optimizando transacciones de USDT en Tron con resultados comprobables.',
+      tr1t:'Soporte humano real', tr1d:'Olvida los bots. Tienes un equipo dedicado a un mensaje de distancia por Telegram o WhatsApp.',
+      tr2t:'Rapidez garantizada', tr2d:'Tras cada pago, tus recursos se refrescan en 2 a 5 segundos. Sin demoras.',
+      ebFaq:'Preguntas frecuentes', faqTitle:'Respuestas para mentes analíticas',
+      ebContact:'Contacto directo',
+      contactTitle:'El ahorro es real y es ahora.',
+      contactLead:'No dejes que otra transacción se lleve dinero que debería ser tu utilidad. Elige tu canal preferido.',
+      formTitle:'Vamos a optimizar costos',
+      formHint:'Tu mensaje se envía por un canal seguro. Sin registros.',
+      formLbl:'Tu mensaje', formPh:'Cuéntanos tu volumen aproximado y qué quieres optimizar...',
+      formSecure:'Canal seguro', formBtn:'Empezar a optimizar',
+      waSub:'Respuesta inmediata', tgSub:'Canal rápido y seguro', emailSub:'Consulta corporativa',
+      footer:'2CES — Seguridad, eficiencia y confianza en cada transacción. © 2026 Todos los derechos reservados.',
+      toastSent:'Mensaje listo para enviar — gracias por confiar en 2CES.',
+      toastEmpty:'Escribe tu mensaje para enviarlo.',
+      faq:[
+        ['¿Qué hace exactamente 2CES?','Optimizamos tus costos operativos en la red Tron proveyendo la energía necesaria para que tus transferencias de USDT cuesten siempre lo mismo: 1.65 USDT.'],
+        ['¿Necesito crear una cuenta o instalar algo?','Absolutamente nada. Operamos mediante la asignación directa de recursos a tu wallet. Sin registros, sin instalaciones y sin comprometer tu privacidad.'],
+        ['¿Cómo verifico que realmente funciona?','Es inmediato. Una vez activado el servicio, verás los recursos reflejados en tu wallet en un lapso de 2 a 5 segundos, listos para ser usados.'],
+        ['¿Qué pasa si mi volumen cambia cada mes?','Nos adaptamos. Tenemos planes desde usuarios particulares con uso frecuente hasta empresas con alto volumen operativo que requieren escalabilidad constante.'],
+        ['El sitio es nuevo, ¿por qué confiar en 2CES?','Nuestra presencia digital es de 2026, pero nuestra operación tiene más de un año de trayectoria atendiendo clientes y optimizando millones en transacciones.'],
+        ['¿Solo funciona con USDT-TRC20?','Sí, nos especializamos exclusivamente en la red Tron (TRC20) para garantizar la máxima eficiencia y el menor costo posible.'],
+        ['¿2CES puede acceder a mis fondos?','Jamás. Solo enviamos recursos (energía/delegación) a tu dirección de wallet. No tenemos acceso a tus llaves privadas ni control sobre tus activos.']
+      ],
+      msg:{
+        hero1:'Hola, he visto que puedo fijar mis costos de USDT en 1.65. Me gustaría saber cómo aplicarlo a mi operación actual para dejar de pagar de más. ¿Me ayudan?',
+        hero2:n=>`Hola, realizo aproximadamente ${n} transacciones al mes y quiero confirmar cuánto dinero real voy a ahorrar con 2CES. ¿Podemos revisar mis números?`,
+        wa:'Hola 2CES, quiero activar la optimización de 1.65 USDT en mi wallet ahora mismo. He leído que no necesito registros ni descargas, ¿cuáles son los siguientes pasos?',
+        tg:'Buenas, busco optimizar mis envíos de USDT-TRC20 con su infraestructura. Quiero empezar a operar sin las fricciones de la red Tron. ¿Cómo procedemos?',
+        emailSub:'Consulta: Optimización de costos operativos USDT',
+        emailBody:'Hola equipo de 2CES,\n\nEstamos interesados en su solución de ahorro frente a costos máximos de mercado. Por favor, envíenos información técnica para integrar su optimización a nuestra operativa.\n\nGracias.'
+      }
     },
-    en:{
-      skip:"Skip to content",hdrSub:"Energy",
-      navProblem:"The problem",navHow:"How",navCalc:"Calculator",navFaq:"FAQ",navContact:"Contact",
-      heroBadge:"Save up to 62% on fees",
-      heroTitle:"Optimize your <em>USDT</em> fees on TRON",
-      heroSub1:"1.6 USDT per transaction.",heroSub2:"No apps, no contracts, no signups. Verifiable on-chain.",
-      heroCta1:"Calculate my savings",heroCta2:"See how it works",
-      trust1:"Verifiable on-chain",trust2:"Non-custodial",trust3:"Human support",
-      payHdr:"Live comparison",payTrxLbl:"TRX · TRON token",payMktLbl:"Average market cost",payOptLbl:"2CES optimized cost",
-      chartHdr:"Savings comparison",
-      liveNote:"Live market value · may vary with a small delay",
-      probBadge:"The problem",probTitle:"You pay more than you think for each USDT",probLead:"Wallets charge variable fees that can double at peak hours. 2CES locks the cost.",
-      statMax:"Max USDT-TRC20 cost",statAvg:"Current market average",statCes:"With 2CES (fixed)",statSave:"Average savings",
-      howBadge:"Live in 5 minutes",howTitle:"Three steps. No friction.",howLead:"Sequential process. Each step depends on the previous and finishes in minutes.",
-      step1Title:"Contact us",step1Desc:"Reach out via WhatsApp, Telegram or the form. We reply in minutes.",
-      step2Title:"Confirm your wallet",step2Desc:"Send us the TRON address you'll operate from. We never ask for keys.",
-      step3Title:"Operate optimized",step3Desc:"Your USDT-TRC20 transactions stay at 1.6 USDT fixed, verifiable on-chain.",
-      calcBadge:"Calculator",calcTitle:"Calculate your monthly savings",calcLead:"Adjust the transaction volume and see what you save per month.",
-      calcLabel:"Transactions per month",calcMkt:"Market",calcCes:"With 2CES",calcSave:"You save",calcPct:"% savings",
-      calcCta:"Start optimizing",calcHint:"NO COMMITMENT · REPLY IN MINUTES",
-      cliBadge:"Who it's for",cliTitle:"Built for high volume",
-      profCorp:"Corporate",profCorpTitle:"Companies & exchanges",profCorpDesc:"Optimize thousands of monthly transfers without changing your stack.",
-      profCorp1:"Unlimited volume",profCorp2:"Dedicated SLA",profCorp3:"Monthly reports",profCta:"Talk to sales →",
-      profInd:"Individual",profIndTitle:"Traders & freelancers",profIndDesc:"If you move USDT often, 2CES pays for itself in the first week.",
-      profInd1:"No minimum volume",profInd2:"Pay as you go",profInd3:"1-on-1 support",profCta2:"Start now →",
-      trustBadge:"Trust",trustTitle:"Verifiable data. No empty promises.",
-      trustC1Title:"100% on-chain",trustC1Desc:"Every transaction is verifiable on TRONScan. No black boxes.",
-      trustC2Title:"Non-custodial",trustC2Desc:"Your funds never touch us. You stay in full control.",
-      trustC3Title:"Instant activation",trustC3Desc:"In under 5 minutes you're operating with optimized fees.",
-      faqBadge:"FAQ",faqTitle:"We answer your questions",
-      faq1Q:"How do you achieve 1.6 USDT per tx?",faq1A:"We optimize TRX energy use on TRON, removing the overhead wallets charge.",
-      faq2Q:"Do I need to install anything?",faq2A:"No. Keep using your usual wallet. Just give us your TRON address and we optimize.",
-      faq3Q:"Is it safe?",faq3A:"Absolutely. We never custody your funds. Everything is verifiable on-chain.",
-      faq4Q:"How is the service paid?",faq4A:"The 1.6 USDT cost is the full per-transaction fee. No subscriptions, no hidden charges.",
-      ctBadge:"Contact",ctTitle:"Let's optimize costs",ctLead:"Tell us your volume and we'll reply with a tailored plan.",
-      ccEmailDesc:"Reply within hours",ccTgDesc:"Live chat",ccWaText:"Chat with us",ccWaDesc:"Instant reply",
-      formTitle:"Let's optimize costs",formSub:"Write your message. We'll reach out in minutes.",
-      formMsgLabel:"Message",formMsgPh:"Tell us your monthly volume and how you operate today...",
-      formBtn:"Start optimizing",formSecure:"Your message is sent through a secure channel",
-      formErrEmpty:"Please write a message",toastSent:"Message ready to send — thanks for trusting 2CES",
-      stickyCalc:"Calculate",stickyCta:"Start",footerRights:"All rights reserved"
+    en: {
+      skip:'Skip to content',
+      eyebrow:'Premium USDT-TRC20 optimization',
+      h1:'Stop giving your money to the network: transfer USDT at a fixed cost of <b><span data-bind="ces-fee">1.65</span></b> with maximum efficiency.',
+      hsub:'While the market charges up to <b>4.40 USDT</b> per move, our infrastructure lets you operate with a real saving of <b><span data-bind="save-vs-max">62.5%</span></b>. If you are not optimizing, you are losing profit on every transaction.',
+      cta1:'Talk to an advisor now', cta2:'See my projected savings',
+      t1:'Instant activation', t2:'No sign-up', t3:'100% predictable costs',
+      payments:'Payments', trxToken:'TRX · Tron token', efficiency:'Efficiency',
+      bMax:'Market max.', bMid:'Market avg.',
+      liveNote:'Live market value · may vary with a small delay.',
+      dashFoot:'· Reliable strategy aligned with your current operation.',
+      ebProb:'The problem',
+      probTitle:'Do you know how much money you are leaving on the table?',
+      probLead:'Every time you send USDT on Tron, you consume resources at variable, abusive prices nobody explains.',
+      pcMax:'High market charges', pcMaxD:'Per transaction during Tron peak hours.',
+      pcMid:'Average market charges',
+      pcCes:'2CES guarantees a flat fee of', pcCesD:'Same price today, tomorrow and always. Pure math.',
+      probImpact:'With 2CES, if the market goes up you do not pay more; if it goes down, you keep paying less. Pure math, not a promise.',
+      ebCalc:'Reality check',
+      calcTitle:'Your current inefficiency in numbers',
+      calcLead:'Picture your monthly transactions. See the gap between operating with 2CES or staying as the rest.',
+      calcLbl:'# of transactions', calcHelper:'Adjust your real operation volume.',
+      calcMax:'Max market spend (4.40 USDT)', calcCes:'Spend with 2CES',
+      calcLoss:'Your loss for not acting', calcCta:'Calculate my real saving',
+      ebProc:'Zero friction',
+      procTitle:'Live in 5 minutes. No bureaucracy.',
+      procLead:'If you can copy-paste a wallet address, you can use 2CES.',
+      s1t:'No accounts, no sign-up', s1d:'We do not want your data, we want your efficiency. Zero forms.',
+      s2t:'No risky downloads', s2d:'Your security first. Nothing to install, nothing to click.',
+      s3t:'Instant assignment', s3d:'You share your wallet and we activate the resources. That simple.',
+      ebTrust:'Trust', trustTitle:'Real experience for high-level operations',
+      trustLead:'We are not a new website experimenting with your money. Over a year optimizing USDT transactions on Tron with verifiable results.',
+      tr1t:'Real human support', tr1d:'Forget bots. A dedicated team one message away on Telegram or WhatsApp.',
+      tr2t:'Guaranteed speed', tr2d:'After each payment, your resources refresh in 2 to 5 seconds. No delays.',
+      ebFaq:'FAQ', faqTitle:'Answers for analytical minds',
+      ebContact:'Direct contact',
+      contactTitle:'The saving is real and it is now.',
+      contactLead:'Do not let another transaction take money that should be your profit. Pick your channel.',
+      formTitle:"Let's optimize costs",
+      formHint:'Your message goes through a secure channel. No sign-up.',
+      formLbl:'Your message', formPh:'Tell us your approximate volume and what you want to optimize...',
+      formSecure:'Secure channel', formBtn:'Start optimizing',
+      waSub:'Instant reply', tgSub:'Fast and secure', emailSub:'Corporate inquiry',
+      footer:'2CES — Security, efficiency and trust on every transaction. © 2026 All rights reserved.',
+      toastSent:'Message ready to send — thanks for trusting 2CES.',
+      toastEmpty:'Write your message before sending.',
+      faq:[
+        ['What does 2CES exactly do?','We optimize your operating costs on Tron by providing the energy needed so your USDT transfers always cost the same: 1.65 USDT.'],
+        ['Do I need to sign up or install anything?','Absolutely nothing. We operate via direct resource assignment to your wallet. No sign-up, no installs, no privacy compromise.'],
+        ['How do I verify it really works?','Instantly. Once activated, you see resources reflected in your wallet within 2 to 5 seconds, ready to use.'],
+        ['What if my volume changes each month?','We adapt. Plans range from frequent individuals to high-volume enterprises that require constant scalability.'],
+        ['The site is new, why trust 2CES?','Our digital presence is from 2026, but our operation has over a year serving clients and optimizing millions in transactions.'],
+        ['Does it only work with USDT-TRC20?','Yes, we specialize exclusively in Tron (TRC20) to guarantee maximum efficiency and the lowest cost.'],
+        ['Can 2CES access my funds?','Never. We only send resources (energy/delegation) to your wallet address. We do not have access to your private keys.']
+      ],
+      msg:{
+        hero1:'Hi, I saw I can fix my USDT costs at 1.65. I would like to know how to apply it to my current operation and stop overpaying. Can you help?',
+        hero2:n=>`Hi, I make about ${n} transactions per month and want to confirm how much I would really save with 2CES. Can we go through my numbers?`,
+        wa:'Hi 2CES, I want to activate the 1.65 USDT optimization on my wallet right now. I read I do not need sign-up or downloads, what are the next steps?',
+        tg:'Hi, I want to optimize my USDT-TRC20 transfers with your infrastructure and skip Tron friction. How do we proceed?',
+        emailSub:'Inquiry: USDT operating cost optimization',
+        emailBody:'Hi 2CES team,\n\nWe are interested in your savings solution vs. peak market costs. Please send technical info to integrate your optimization into our operation.\n\nThank you.'
+      }
     }
   };
 
-  // ===== Market state — single source of truth =====
-  const MarketState = { trxUSD: null, mktRate: 3.30, ces: 1.6, ts: 0 };
+  const MarketState = { trxUSD:null, mktRate:3.30, ts:0 };
+  let LANG = 'es';
 
-  function fmt(n, dec){ return n.toFixed(dec).replace('.', state.lang==='es'?',':'.'); }
-  function fmtUSD(n){ return n==null?'—':n.toFixed(4).replace('.',state.lang==='es'?',':'.'); }
+  const $  = (s, r=document) => r.querySelector(s);
+  const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+  const fmtN = (n, d=2) => Number.isFinite(n) ? n.toLocaleString(LANG==='es'?'es-ES':'en-US',{minimumFractionDigits:d,maximumFractionDigits:d}) : '—';
+  const fmtInt = n => Number.isFinite(n) ? n.toLocaleString(LANG==='es'?'es-ES':'en-US',{maximumFractionDigits:0}) : '—';
+  const enc = encodeURIComponent;
 
-  function renderMarket(){
-    const trxUSD = MarketState.trxUSD;
-    const mkt = MarketState.mktRate;
-    const ces = MarketState.ces;
-    const savePct = mkt > 0 ? Math.round((1 - ces/mkt)*100) : 0;
-    const costMax = 4.40;
-
-    document.querySelectorAll('[data-bind="trx-usd"]').forEach(el=>{ el.textContent = trxUSD!=null ? fmtUSD(trxUSD) : '—'; });
-    document.querySelectorAll('[data-bind="mkt-rate"]').forEach(el=>{ el.textContent = fmt(mkt, 2); });
-    document.querySelectorAll('[data-bind="ces-rate"]').forEach(el=>{ el.textContent = fmt(ces, 2); });
-    document.querySelectorAll('[data-bind="cost-max"]').forEach(el=>{ el.textContent = fmt(costMax, 2); });
-    document.querySelectorAll('[data-bind="saving-pct"]').forEach(el=>{ el.textContent = savePct + '%'; });
-
-    drawChart(mkt, ces);
-    updateCalc();
+  function toast(msg){
+    const t = $('#toast'); if(!t) return;
+    t.textContent = msg; t.classList.add('show');
+    clearTimeout(toast._t); toast._t = setTimeout(()=>t.classList.remove('show'), 2600);
   }
 
-  function drawChart(mkt, ces){
-    const svg = document.getElementById('pay-chart');
-    if(!svg) return;
-    const w = 300, h = 80, pad = 8;
-    const max = Math.max(mkt, ces, 0.1) * 1.15;
-    const barW = 70;
-    const x1 = w/2 - barW - 20;
-    const x2 = w/2 + 20;
-    const mktH = (mkt/max) * (h - pad*2);
-    const cesH = (ces/max) * (h - pad*2);
-    svg.innerHTML = `
-      <defs>
-        <linearGradient id="grBar1" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#6A92FF" stop-opacity="0.9"/>
-          <stop offset="100%" stop-color="#2452CC" stop-opacity="0.5"/>
-        </linearGradient>
-        <linearGradient id="grBar2" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#2EC4E8" stop-opacity="1"/>
-          <stop offset="100%" stop-color="#0080A8" stop-opacity="0.7"/>
-        </linearGradient>
-      </defs>
-      <rect x="${x1}" y="${h-pad-mktH}" width="${barW}" height="${mktH}" rx="4" fill="url(#grBar1)"/>
-      <rect x="${x2}" y="${h-pad-cesH}" width="${barW}" height="${cesH}" rx="4" fill="url(#grBar2)"/>
-      <text x="${x1+barW/2}" y="${h-pad-mktH-4}" text-anchor="middle" font-family="PT Sans Narrow" font-size="11" font-weight="700" fill="#94AEFF">${fmt(mkt,2)}</text>
-      <text x="${x2+barW/2}" y="${h-pad-cesH-4}" text-anchor="middle" font-family="PT Sans Narrow" font-size="11" font-weight="700" fill="#0EA5C8">${fmt(ces,2)}</text>
-    `;
+  function renderMarket(){
+    $$('[data-bind="ces-fee"]').forEach(n => n.textContent = fmtN(CES_FEE,2));
+    $$('[data-bind="trx-usd"]').forEach(n => n.textContent = MarketState.trxUSD ? fmtN(MarketState.trxUSD,4) : '—');
+    $$('[data-bind="mkt-rate"]').forEach(n => n.textContent = fmtN(MarketState.mktRate,2));
+    const savePct = ((MKT_MAX - CES_FEE) / MKT_MAX) * 100;
+    $$('[data-bind="save-vs-max"]').forEach(n => n.textContent = fmtN(savePct,1)+'%');
+    const max = $('#bar-max'), mid = $('#bar-mid'), ces = $('#bar-ces');
+    if(max) max.style.width = '100%';
+    if(mid) mid.style.width = Math.min(100, (MarketState.mktRate / MKT_MAX) * 100) + '%';
+    if(ces) ces.style.width = Math.min(100, (CES_FEE / MKT_MAX) * 100) + '%';
+    updateCalc();
   }
 
   async function fetchTRX(){
     try{
       const r = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=tron&vs_currencies=usd', {cache:'no-store'});
-      if(!r.ok) throw new Error('net');
+      if(!r.ok) throw new Error('http');
       const j = await r.json();
       const usd = j?.tron?.usd;
       if(typeof usd === 'number' && usd > 0){
         MarketState.trxUSD = usd;
-        // Estimación dinámica costo de mercado: ~ 27-32 TRX por tx USDT-TRC20.
-        // Promedio referencial 30 TRX → mktRate = usd*30 (rango realista 1.5–4.0 USDT)
-        const est = usd * 30;
-        MarketState.mktRate = Math.max(1.8, Math.min(4.4, est));
+        // Proxy estimado del coste medio real de transferir USDT-TRC20 en USDT
+        // (rango realista 2.4 - 4.2 según congestión y precio TRX)
+        const proxy = Math.max(2.40, Math.min(4.20, 2.40 + usd * 8));
+        MarketState.mktRate = +proxy.toFixed(2);
         MarketState.ts = Date.now();
-        renderMarket();
       }
-    }catch(_){ /* mantener fallback */ }
-  }
-
-  // ===== State =====
-  const state = { lang: 'es', theme: 'dark' };
-
-  // ===== i18n apply =====
-  function applyLang(lang){
-    state.lang = lang;
-    document.documentElement.lang = lang;
-    const dict = I18N[lang];
-    document.querySelectorAll('[data-i18n]').forEach(el=>{
-      const k = el.getAttribute('data-i18n');
-      if(dict[k] != null) el.innerHTML = dict[k];
-    });
-    document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
-      const k = el.getAttribute('data-i18n-placeholder');
-      if(dict[k] != null) el.setAttribute('placeholder', dict[k]);
-    });
-    const lbl = document.getElementById('lang-label');
-    if(lbl) lbl.textContent = lang === 'es' ? 'EN' : 'ES';
-    try{ localStorage.setItem('2ces-lang', lang); }catch(_){}
+    }catch(_){ /* fallback values stay */ }
     renderMarket();
   }
 
-  function applyTheme(theme){
-    state.theme = theme;
-    document.documentElement.setAttribute('data-theme', theme);
-    try{ localStorage.setItem('2ces-theme', theme); }catch(_){}
-  }
-
-  // ===== Calculator =====
   function updateCalc(){
-    const slider = document.getElementById('tx-slider');
-    if(!slider) return;
-    const tx = +slider.value;
-    const mkt = tx * MarketState.mktRate;
-    const ces = tx * MarketState.ces;
-    const save = mkt - ces;
-    const pct = mkt > 0 ? Math.round((save/mkt)*100) : 0;
-    const txVal = document.getElementById('tx-val');
-    const cmkt = document.getElementById('calc-mkt');
-    const cces = document.getElementById('calc-ces');
-    const csave = document.getElementById('calc-save');
-    const cpct = document.getElementById('calc-pct');
-    if(txVal) txVal.textContent = tx.toLocaleString(state.lang==='es'?'es-ES':'en-US');
-    if(cmkt) cmkt.textContent = Math.round(mkt).toLocaleString(state.lang==='es'?'es-ES':'en-US');
-    if(cces) cces.textContent = Math.round(ces).toLocaleString(state.lang==='es'?'es-ES':'en-US');
-    if(csave) csave.textContent = Math.round(save).toLocaleString(state.lang==='es'?'es-ES':'en-US');
-    if(cpct) cpct.textContent = pct;
+    const txEl = $('#tx'); if(!txEl) return;
+    const tx = Math.max(0, parseInt(txEl.value || '0', 10) || 0);
+    const max = tx * MKT_MAX;
+    const ces = tx * CES_FEE;
+    const loss = max - ces;
+    const oMax = $('#o-max'), oCes = $('#o-ces'), oLoss = $('#o-loss');
+    if(oMax)  oMax.textContent  = fmtInt(max);
+    if(oCes)  oCes.textContent  = fmtInt(ces);
+    if(oLoss) oLoss.textContent = fmtInt(loss);
   }
 
-  // ===== Toast =====
-  function toast(msg){
-    const t = document.getElementById('toast');
-    if(!t) return;
-    t.textContent = msg;
-    t.classList.add('show');
-    setTimeout(()=> t.classList.remove('show'), 3500);
-  }
-
-  // ===== Init =====
-  document.addEventListener('DOMContentLoaded', ()=>{
-    // Year
-    const yr = document.getElementById('yr'); if(yr) yr.textContent = new Date().getFullYear();
-
-    // Restore prefs
-    let savedLang='es', savedTheme='dark';
-    try{
-      savedLang = localStorage.getItem('2ces-lang') || (navigator.language||'es').slice(0,2)==='en'?'en':'es';
-      savedTheme = localStorage.getItem('2ces-theme') || 'dark';
-    }catch(_){}
-    if(savedLang!=='es' && savedLang!=='en') savedLang='es';
-    applyTheme(savedTheme);
-    applyLang(savedLang);
-
-    // Header scroll
-    const hdr = document.getElementById('hdr');
-    let scrollT;
-    const onScroll = ()=>{
-      const sc = window.scrollY > 40;
-      hdr.classList.toggle('hdr-active', sc);
-      document.body.classList.add('is-scrolling');
-      clearTimeout(scrollT);
-      scrollT = setTimeout(()=> document.body.classList.remove('is-scrolling'), 180);
-      // Sticky CTA after hero
-      const sticky = document.getElementById('sticky-cta');
-      if(sticky) sticky.classList.toggle('show', window.scrollY > 600);
-    };
-    window.addEventListener('scroll', onScroll, {passive:true});
-    onScroll();
-
-    // Theme toggle
-    document.getElementById('theme-btn').addEventListener('click', ()=>{
-      applyTheme(state.theme==='dark'?'light':'dark');
-    });
-    // Lang toggle
-    document.getElementById('lang-btn').addEventListener('click', ()=>{
-      applyLang(state.lang==='es'?'en':'es');
-    });
-
-    // Calc
-    const slider = document.getElementById('tx-slider');
-    if(slider){ slider.addEventListener('input', updateCalc); updateCalc(); }
-
-    // FAQ
-    document.querySelectorAll('.faq-item').forEach(item=>{
-      const btn = item.querySelector('.faq-btn');
-      if(!btn) return;
-      btn.addEventListener('click', ()=>{
-        const open = item.classList.toggle('open');
-        btn.setAttribute('aria-expanded', open?'true':'false');
-      });
-    });
-
-    // Form
-    const form = document.getElementById('contact-form');
-    if(form){
-      form.addEventListener('submit', e=>{
-        e.preventDefault();
-        const msg = document.getElementById('msg');
-        const err = document.getElementById('msg-err');
-        const v = (msg.value||'').trim();
-        if(!v){
-          err.textContent = I18N[state.lang].formErrEmpty;
-          msg.focus();
-          return;
-        }
-        err.textContent = '';
-        const subject = encodeURIComponent('2CES — Optimización de costos');
-        const body = encodeURIComponent(v.slice(0,1000));
-        // Open mailto silently in background
-        const a = document.createElement('a');
-        a.href = `mailto:hola@2cesenergy.com?subject=${subject}&body=${body}`;
-        a.style.display='none';
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        toast(I18N[state.lang].toastSent);
-        msg.value = '';
-      });
+  function openChannel(channel, message){
+    const m = (message||'').trim();
+    let url = '';
+    if(channel === 'wa'){
+      const num = CONTACT.wa.replace(/[^\d]/g,'');
+      url = `https://wa.me/${num}` + (m ? `?text=${enc(m)}` : '');
+    } else if(channel === 'tg'){
+      const handle = CONTACT.tg.replace(/^@/,'');
+      url = `https://t.me/${handle}` + (m ? `?text=${enc(m)}` : '');
+    } else if(channel === 'email'){
+      const dict = I18N[LANG].msg;
+      const subject = dict.emailSub;
+      const body = m || dict.emailBody;
+      url = `mailto:${CONTACT.email}?subject=${enc(subject)}&body=${enc(body)}`;
     }
+    if(!url) return;
+    if(channel === 'email') window.location.href = url;
+    else window.open(url, '_blank', 'noopener,noreferrer');
+  }
 
-    // Initial market render + fetch
+  function ctaHandler(e){
+    const btn = e.target.closest('[data-cta]'); if(!btn) return;
+    e.preventDefault();
+    const dict = I18N[LANG].msg;
+    const kind = btn.dataset.cta;
+    if(kind === 'hero1') return openChannel('wa', dict.hero1);
+    if(kind === 'hero2' || kind === 'calc'){
+      const tx = parseInt(($('#tx')?.value)||'10000',10) || 10000;
+      return openChannel('wa', dict.hero2(fmtInt(tx)));
+    }
+    if(kind === 'wa') return openChannel('wa', dict.wa);
+    if(kind === 'tg') return openChannel('tg', dict.tg);
+    if(kind === 'email') return openChannel('email', '');
+    if(kind === 'form-wa'){
+      const t = ($('#msg')?.value || '').trim();
+      if(!t){ toast(I18N[LANG].toastEmpty); $('#msg')?.focus(); return; }
+      openChannel('wa', t);
+      toast(I18N[LANG].toastSent);
+    }
+  }
+
+  function applyLang(lang){
+    LANG = (lang === 'en') ? 'en' : 'es';
+    document.documentElement.lang = LANG;
+    const d = I18N[LANG];
+    $$('[data-i18n]').forEach(n => { const k = n.getAttribute('data-i18n'); if(d[k] != null) n.textContent = d[k]; });
+    $$('[data-i18n-html]').forEach(n => { const k = n.getAttribute('data-i18n-html'); if(d[k] != null) n.innerHTML = d[k]; });
+    $$('[data-i18n-attr]').forEach(n => { const [attr, key] = n.getAttribute('data-i18n-attr').split('|'); if(d[key] != null) n.setAttribute(attr, d[key]); });
+    const list = $('#faq-list');
+    if(list) list.innerHTML = d.faq.map(([q,a])=>`<details class="qa"><summary>${q}</summary><div class="a">${a}</div></details>`).join('');
+    const lt = $('#lang-toggle'); if(lt) lt.textContent = (LANG==='es') ? 'EN' : 'ES';
+    const f = $('#wa-float'); if(f) f.setAttribute('aria-label', LANG==='es'?'Abrir WhatsApp 2CES':'Open WhatsApp 2CES');
+    renderMarket();
+    try{ localStorage.setItem('lang', LANG); }catch(_){}
+  }
+
+  function applyTheme(theme){
+    const t = (theme === 'light') ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', t);
+    const tt = $('#theme-toggle'); if(tt) tt.textContent = (t==='dark') ? '🌙' : '☀️';
+    try{ localStorage.setItem('theme', t); }catch(_){}
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    let savedLang = null; try{ savedLang = localStorage.getItem('lang'); }catch(_){}
+    const navLang = (navigator.language||'es').slice(0,2).toLowerCase();
+    applyLang(savedLang || (['es','en'].includes(navLang) ? navLang : 'es'));
+
+    let savedTheme = null; try{ savedTheme = localStorage.getItem('theme'); }catch(_){}
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    applyTheme(savedTheme || (prefersDark ? 'dark' : 'light'));
+    try{
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+        if(!localStorage.getItem('theme')) applyTheme(e.matches ? 'dark' : 'light');
+      });
+    }catch(_){}
+
+    $('#lang-toggle')?.addEventListener('click', () => applyLang(LANG==='es' ? 'en' : 'es'));
+    $('#theme-toggle')?.addEventListener('click', () => applyTheme(document.documentElement.getAttribute('data-theme')==='dark' ? 'light' : 'dark'));
+
+    document.addEventListener('click', ctaHandler);
+
+    $('#tx')?.addEventListener('input', updateCalc);
+
+    const msg = $('#msg'), counter = $('#msg-counter');
+    msg?.addEventListener('input', () => { counter.textContent = `${msg.value.length} / 1000`; });
+
+    $('#wa-float')?.addEventListener('click', (e) => { e.preventDefault(); openChannel('wa', I18N[LANG].msg.wa); });
+
     renderMarket();
     fetchTRX();
     setInterval(fetchTRX, 60_000);

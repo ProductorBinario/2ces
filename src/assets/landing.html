@@ -56,7 +56,7 @@
     background-attachment: fixed, fixed, fixed;
     color:var(--t1);min-height:100dvh;line-height:1.55;-webkit-font-smoothing:antialiased;
   }
-  body::before{content:"";position:fixed;inset:0;background:url("/2ces-logo-clean.png") no-repeat center center / min(58vmin,560px) auto;opacity:var(--bg-logo-opacity);pointer-events:none;z-index:-1}
+  body::before{content:"";position:fixed;inset:0;background:url("/2ces-logo-clean.svg") no-repeat center center / min(58vmin,560px) auto;opacity:var(--bg-logo-opacity);pointer-events:none;z-index:-1}
   body::after{content:"";position:fixed;inset:0;background:transparent;pointer-events:none;z-index:-2}
   html[data-theme="light"] body{background-blend-mode:normal,normal,normal}
   html[data-theme="dark"] body{background-blend-mode:normal,normal,normal}
@@ -225,6 +225,7 @@
   #wa-float{position:fixed;right:18px;bottom:18px;z-index:50;display:inline-grid;place-items:center;width:58px;height:58px;padding:8px;border-radius:999px;background:color-mix(in oklab,var(--glass) 70%,transparent);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);border:1px solid var(--bdr);box-shadow:var(--shadow-card);transition:transform .2s var(--ease)}
   #wa-float:hover{transform:translateY(-2px)}
   #wa-float img{width:42px;height:42px;object-fit:contain}
+  #wa-float.is-over-footer{opacity:0;pointer-events:none;transform:translateY(14px)}
 
   #toast{position:fixed;left:50%;bottom:80px;transform:translateX(-50%) translateY(20px);padding:12px 18px;border-radius:14px;background:var(--grad);color:#fff;box-shadow:var(--shadow-card);opacity:0;pointer-events:none;transition:opacity .25s var(--ease),transform .25s var(--ease);z-index:60;font-weight:600;font-size:14px;max-width:90vw;text-align:center}
   #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
@@ -270,7 +271,7 @@
     <div class="wrap">
       <div class="hero-bar" role="group" aria-label="Preferencias">
         <a class="bar-brand" href="#inicio" aria-label="2CES">
-          <img class="bar-logo" src="/2ces-logo-clean.png" alt="" width="42" height="42" />
+          <img class="bar-logo" src="/2ces-logo-clean.svg" alt="" width="42" height="42" />
           <span class="bar-copy"><span class="bar-name">2CES</span><span class="bar-slogan">Optimización en USDT-TRC20</span></span>
         </a>
         <div class="bar-actions" aria-label="Controles">
@@ -283,7 +284,7 @@
       <div class="hero-grid">
         <div class="hero-left">
           <a class="brand" href="#inicio" aria-label="2CES">
-            <img class="brand-logo" src="/2ces-logo-clean.png" alt="2CES" width="180" height="44" />
+            <img class="brand-logo" src="/2ces-logo-clean.svg" alt="2CES" width="180" height="44" />
           </a>
           <span class="eyebrow" style="margin-top:18px"><span class="dot"></span><span data-i18n="eyebrow">Optimización Premium en USDT-TRC20</span></span>
           <h1 data-i18n-html="h1">Deja de regalar tu dinero a la red: transfiere USDT con un costo fijo de <b><span data-bind="ces-fee">1.65</span></b> y máxima eficiencia.</h1>
@@ -363,7 +364,7 @@
 
   <section id="calculadora">
     <div class="wrap">
-      <span class="eyebrow"><span class="dot"></span><span data-i18n="ebCalc">Bofetada de realidad</span></span>
+          <span class="eyebrow"><span class="dot"></span><span data-i18n="ebCalc">LA REALIDAD</span></span>
       <h2 class="sec-title" data-i18n="calcTitle">Tu ineficiencia actual en cifras</h2>
       <p class="sec-lead" data-i18n="calcLead">Imagina tus transacciones mensuales. Mira la diferencia entre operar con 2CES o seguir como el resto.</p>
       <div class="calc">
@@ -459,14 +460,14 @@
 
   <footer>
     <div class="wrap row">
-      <a class="brand" href="#inicio" aria-label="2CES"><img class="brand-logo sm" src="/2ces-logo-clean.png" alt="2CES" width="140" height="34" /></a>
+      <a class="brand" href="#inicio" aria-label="2CES"><img class="brand-logo sm" src="/2ces-logo-clean.svg" alt="2CES" width="140" height="34" /></a>
       <div data-i18n="footer">2CES — Seguridad, eficiencia y confianza en cada transacción. © 2026 Todos los derechos reservados.</div>
     </div>
   </footer>
 </main>
 
 <a id="wa-float" href="#" rel="noopener noreferrer" aria-label="Abrir WhatsApp 2CES">
-  <img src="/2ces-logo-clean.png" alt="" width="42" height="42" aria-hidden="true" />
+  <img src="/2ces-logo-clean.svg" alt="" width="42" height="42" aria-hidden="true" />
 </a>
 
 <div id="toast" role="status" aria-live="polite"></div>
@@ -496,7 +497,7 @@
       pcMid:'Mercado promedio te cobra',
       pcCes:'2CES te garantiza un fijo de', pcCesD:'Mismo precio hoy, mañana y siempre. Matemática pura.',
       probImpact:'Con 2CES, si el mercado sube tú no gastas más; si el mercado baja, tú sigues pagando menos. Es matemática pura, no una promesa.',
-      ebCalc:'Bofetada de realidad',
+      ebCalc:'LA REALIDAD',
       calcTitle:'Tu ineficiencia actual en cifras',
       calcLead:'Imagina tus transacciones mensuales. Mira la diferencia entre operar con 2CES o seguir como el resto.',
       calcLbl:'Nº de transacciones', calcHelper:'Ajusta el volumen real de tu operación.',
@@ -772,6 +773,12 @@
     msg?.addEventListener('input', () => { counter.textContent = `${msg.value.length} / 1000`; });
 
     $('#wa-float')?.addEventListener('click', (e) => { e.preventDefault(); openChannel('wa', I18N[LANG].msg.wa); });
+    const footer = $('footer'), waFloat = $('#wa-float');
+    if(footer && waFloat && 'IntersectionObserver' in window){
+      new IntersectionObserver(entries => {
+        waFloat.classList.toggle('is-over-footer', entries.some(entry => entry.isIntersecting));
+      }, {threshold:0.02}).observe(footer);
+    }
 
     renderMarket();
     fetchTRX();

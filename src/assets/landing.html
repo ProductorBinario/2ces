@@ -773,6 +773,12 @@
     msg?.addEventListener('input', () => { counter.textContent = `${msg.value.length} / 1000`; });
 
     $('#wa-float')?.addEventListener('click', (e) => { e.preventDefault(); openChannel('wa', I18N[LANG].msg.wa); });
+    const footer = $('footer'), waFloat = $('#wa-float');
+    if(footer && waFloat && 'IntersectionObserver' in window){
+      new IntersectionObserver(entries => {
+        waFloat.classList.toggle('is-over-footer', entries.some(entry => entry.isIntersecting));
+      }, {threshold:0.02}).observe(footer);
+    }
 
     renderMarket();
     fetchTRX();

@@ -37,12 +37,12 @@
   html[data-theme="dark"]{
     --bg:#070d1c;--surface:rgba(255,255,255,.04);--surface-2:rgba(255,255,255,.06);
     --t1:#eaf2ff;--t2:#b9c6e3;--t3:#7d8bb0;--bdr:rgba(255,255,255,.10);--bdr-2:rgba(255,255,255,.06);
-    --glass:rgba(10,20,40,.55);--bg-logo-opacity:.16;
+    --glass:rgba(10,20,40,.55);--bg-logo-opacity:.10;
   }
   html[data-theme="light"]{
     --bg:#f5f8ff;--surface:rgba(255,255,255,.46);--surface-2:rgba(232,240,255,.50);
     --t1:#0a1530;--t2:#33446b;--t3:#5e6e93;--bdr:rgba(10,30,80,.10);--bdr-2:rgba(10,30,80,.06);
-    --glass:rgba(255,255,255,.42);--bg-logo-opacity:.10;
+    --glass:rgba(255,255,255,.42);--bg-logo-opacity:.07;
   }
   *,*:before,*:after{box-sizing:border-box}
   html,body{margin:0;padding:0}
@@ -56,7 +56,7 @@
     background-attachment: fixed, fixed, fixed;
     color:var(--t1);min-height:100dvh;line-height:1.55;-webkit-font-smoothing:antialiased;
   }
-  body::before{content:"";position:fixed;inset:0;background:url("/2ces-logo.svg") no-repeat center center / min(68vmin,700px) auto;opacity:var(--bg-logo-opacity);pointer-events:none;z-index:-1}
+  body::before{content:"";position:fixed;inset:0;background:url("/2ces-logo-clean.png") no-repeat center center / min(58vmin,560px) auto;opacity:var(--bg-logo-opacity);pointer-events:none;z-index:-1}
   body::after{content:"";position:fixed;inset:0;background:transparent;pointer-events:none;z-index:-2}
   html[data-theme="light"] body{background-blend-mode:normal,normal,normal}
   html[data-theme="dark"] body{background-blend-mode:normal,normal,normal}
@@ -77,13 +77,14 @@
   .skip{position:absolute;left:-9999px;top:0}
   .skip:focus{left:12px;top:12px;padding:10px 14px;background:var(--b500);color:#fff;border-radius:10px;z-index:1000}
 
-  .sec-hero{position:relative;padding:clamp(72px,10vw,120px) 0 clamp(48px,7vw,90px);overflow:hidden}
-  .hero-bar{position:fixed;top:14px;right:14px;left:auto;display:flex;align-items:center;gap:8px;max-width:calc(100vw - 28px);padding:7px 9px;border-radius:999px;background:color-mix(in oklab,var(--glass) 50%,transparent);backdrop-filter:blur(16px) saturate(145%);-webkit-backdrop-filter:blur(16px) saturate(145%);border:1px solid var(--bdr);z-index:55;box-shadow:var(--shadow-soft)}
-  .hero-bar .bar-brand{display:flex;align-items:center;gap:8px;min-width:0;padding-right:2px}
-  .hero-bar .bar-logo{width:34px;height:34px;object-fit:contain;flex:0 0 auto}
+  .sec-hero{position:relative;padding:clamp(96px,12vw,132px) 0 clamp(48px,7vw,90px);overflow:hidden}
+  .hero-bar{position:fixed;top:0;right:0;left:0;display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;padding:10px max(14px,calc((100vw - 1200px)/2 + 20px));background:color-mix(in oklab,var(--glass) 62%,transparent);backdrop-filter:blur(18px) saturate(150%);-webkit-backdrop-filter:blur(18px) saturate(150%);border-bottom:1px solid var(--bdr);z-index:55;box-shadow:0 12px 34px -24px rgba(8,30,90,.55)}
+  .hero-bar .bar-brand{display:flex;align-items:center;gap:10px;min-width:0;max-width:min(68vw,520px)}
+  .hero-bar .bar-logo{width:42px;height:42px;object-fit:contain;flex:0 0 auto}
   .hero-bar .bar-copy{display:flex;flex-direction:column;line-height:1.05;min-width:0}
-  .hero-bar .bar-name{font-family:'PT Sans Narrow';font-weight:700;font-size:15px;color:var(--t1)}
-  .hero-bar .bar-slogan{font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);white-space:nowrap}
+  .hero-bar .bar-name{font-family:'PT Sans Narrow';font-weight:700;font-size:18px;color:var(--t1)}
+  .hero-bar .bar-slogan{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .hero-bar .bar-actions{display:flex;align-items:center;gap:6px;flex:0 0 auto}
   .hero-bar button{display:inline-flex;align-items:center;justify-content:center;height:34px;min-width:38px;padding:0 10px;border-radius:999px;color:var(--t1);font-weight:700;font-size:13px;background:rgba(255,255,255,.035);transition:background .2s var(--ease)}
   .hero-bar button:hover{background:rgba(63,124,255,.14)}
   .hero-bar .sep{width:1px;height:18px;background:var(--bdr)}
@@ -104,8 +105,9 @@
   .micro-trust .dotg{width:6px;height:6px;border-radius:50%;background:var(--c400);box-shadow:0 0 0 4px rgba(34,211,238,.15)}
 
   .brand{display:inline-flex;align-items:center;gap:10px}
-  .brand-logo{height:44px;width:auto;display:block}
-  .brand-logo.sm{height:34px}
+  .hero-left>.brand{display:none}
+  .brand-logo{height:42px;width:auto;display:block;object-fit:contain}
+  .brand-logo.sm{height:30px;max-width:112px}
   .brand-name{font-family:'PT Sans Narrow';font-weight:700;font-size:22px}
   .brand-name span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
   html[data-theme="light"] .brand-logo{filter:none}
@@ -215,8 +217,10 @@
   .ch.tg{color:var(--b500)} .ch.tg .ico{background:linear-gradient(135deg,var(--b400),var(--b700))}
   .ch.wa{color:var(--c500)} .ch.wa .ico{background:linear-gradient(135deg,var(--c400),var(--b500))}
 
-  footer{padding:28px 0;border-top:1px solid var(--bdr);color:var(--t3);font-size:13px}
-  footer .row{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+  footer{padding:28px 0;border-top:1px solid var(--bdr);color:var(--t3);font-size:13px;overflow:hidden}
+  footer .row{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;min-width:0}
+  footer .brand{flex:0 0 auto;max-width:120px}
+  footer [data-i18n="footer"]{flex:1 1 260px;min-width:0}
 
   #wa-float{position:fixed;right:18px;bottom:18px;z-index:50;display:inline-grid;place-items:center;width:58px;height:58px;padding:8px;border-radius:999px;background:color-mix(in oklab,var(--glass) 70%,transparent);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);border:1px solid var(--bdr);box-shadow:var(--shadow-card);transition:transform .2s var(--ease)}
   #wa-float:hover{transform:translateY(-2px)}
@@ -238,11 +242,19 @@
   @media (max-width:560px){
     .prob-grid{grid-template-columns:1fr}
     .bar{grid-template-columns:minmax(76px,.72fr) minmax(88px,1fr) minmax(74px,.58fr);gap:9px;font-size:11.5px}
-    .hero-bar{top:10px;right:10px;max-width:calc(100vw - 20px);gap:5px;padding:6px}
-    .hero-bar .bar-logo{width:30px;height:30px}
-    .hero-bar .bar-name{font-size:14px}
-    .hero-bar .bar-slogan{font-size:8px;max-width:128px;overflow:hidden;text-overflow:ellipsis}
+    body::before{background-size:min(58vmin,260px) auto;background-position:center 76%;opacity:calc(var(--bg-logo-opacity) * .74)}
+    .sec-hero{padding-top:104px}
+    .hero-bar{gap:8px;padding:8px 12px}
+    .hero-bar .bar-brand{gap:8px;max-width:calc(100vw - 112px)}
+    .hero-bar .bar-logo{width:36px;height:36px}
+    .hero-bar .bar-name{font-size:15px}
+    .hero-bar .bar-slogan{font-size:8px;max-width:178px}
+    .hero-bar .bar-actions{gap:4px}
     .hero-bar button{font-size:12px;height:32px;min-width:34px;padding:0 8px}
+    .brand-logo{height:36px;max-width:146px}
+    footer .row{align-items:flex-start;gap:10px}
+    footer .brand{max-width:98px}
+    .brand-logo.sm{height:26px;max-width:96px}
   }
   @media (prefers-reduced-motion:reduce){
     *{animation:none!important;transition:none!important}
@@ -258,18 +270,20 @@
     <div class="wrap">
       <div class="hero-bar" role="group" aria-label="Preferencias">
         <a class="bar-brand" href="#inicio" aria-label="2CES">
-          <img class="bar-logo" src="/2ces-logo.svg" alt="" width="34" height="34" />
+          <img class="bar-logo" src="/2ces-logo-clean.png" alt="" width="42" height="42" />
           <span class="bar-copy"><span class="bar-name">2CES</span><span class="bar-slogan">Optimización en USDT-TRC20</span></span>
         </a>
-        <button id="lang-toggle" aria-label="Cambiar idioma" type="button">EN</button>
-        <span class="sep" aria-hidden="true"></span>
-        <button id="theme-toggle" aria-label="Cambiar tema" type="button">🌙</button>
+        <div class="bar-actions" aria-label="Controles">
+          <button id="lang-toggle" aria-label="Cambiar idioma" type="button">EN</button>
+          <span class="sep" aria-hidden="true"></span>
+          <button id="theme-toggle" aria-label="Cambiar tema" type="button">🌙</button>
+        </div>
       </div>
 
       <div class="hero-grid">
         <div class="hero-left">
           <a class="brand" href="#inicio" aria-label="2CES">
-            <img class="brand-logo" src="/2ces-logo.svg" alt="2CES" width="180" height="44" />
+            <img class="brand-logo" src="/2ces-logo-clean.png" alt="2CES" width="180" height="44" />
           </a>
           <span class="eyebrow" style="margin-top:18px"><span class="dot"></span><span data-i18n="eyebrow">Optimización Premium en USDT-TRC20</span></span>
           <h1 data-i18n-html="h1">Deja de regalar tu dinero a la red: transfiere USDT con un costo fijo de <b><span data-bind="ces-fee">1.65</span></b> y máxima eficiencia.</h1>
@@ -289,7 +303,6 @@
           <span class="badge-float badge-usdt">USDT</span>
           <div class="dash-head">
             <div class="dash-title" data-i18n="payments">Payments</div>
-            <div class="toggle" role="img" aria-label="Optimización activa"></div>
           </div>
 
           <div class="trx-row" aria-live="polite">
@@ -446,14 +459,14 @@
 
   <footer>
     <div class="wrap row">
-      <a class="brand" href="#inicio" aria-label="2CES"><img class="brand-logo sm" src="/2ces-logo.svg" alt="2CES" width="140" height="34" /></a>
+      <a class="brand" href="#inicio" aria-label="2CES"><img class="brand-logo sm" src="/2ces-logo-clean.png" alt="2CES" width="140" height="34" /></a>
       <div data-i18n="footer">2CES — Seguridad, eficiencia y confianza en cada transacción. © 2026 Todos los derechos reservados.</div>
     </div>
   </footer>
 </main>
 
 <a id="wa-float" href="#" rel="noopener noreferrer" aria-label="Abrir WhatsApp 2CES">
-  <img src="/2ces-logo.svg" alt="" width="42" height="42" aria-hidden="true" />
+  <img src="/2ces-logo-clean.png" alt="" width="42" height="42" aria-hidden="true" />
 </a>
 
 <div id="toast" role="status" aria-live="polite"></div>

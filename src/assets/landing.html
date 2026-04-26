@@ -774,11 +774,15 @@
 
     $('#wa-float')?.addEventListener('click', (e) => { e.preventDefault(); openChannel('wa', I18N[LANG].msg.wa); });
     const footer = $('footer'), waFloat = $('#wa-float');
-    if(footer && waFloat && 'IntersectionObserver' in window){
-      new IntersectionObserver(entries => {
-        waFloat.classList.toggle('is-over-footer', entries.some(entry => entry.isIntersecting));
-      }, {threshold:0.02}).observe(footer);
+    function keepFloatAboveFooter(){
+      if(!footer || !waFloat) return;
+      const overlap = Math.max(0, window.innerHeight - footer.getBoundingClientRect().top);
+      waFloat.style.setProperty('--footer-clearance', `${overlap}px`);
+      waFloat.classList.toggle('is-near-footer', overlap > 0);
     }
+    keepFloatAboveFooter();
+    window.addEventListener('scroll', keepFloatAboveFooter, {passive:true});
+    window.addEventListener('resize', keepFloatAboveFooter);
 
     renderMarket();
     fetchTRX();

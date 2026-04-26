@@ -24,12 +24,14 @@ function NotFoundComponent() {
   );
 }
 
+const tabTitle = "2CES Optimización en USTD-TRC20";
+
 export const Route = createRootRoute({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
+      { title: tabTitle },
       { name: "description", content: "Lovable Generated Project" },
       { name: "author", content: "Lovable" },
       { property: "og:title", content: "Lovable App" },
@@ -39,6 +41,11 @@ export const Route = createRootRoute({
       { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
+      {
+        rel: "icon",
+        type: "image/svg+xml",
+        href: "/favicon.svg",
+      },
       {
         rel: "stylesheet",
         href: appCss,
@@ -58,6 +65,11 @@ function RootShell({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         {children}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(() => { const title = ${JSON.stringify(tabTitle)}; if (title.length < 18) { document.title = title; return; } let i = 0; const gap = '   •   '; const text = title + gap; document.title = title; setInterval(() => { i = (i + 1) % text.length; document.title = text.slice(i) + text.slice(0, i); }, 900); })();`,
+          }}
+        />
         <Scripts />
       </body>
     </html>

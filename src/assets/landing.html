@@ -619,6 +619,13 @@
   const fmtN = (n, d=2) => Number.isFinite(n) ? n.toLocaleString(LANG==='es'?'es-ES':'en-US',{minimumFractionDigits:d,maximumFractionDigits:d}) : '—';
   const fmtInt = n => Number.isFinite(n) ? n.toLocaleString(LANG==='es'?'es-ES':'en-US',{maximumFractionDigits:0}) : '—';
   const enc = encodeURIComponent;
+  const validNumber = n => Number.isFinite(n) && n > 0;
+  const clamp = (n, min, max) => Math.min(max, Math.max(min, n));
+  const marketValues = () => {
+    const trx = Number(MarketState.trxUSD);
+    if(!validNumber(trx)) return { ready:false, max:NaN, mid:NaN };
+    return { ready:true, max:MKT_MAX_TRX * trx, mid:MKT_MID_TRX * trx };
+  };
 
   function toast(msg){
     const t = $('#toast'); if(!t) return;
@@ -627,34 +634,37 @@
   }
 
   function renderMarket(){
-    const marketMax = MarketState.mktMax || MKT_MAX_TRX * (MarketState.trxUSD || 0);
-    const marketMid = MarketState.mktRate || MKT_MID_TRX * (MarketState.trxUSD || 0);
+    const { ready, max:marketMax, mid:marketMid } = marketValues();
     $$('[data-bind="ces-fee"]').forEach(n => n.textContent = fmtN(CES_FEE,2));
-    $$('[data-bind="trx-usd"]').forEach(n => n.textContent = MarketState.trxUSD ? fmtN(MarketState.trxUSD,4) : '—');
-    $$('[data-bind="mkt-max"]').forEach(n => n.textContent = marketMax ? fmtN(marketMax,2) : '—');
-    $$('[data-bind="mkt-rate"]').forEach(n => n.textContent = marketMid ? fmtN(marketMid,2) : '—');
-    const savePct = marketMax ? ((marketMax - CES_FEE) / marketMax) * 100 : NaN;
+    $$('[data-bind="trx-usd"]').forEach(n => n.textContent = ready ? fmtN(MarketState.trxUSD,4) : '—');
+    $$('[data-bind="mkt-max"]').forEach(n => n.textContent = ready ? fmtN(marketMax,2) : '—');
+    $$('[data-bind="mkt-rate"]').forEach(n => n.textContent = ready ? fmtN(marketMid,2) : '—');
+    const savePct = ready ? ((marketMax - CES_FEE) / marketMax) * 100 : NaN;
     $$('[data-bind="save-vs-max"]').forEach(n => n.textContent = fmtN(savePct,1)+'%');
     const max = $('#bar-max'), mid = $('#bar-mid'), ces = $('#bar-ces');
-    if(max) max.style.width = '100%';
-    if(mid) mid.style.width = marketMax ? Math.min(100, (marketMid / marketMax) * 100) + '%' : '75%';
-    if(ces) ces.style.width = marketMax ? Math.min(100, (CES_FEE / marketMax) * 100) + '%' : '36%';
+    if(max) max.style.width = ready ? '100%' : '0%';
+    if(mid) mid.style.width = ready ? clamp((marketMid / marketMax) * 100, 8, 100) + '%' : '0%';
+    if(ces) ces.style.width = ready ? clamp((CES_FEE / marketMax) * 100, 8, 100) + '%' : '0%';
     updateCalc();
   }
 
   async function fetchTRX(){
+    const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+    const timeout = controller ? setTimeout(()=>controller.abort(), 4500) : null;
     try{
-      const r = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=tron&vs_currencies=usd', {cache:'no-store'});
+      const r = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=tron&vs_currencies=usd', {cache:'no-store', signal:controller?.signal});
       if(!r.ok) throw new Error('http');
       const j = await r.json();
       const usd = j?.tron?.usd;
       if(typeof usd === 'number' && usd > 0){
         MarketState.trxUSD = usd;
-        MarketState.mktMax = +(MKT_MAX_TRX * usd).toFixed(4);
-        MarketState.mktRate = +(MKT_MID_TRX * usd).toFixed(4);
+        MarketState.mktMax = MKT_MAX_TRX * usd;
+        MarketState.mktRate = MKT_MID_TRX * usd;
         MarketState.ts = Date.now();
+        try{ localStorage.setItem('trx-market-cache', JSON.stringify({trxUSD:usd, ts:MarketState.ts})); }catch(_){}
       }
     }catch(_){ /* fallback values stay */ }
+    finally{ if(timeout) clearTimeout(timeout); }
     renderMarket();
   }
 
@@ -677,14 +687,39 @@
   }
   function updateCalc(){
     const tx = getTx();
-    const marketMax = MarketState.mktMax || MKT_MAX_TRX * (MarketState.trxUSD || 0);
-    const max = tx * marketMax;
+    const { ready, max:marketMax } = marketValues();
+    const max = ready ? tx * marketMax : NaN;
     const ces = tx * CES_FEE;
-    const loss = max - ces;
+    const loss = ready ? max - ces : NaN;
     const oMax = $('#o-max'), oCes = $('#o-ces'), oLoss = $('#o-loss');
     if(oMax)  oMax.textContent  = fmtInt(max);
     if(oCes)  oCes.textContent  = fmtInt(ces);
     if(oLoss) oLoss.textContent = fmtInt(loss);
+  }
+
+  function loadCachedMarket(){
+    try{
+      const cached = JSON.parse(localStorage.getItem('trx-market-cache') || 'null');
+      if(cached && validNumber(cached.trxUSD) && Date.now() - cached.ts < 300000){
+        MarketState.trxUSD = cached.trxUSD;
+        MarketState.mktMax = MKT_MAX_TRX * cached.trxUSD;
+        MarketState.mktRate = MKT_MID_TRX * cached.trxUSD;
+        MarketState.ts = cached.ts;
+      }
+    }catch(_){}
+  }
+
+  function marketSelfTest(){
+    const previous = {...MarketState};
+    MarketState.trxUSD = 0.1234;
+    renderMarket();
+    const first = $('[data-bind="mkt-max"]')?.textContent;
+    MarketState.trxUSD = 0.2345;
+    renderMarket();
+    const second = $('[data-bind="mkt-max"]')?.textContent;
+    Object.assign(MarketState, previous);
+    renderMarket();
+    return first && second && first !== second;
   }
 
   function openChannel(channel, message){
@@ -787,9 +822,11 @@
     window.addEventListener('scroll', keepFloatAboveFooter, {passive:true});
     window.addEventListener('resize', keepFloatAboveFooter);
 
+    loadCachedMarket();
     renderMarket();
     fetchTRX();
     setInterval(fetchTRX, 60_000);
+    marketSelfTest();
   });
 })();
 </script>

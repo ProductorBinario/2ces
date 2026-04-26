@@ -225,7 +225,7 @@
   #wa-float{position:fixed;right:18px;bottom:18px;z-index:50;display:inline-grid;place-items:center;width:58px;height:58px;padding:8px;border-radius:999px;background:color-mix(in oklab,var(--glass) 70%,transparent);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);border:1px solid var(--bdr);box-shadow:var(--shadow-card);transition:transform .2s var(--ease)}
   #wa-float:hover{transform:translateY(-2px)}
   #wa-float img{width:42px;height:42px;object-fit:contain}
-  #wa-float.is-over-footer{opacity:0;pointer-events:none;transform:translateY(14px)}
+  #wa-float.is-near-footer{bottom:calc(var(--footer-clearance, 0px) + 18px)}
 
   #toast{position:fixed;left:50%;bottom:80px;transform:translateX(-50%) translateY(20px);padding:12px 18px;border-radius:14px;background:var(--grad);color:#fff;box-shadow:var(--shadow-card);opacity:0;pointer-events:none;transition:opacity .25s var(--ease),transform .25s var(--ease);z-index:60;font-weight:600;font-size:14px;max-width:90vw;text-align:center}
   #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
@@ -503,13 +503,13 @@
       calcLbl:'Nº de transacciones', calcHelper:'Ajusta el volumen real de tu operación.',
       calcMax:'Gasto Mercado Máximo (4.40 USDT)', calcCes:'Gasto con 2CES',
       calcLoss:'Tu pérdida por no actuar', calcCta:'Calcular mi ahorro real',
-      ebProc:'Cero fricción',
+      ebProc:'SENCILLO',
       procTitle:'Operativo en 5 minutos. Sin burocracia.',
       procLead:'Si sabes copiar y pegar una dirección de wallet, ya sabes usar 2CES.',
       s1t:'Sin cuentas ni registros', s1d:'No queremos tus datos, queremos tu eficiencia. Cero formularios.',
       s2t:'Sin descargas peligrosas', s2d:'Tu seguridad es primero. Nada que instalar, nada que clickar.',
       s3t:'Asignación inmediata', s3d:'Indicas tu wallet y activamos los recursos. Así de simple.',
-      ebTrust:'Confianza',
+      ebTrust:'SOMOS',
       trustTitle:'Experiencia real para operaciones de alto nivel',
       trustLead:'No somos una web nueva experimentando con tu dinero. Llevamos más de un año optimizando transacciones de USDT en Tron con resultados comprobables.',
       tr1t:'Soporte humano real', tr1d:'Olvida los bots. Tienes un equipo dedicado a un mensaje de distancia por Telegram o WhatsApp.',
@@ -568,13 +568,13 @@
       calcLbl:'# of transactions', calcHelper:'Adjust your real operation volume.',
       calcMax:'Max market spend (4.40 USDT)', calcCes:'Spend with 2CES',
       calcLoss:'Your loss for not acting', calcCta:'Calculate my real saving',
-      ebProc:'Zero friction',
+      ebProc:'Simple',
       procTitle:'Live in 5 minutes. No bureaucracy.',
       procLead:'If you can copy-paste a wallet address, you can use 2CES.',
       s1t:'No accounts, no sign-up', s1d:'We do not want your data, we want your efficiency. Zero forms.',
       s2t:'No risky downloads', s2d:'Your security first. Nothing to install, nothing to click.',
       s3t:'Instant assignment', s3d:'You share your wallet and we activate the resources. That simple.',
-      ebTrust:'Trust', trustTitle:'Real experience for high-level operations',
+      ebTrust:'We are', trustTitle:'Real experience for high-level operations',
       trustLead:'We are not a new website experimenting with your money. Over a year optimizing USDT transactions on Tron with verifiable results.',
       tr1t:'Real human support', tr1d:'Forget bots. A dedicated team one message away on Telegram or WhatsApp.',
       tr2t:'Guaranteed speed', tr2d:'After each payment, your resources refresh in 2 to 5 seconds. No delays.',

@@ -611,7 +611,7 @@
     }
   };
 
-  const MarketState = { trxUSD:null, mktRate:3.30, ts:0 };
+  const MarketState = { trxUSD:null, mktMax:null, mktRate:null, ts:0 };
   let LANG = 'es';
 
   const $  = (s, r=document) => r.querySelector(s);
@@ -627,15 +627,18 @@
   }
 
   function renderMarket(){
+    const marketMax = MarketState.mktMax || MKT_MAX_TRX * (MarketState.trxUSD || 0);
+    const marketMid = MarketState.mktRate || MKT_MID_TRX * (MarketState.trxUSD || 0);
     $$('[data-bind="ces-fee"]').forEach(n => n.textContent = fmtN(CES_FEE,2));
     $$('[data-bind="trx-usd"]').forEach(n => n.textContent = MarketState.trxUSD ? fmtN(MarketState.trxUSD,4) : '—');
-    $$('[data-bind="mkt-rate"]').forEach(n => n.textContent = fmtN(MarketState.mktRate,2));
-    const savePct = ((MKT_MAX - CES_FEE) / MKT_MAX) * 100;
+    $$('[data-bind="mkt-max"]').forEach(n => n.textContent = marketMax ? fmtN(marketMax,2) : '—');
+    $$('[data-bind="mkt-rate"]').forEach(n => n.textContent = marketMid ? fmtN(marketMid,2) : '—');
+    const savePct = marketMax ? ((marketMax - CES_FEE) / marketMax) * 100 : NaN;
     $$('[data-bind="save-vs-max"]').forEach(n => n.textContent = fmtN(savePct,1)+'%');
     const max = $('#bar-max'), mid = $('#bar-mid'), ces = $('#bar-ces');
     if(max) max.style.width = '100%';
-    if(mid) mid.style.width = Math.min(100, (MarketState.mktRate / MKT_MAX) * 100) + '%';
-    if(ces) ces.style.width = Math.min(100, (CES_FEE / MKT_MAX) * 100) + '%';
+    if(mid) mid.style.width = marketMax ? Math.min(100, (marketMid / marketMax) * 100) + '%' : '75%';
+    if(ces) ces.style.width = marketMax ? Math.min(100, (CES_FEE / marketMax) * 100) + '%' : '36%';
     updateCalc();
   }
 
@@ -647,10 +650,8 @@
       const usd = j?.tron?.usd;
       if(typeof usd === 'number' && usd > 0){
         MarketState.trxUSD = usd;
-        // Proxy estimado del coste medio real de transferir USDT-TRC20 en USDT
-        // (rango realista 2.4 - 4.2 según congestión y precio TRX)
-        const proxy = Math.max(2.40, Math.min(4.20, 2.40 + usd * 8));
-        MarketState.mktRate = +proxy.toFixed(2);
+        MarketState.mktMax = +(MKT_MAX_TRX * usd).toFixed(4);
+        MarketState.mktRate = +(MKT_MID_TRX * usd).toFixed(4);
         MarketState.ts = Date.now();
       }
     }catch(_){ /* fallback values stay */ }
@@ -676,7 +677,8 @@
   }
   function updateCalc(){
     const tx = getTx();
-    const max = tx * MKT_MAX;
+    const marketMax = MarketState.mktMax || MKT_MAX_TRX * (MarketState.trxUSD || 0);
+    const max = tx * marketMax;
     const ces = tx * CES_FEE;
     const loss = max - ces;
     const oMax = $('#o-max'), oCes = $('#o-ces'), oLoss = $('#o-loss');

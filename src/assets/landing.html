@@ -322,7 +322,7 @@
           </svg>
 
           <div class="bars" role="list">
-            <div class="bar max" role="listitem"><div class="name" data-i18n="bMax">Mercado máx.</div><div class="track"><div class="fill" id="bar-max" style="width:100%"></div></div><div class="num">4.40<small>USDT</small></div></div>
+            <div class="bar max" role="listitem"><div class="name" data-i18n="bMax">Mercado máx.</div><div class="track"><div class="fill" id="bar-max" style="width:100%"></div></div><div class="num"><span data-bind="mkt-max">—</span><small>USDT</small></div></div>
             <div class="bar mid" role="listitem"><div class="name" data-i18n="bMid">Mercado medio</div><div class="track"><div class="fill" id="bar-mid" style="width:75%"></div></div><div class="num"><span data-bind="mkt-rate">—</span><small>USDT</small></div></div>
             <div class="bar ces" role="listitem"><div class="name">2CES</div><div class="track"><div class="fill" id="bar-ces" style="width:36%"></div></div><div class="num"><span data-bind="ces-fee">1.65</span><small>USDT</small></div></div>
           </div>
@@ -344,7 +344,7 @@
       <div class="prob-grid">
         <div class="prob-card max">
           <div class="tag" data-i18n="pcMax">Mercado alto te cobra</div>
-          <div class="v">4.40<small>USDT</small></div>
+          <div class="v"><span data-bind="mkt-max">—</span><small>USDT</small></div>
           <div class="d" data-i18n="pcMaxD">Por transacción en horas pico de la red Tron.</div>
         </div>
         <div class="prob-card mid">
@@ -374,7 +374,7 @@
           <p class="helper" data-i18n="calcHelper">Ajusta el volumen real de tu operación.</p>
         </div>
         <div class="calc-out" aria-live="polite">
-          <div class="calc-row"><div class="k" data-i18n="calcMax">Gasto Mercado Máximo (4.40 USDT)</div><div class="vv"><span id="o-max">—</span> USDT</div></div>
+          <div class="calc-row"><div class="k" data-i18n-html="calcMax">Gasto Mercado Máximo (<span data-bind="mkt-max">—</span> USDT)</div><div class="vv"><span id="o-max">—</span> USDT</div></div>
           <div class="calc-row save"><div class="k"><span data-i18n="calcCes">Gasto con 2CES</span> (<span data-bind="ces-fee">1.65</span> USDT)</div><div class="vv"><span id="o-ces">—</span> USDT</div></div>
           <div class="calc-row loss"><div class="k" data-i18n="calcLoss">Tu pérdida por no actuar</div><div class="vv"><span id="o-loss">—</span> USDT</div></div>
           <div style="margin-top:6px">
@@ -475,7 +475,8 @@
 <script>
 (() => {
   const CES_FEE = 1.65;
-  const MKT_MAX = 4.40;
+  const MKT_MAX_TRX = 13.3745;
+  const MKT_MID_TRX = 10.0745;
   const CONTACT = { wa:'+3197010265771', tg:'ask2ces', email:'support@2cesenergy.com' };
 
   const I18N = {
@@ -483,7 +484,7 @@
       skip:'Saltar al contenido',
       eyebrow:'Optimización Premium en USDT-TRC20',
       h1:'Deja de regalar tu dinero a la red: transfiere USDT con un costo fijo de <b><span data-bind="ces-fee">1.65</span></b> y máxima eficiencia.',
-      hsub:'Mientras el mercado te cobra hasta <b>4.40 USDT</b> por movimiento, nuestra infraestructura te permite operar con un ahorro real del <b><span data-bind="save-vs-max">62.5%</span></b>. Si no estás optimizando, estás perdiendo beneficios en cada transacción.',
+      hsub:'Mientras el mercado te cobra hasta <b><span data-bind="mkt-max">—</span> USDT</b> por movimiento, nuestra infraestructura te permite operar con un ahorro real del <b><span data-bind="save-vs-max">62.5%</span></b>. Si no estás optimizando, estás perdiendo beneficios en cada transacción.',
       cta1:'Hablar con un asesor ahora', cta2:'Ver mi ahorro proyectado',
       t1:'Activación inmediata', t2:'Sin registros', t3:'Costos 100% predecibles',
       payments:'Payments', trxToken:'TRX · token de Tron', efficiency:'Eficiencia',
@@ -501,7 +502,7 @@
       calcTitle:'Tu ineficiencia actual en cifras',
       calcLead:'Imagina tus transacciones mensuales. Mira la diferencia entre operar con 2CES o seguir como el resto.',
       calcLbl:'Nº de transacciones', calcHelper:'Ajusta el volumen real de tu operación.',
-      calcMax:'Gasto Mercado Máximo (4.40 USDT)', calcCes:'Gasto con 2CES',
+      calcMax:'Gasto Mercado Máximo (<span data-bind="mkt-max">—</span> USDT)', calcCes:'Gasto con 2CES',
       calcLoss:'Tu pérdida por no actuar', calcCta:'Calcular mi ahorro real',
       ebProc:'SENCILLO',
       procTitle:'Operativo en 5 minutos. Sin burocracia.',
@@ -548,7 +549,7 @@
       skip:'Skip to content',
       eyebrow:'Premium USDT-TRC20 optimization',
       h1:'Stop giving your money to the network: transfer USDT at a fixed cost of <b><span data-bind="ces-fee">1.65</span></b> with maximum efficiency.',
-      hsub:'While the market charges up to <b>4.40 USDT</b> per move, our infrastructure lets you operate with a real saving of <b><span data-bind="save-vs-max">62.5%</span></b>. If you are not optimizing, you are losing profit on every transaction.',
+      hsub:'While the market charges up to <b><span data-bind="mkt-max">—</span> USDT</b> per move, our infrastructure lets you operate with a real saving of <b><span data-bind="save-vs-max">62.5%</span></b>. If you are not optimizing, you are losing profit on every transaction.',
       cta1:'Talk to an advisor now', cta2:'See my projected savings',
       t1:'Instant activation', t2:'No sign-up', t3:'100% predictable costs',
       payments:'Payments', trxToken:'TRX · Tron token', efficiency:'Efficiency',
@@ -566,7 +567,7 @@
       calcTitle:'Your current inefficiency in numbers',
       calcLead:'Picture your monthly transactions. See the gap between operating with 2CES or staying as the rest.',
       calcLbl:'# of transactions', calcHelper:'Adjust your real operation volume.',
-      calcMax:'Max market spend (4.40 USDT)', calcCes:'Spend with 2CES',
+      calcMax:'Max market spend (<span data-bind="mkt-max">—</span> USDT)', calcCes:'Spend with 2CES',
       calcLoss:'Your loss for not acting', calcCta:'Calculate my real saving',
       ebProc:'Simple',
       procTitle:'Live in 5 minutes. No bureaucracy.',
@@ -610,7 +611,7 @@
     }
   };
 
-  const MarketState = { trxUSD:null, mktRate:3.30, ts:0 };
+  const MarketState = { trxUSD:null, mktMax:null, mktRate:null, ts:0 };
   let LANG = 'es';
 
   const $  = (s, r=document) => r.querySelector(s);
@@ -626,15 +627,18 @@
   }
 
   function renderMarket(){
+    const marketMax = MarketState.mktMax || MKT_MAX_TRX * (MarketState.trxUSD || 0);
+    const marketMid = MarketState.mktRate || MKT_MID_TRX * (MarketState.trxUSD || 0);
     $$('[data-bind="ces-fee"]').forEach(n => n.textContent = fmtN(CES_FEE,2));
     $$('[data-bind="trx-usd"]').forEach(n => n.textContent = MarketState.trxUSD ? fmtN(MarketState.trxUSD,4) : '—');
-    $$('[data-bind="mkt-rate"]').forEach(n => n.textContent = fmtN(MarketState.mktRate,2));
-    const savePct = ((MKT_MAX - CES_FEE) / MKT_MAX) * 100;
+    $$('[data-bind="mkt-max"]').forEach(n => n.textContent = marketMax ? fmtN(marketMax,2) : '—');
+    $$('[data-bind="mkt-rate"]').forEach(n => n.textContent = marketMid ? fmtN(marketMid,2) : '—');
+    const savePct = marketMax ? ((marketMax - CES_FEE) / marketMax) * 100 : NaN;
     $$('[data-bind="save-vs-max"]').forEach(n => n.textContent = fmtN(savePct,1)+'%');
     const max = $('#bar-max'), mid = $('#bar-mid'), ces = $('#bar-ces');
     if(max) max.style.width = '100%';
-    if(mid) mid.style.width = Math.min(100, (MarketState.mktRate / MKT_MAX) * 100) + '%';
-    if(ces) ces.style.width = Math.min(100, (CES_FEE / MKT_MAX) * 100) + '%';
+    if(mid) mid.style.width = marketMax ? Math.min(100, (marketMid / marketMax) * 100) + '%' : '75%';
+    if(ces) ces.style.width = marketMax ? Math.min(100, (CES_FEE / marketMax) * 100) + '%' : '36%';
     updateCalc();
   }
 
@@ -646,10 +650,8 @@
       const usd = j?.tron?.usd;
       if(typeof usd === 'number' && usd > 0){
         MarketState.trxUSD = usd;
-        // Proxy estimado del coste medio real de transferir USDT-TRC20 en USDT
-        // (rango realista 2.4 - 4.2 según congestión y precio TRX)
-        const proxy = Math.max(2.40, Math.min(4.20, 2.40 + usd * 8));
-        MarketState.mktRate = +proxy.toFixed(2);
+        MarketState.mktMax = +(MKT_MAX_TRX * usd).toFixed(4);
+        MarketState.mktRate = +(MKT_MID_TRX * usd).toFixed(4);
         MarketState.ts = Date.now();
       }
     }catch(_){ /* fallback values stay */ }
@@ -675,7 +677,8 @@
   }
   function updateCalc(){
     const tx = getTx();
-    const max = tx * MKT_MAX;
+    const marketMax = MarketState.mktMax || MKT_MAX_TRX * (MarketState.trxUSD || 0);
+    const max = tx * marketMax;
     const ces = tx * CES_FEE;
     const loss = max - ces;
     const oMax = $('#o-max'), oCes = $('#o-ces'), oLoss = $('#o-loss');

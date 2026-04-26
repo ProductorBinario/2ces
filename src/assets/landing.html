@@ -322,7 +322,7 @@
           </svg>
 
           <div class="bars" role="list">
-            <div class="bar max" role="listitem"><div class="name" data-i18n="bMax">Mercado máx.</div><div class="track"><div class="fill" id="bar-max" style="width:100%"></div></div><div class="num">4.40<small>USDT</small></div></div>
+            <div class="bar max" role="listitem"><div class="name" data-i18n="bMax">Mercado máx.</div><div class="track"><div class="fill" id="bar-max" style="width:100%"></div></div><div class="num"><span data-bind="mkt-max">—</span><small>USDT</small></div></div>
             <div class="bar mid" role="listitem"><div class="name" data-i18n="bMid">Mercado medio</div><div class="track"><div class="fill" id="bar-mid" style="width:75%"></div></div><div class="num"><span data-bind="mkt-rate">—</span><small>USDT</small></div></div>
             <div class="bar ces" role="listitem"><div class="name">2CES</div><div class="track"><div class="fill" id="bar-ces" style="width:36%"></div></div><div class="num"><span data-bind="ces-fee">1.65</span><small>USDT</small></div></div>
           </div>
@@ -344,7 +344,7 @@
       <div class="prob-grid">
         <div class="prob-card max">
           <div class="tag" data-i18n="pcMax">Mercado alto te cobra</div>
-          <div class="v">4.40<small>USDT</small></div>
+          <div class="v"><span data-bind="mkt-max">—</span><small>USDT</small></div>
           <div class="d" data-i18n="pcMaxD">Por transacción en horas pico de la red Tron.</div>
         </div>
         <div class="prob-card mid">
@@ -374,7 +374,7 @@
           <p class="helper" data-i18n="calcHelper">Ajusta el volumen real de tu operación.</p>
         </div>
         <div class="calc-out" aria-live="polite">
-          <div class="calc-row"><div class="k" data-i18n="calcMax">Gasto Mercado Máximo (4.40 USDT)</div><div class="vv"><span id="o-max">—</span> USDT</div></div>
+          <div class="calc-row"><div class="k" data-i18n-html="calcMax">Gasto Mercado Máximo (<span data-bind="mkt-max">—</span> USDT)</div><div class="vv"><span id="o-max">—</span> USDT</div></div>
           <div class="calc-row save"><div class="k"><span data-i18n="calcCes">Gasto con 2CES</span> (<span data-bind="ces-fee">1.65</span> USDT)</div><div class="vv"><span id="o-ces">—</span> USDT</div></div>
           <div class="calc-row loss"><div class="k" data-i18n="calcLoss">Tu pérdida por no actuar</div><div class="vv"><span id="o-loss">—</span> USDT</div></div>
           <div style="margin-top:6px">

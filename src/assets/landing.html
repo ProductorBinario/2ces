@@ -475,7 +475,8 @@
 <script>
 (() => {
   const CES_FEE = 1.65;
-  const MKT_MAX = 4.40;
+  const MKT_MAX_TRX = 13.3745;
+  const MKT_MID_TRX = 10.0745;
   const CONTACT = { wa:'+3197010265771', tg:'ask2ces', email:'support@2cesenergy.com' };
 
   const I18N = {
@@ -483,7 +484,7 @@
       skip:'Saltar al contenido',
       eyebrow:'Optimización Premium en USDT-TRC20',
       h1:'Deja de regalar tu dinero a la red: transfiere USDT con un costo fijo de <b><span data-bind="ces-fee">1.65</span></b> y máxima eficiencia.',
-      hsub:'Mientras el mercado te cobra hasta <b>4.40 USDT</b> por movimiento, nuestra infraestructura te permite operar con un ahorro real del <b><span data-bind="save-vs-max">62.5%</span></b>. Si no estás optimizando, estás perdiendo beneficios en cada transacción.',
+      hsub:'Mientras el mercado te cobra hasta <b><span data-bind="mkt-max">—</span> USDT</b> por movimiento, nuestra infraestructura te permite operar con un ahorro real del <b><span data-bind="save-vs-max">62.5%</span></b>. Si no estás optimizando, estás perdiendo beneficios en cada transacción.',
       cta1:'Hablar con un asesor ahora', cta2:'Ver mi ahorro proyectado',
       t1:'Activación inmediata', t2:'Sin registros', t3:'Costos 100% predecibles',
       payments:'Payments', trxToken:'TRX · token de Tron', efficiency:'Eficiencia',
@@ -501,7 +502,7 @@
       calcTitle:'Tu ineficiencia actual en cifras',
       calcLead:'Imagina tus transacciones mensuales. Mira la diferencia entre operar con 2CES o seguir como el resto.',
       calcLbl:'Nº de transacciones', calcHelper:'Ajusta el volumen real de tu operación.',
-      calcMax:'Gasto Mercado Máximo (4.40 USDT)', calcCes:'Gasto con 2CES',
+      calcMax:'Gasto Mercado Máximo (<span data-bind="mkt-max">—</span> USDT)', calcCes:'Gasto con 2CES',
       calcLoss:'Tu pérdida por no actuar', calcCta:'Calcular mi ahorro real',
       ebProc:'SENCILLO',
       procTitle:'Operativo en 5 minutos. Sin burocracia.',
@@ -548,7 +549,7 @@
       skip:'Skip to content',
       eyebrow:'Premium USDT-TRC20 optimization',
       h1:'Stop giving your money to the network: transfer USDT at a fixed cost of <b><span data-bind="ces-fee">1.65</span></b> with maximum efficiency.',
-      hsub:'While the market charges up to <b>4.40 USDT</b> per move, our infrastructure lets you operate with a real saving of <b><span data-bind="save-vs-max">62.5%</span></b>. If you are not optimizing, you are losing profit on every transaction.',
+      hsub:'While the market charges up to <b><span data-bind="mkt-max">—</span> USDT</b> per move, our infrastructure lets you operate with a real saving of <b><span data-bind="save-vs-max">62.5%</span></b>. If you are not optimizing, you are losing profit on every transaction.',
       cta1:'Talk to an advisor now', cta2:'See my projected savings',
       t1:'Instant activation', t2:'No sign-up', t3:'100% predictable costs',
       payments:'Payments', trxToken:'TRX · Tron token', efficiency:'Efficiency',
@@ -566,7 +567,7 @@
       calcTitle:'Your current inefficiency in numbers',
       calcLead:'Picture your monthly transactions. See the gap between operating with 2CES or staying as the rest.',
       calcLbl:'# of transactions', calcHelper:'Adjust your real operation volume.',
-      calcMax:'Max market spend (4.40 USDT)', calcCes:'Spend with 2CES',
+      calcMax:'Max market spend (<span data-bind="mkt-max">—</span> USDT)', calcCes:'Spend with 2CES',
       calcLoss:'Your loss for not acting', calcCta:'Calculate my real saving',
       ebProc:'Simple',
       procTitle:'Live in 5 minutes. No bureaucracy.',

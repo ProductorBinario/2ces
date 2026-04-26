@@ -9,7 +9,8 @@
       <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#0A5DA6" flood-opacity="0.28" />
     </filter>
   </defs>
-  <circle cx="32" cy="32" r="29" fill="url(#glass)" stroke="#44AED5" stroke-opacity="0.45" />
-  <circle cx="24" cy="19" r="15" fill="#FFFFFF" opacity="0.14" />
-  <image href="/2ces-logo-clean.svg" x="9" y="9" width="46" height="46" preserveAspectRatio="xMidYMid meet" filter="url(#soft)" />
+  <rect width="64" height="64" rx="16" fill="#07131F" />
+  <circle cx="32" cy="32" r="29" fill="url(#glass)" stroke="#44AED5" stroke-opacity="0.52" />
+  <circle cx="24" cy="19" r="15" fill="#FFFFFF" opacity="0.12" />
+  <image href="/favicon-logo.png" x="11" y="9" width="42" height="46" preserveAspectRatio="xMidYMid meet" filter="url(#soft)" />
 </svg>

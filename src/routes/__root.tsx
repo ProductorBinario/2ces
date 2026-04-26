@@ -67,7 +67,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
         {children}
         <script
           dangerouslySetInnerHTML={{
-            __html: `(() => { const title = ${JSON.stringify(tabTitle)}; if (title.length < 18) { document.title = title; return; } let i = 0; const gap = '   •   '; const text = title + gap; document.title = title; setInterval(() => { i = (i + 1) % text.length; document.title = text.slice(i) + text.slice(0, i); }, 900); })();`,
+            __html: `(() => { const title = ${JSON.stringify(tabTitle)}; const gap = '   •   '; const text = title + gap; let i = 0; document.title = title; setInterval(() => { i = (i + 1) % text.length; document.title = text.slice(i) + text.slice(0, i); }, 420); })();`,
           }}
         />
         <Scripts />

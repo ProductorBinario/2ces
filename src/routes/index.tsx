@@ -1,7 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import landingHtml from "../assets/landing.html?raw";
+import landingStylesUrl from "../assets/styles.css?url";
+import landingConfigUrl from "../assets/config.js?url";
+import landingPriceServiceUrl from "../assets/priceService.js?url";
+import landingAppUrl from "../assets/app.js?url";
 
-const raw = landingHtml as string;
+const raw = (landingHtml as string)
+  .replace('href="./styles.css"', `href="${landingStylesUrl}"`)
+  .replace('src="./config.js"', `src="${landingConfigUrl}"`)
+  .replace('src="./priceService.js"', `src="${landingPriceServiceUrl}"`)
+  .replace('src="./app.js"', `src="${landingAppUrl}"`);
 
 const landingDocument: string = raw.includes("<base")
   ? raw

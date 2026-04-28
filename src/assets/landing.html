@@ -128,10 +128,10 @@
     <div class="wrap">
           <span class="eyebrow"><span class="dot"></span><span data-i18n="ebCalc">LA REALIDAD</span></span>
       <h2 class="sec-title" data-i18n="calcTitle">Tu ineficiencia actual en cifras</h2>
-      <p class="sec-lead" data-i18n="calcLead">Imagina tus transacciones mensuales. Mira la diferencia entre operar con 2CES o seguir como el resto.</p>
+      <p class="sec-lead" data-i18n="calcLead">Imagina tus transacciones mensuales. Mira la diferencia entre operar con 2CES o seguir como todos los demás.</p>
       <div class="calc">
         <div class="calc-input">
-          <label for="tx" data-i18n="calcLbl">Nº de transacciones</label>
+          <label for="tx" data-i18n="calcLbl">N.º de transacciones</label>
           <input id="tx" type="text" inputmode="numeric" autocomplete="off" value="10.000" aria-describedby="tx-helper" />
           <p class="helper" data-i18n="calcHelper">Ajusta el volumen real de tu operación.</p>
         </div>
@@ -154,7 +154,7 @@
       <p class="sec-lead" data-i18n="procLead">Si sabes copiar y pegar una dirección de wallet, ya sabes usar 2CES.</p>
       <div class="steps">
         <div class="step"><div class="num">1</div><h3 data-i18n="s1t">Sin cuentas ni registros</h3><p data-i18n="s1d">No queremos tus datos, queremos tu eficiencia. Cero formularios.</p></div>
-        <div class="step"><div class="num">2</div><h3 data-i18n="s2t">Sin descargas peligrosas</h3><p data-i18n="s2d">Tu seguridad es primero. Nada que instalar, nada que clickar.</p></div>
+        <div class="step"><div class="num">2</div><h3 data-i18n="s2t">Sin descargas peligrosas</h3><p data-i18n="s2d">Tu seguridad es lo primero. Nada que instalar, nada que clicar.</p></div>
         <div class="step"><div class="num">3</div><h3 data-i18n="s3t">Asignación inmediata</h3><p data-i18n="s3d">Indicas tu wallet y activamos los recursos. Así de simple.</p></div>
       </div>
     </div>
@@ -198,8 +198,9 @@
           <label for="msg" class="sr-only" data-i18n="formLbl">Tu mensaje</label>
           <textarea id="msg" maxlength="1000" placeholder="Cuéntanos tu volumen aproximado y qué quieres optimizar..." data-i18n-attr="placeholder|formPh" aria-describedby="msg-counter"></textarea>
           <div class="counter"><span id="msg-counter">0 / 1000</span><span data-i18n="formSecure">Canal seguro</span></div>
-          <div class="cta-row" style="margin-top:14px">
+          <div class="form-action">
             <button type="button" class="btn btn-primary" data-cta="form-wa" aria-label="Enviar mensaje por WhatsApp"><span data-i18n="formBtn">Empezar a optimizar</span></button>
+            <div id="toast" role="status" aria-live="polite"></div>
           </div>
         </form>
         <div class="channels">
@@ -231,8 +232,6 @@
 <a id="wa-float" href="#" rel="noopener noreferrer" aria-label="Abrir WhatsApp 2CES">
   <img src="/2ces-logo-clean.svg" alt="" width="42" height="42" aria-hidden="true" />
 </a>
-
-<div id="toast" role="status" aria-live="polite"></div>
 
 <script src="./config.js" defer></script>
 <script src="./priceService.js" defer></script>

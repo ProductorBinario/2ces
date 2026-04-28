@@ -1,12 +1,13 @@
 (() => {
   const { CES_FEE, CONTACT, I18N } = window.TWOCES_CONFIG;
-  const { MarketState, marketValues, fetchTRX, loadCachedMarket } = window.TWOCES_PRICE_SERVICE;
+  const { MarketState, marketValues, fetchTRX, loadCachedMarket, applyTRXPrice } = window.TWOCES_PRICE_SERVICE;
   let LANG = 'es';
 
   const $  = (s, r=document) => r.querySelector(s);
   const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
   const fmtN = (n, d=2) => Number.isFinite(n) ? n.toLocaleString(LANG==='es'?'es-ES':'en-US',{minimumFractionDigits:d,maximumFractionDigits:d}) : '—';
   const fmtInt = n => Number.isFinite(n) ? n.toLocaleString(LANG==='es'?'es-ES':'en-US',{maximumFractionDigits:0}) : '—';
+  const money = n => Number.isFinite(n) ? `<span data-bind="mkt-max">${fmtN(n,2)}</span>` : '<span data-bind="mkt-max">—</span>';
   const enc = encodeURIComponent;
   const clamp = (n, min, max) => Math.min(max, Math.max(min, n));
   function toast(msg){
@@ -25,8 +26,8 @@
     $$('[data-bind="save-vs-max"]').forEach(n => n.textContent = fmtN(savePct,1)+'%');
     const max = $('#bar-max'), mid = $('#bar-mid'), ces = $('#bar-ces');
     if(max) max.style.width = ready ? '100%' : '0%';
-    if(mid) mid.style.width = ready ? clamp((marketMid / marketMax) * 100, 8, 100) + '%' : '0%';
-    if(ces) ces.style.width = ready ? clamp((CES_FEE / marketMax) * 100, 8, 100) + '%' : '0%';
+    if(mid) mid.style.width = ready && marketMax > 0 ? clamp((marketMid / marketMax) * 100, 8, 100) + '%' : '0%';
+    if(ces) ces.style.width = ready && marketMax > 0 ? clamp((CES_FEE / marketMax) * 100, 8, 100) + '%' : '0%';
     updateCalc();
   }
 
@@ -61,15 +62,19 @@
 
   function marketSelfTest(){
     const previous = {...MarketState};
-    MarketState.trxUSD = 0.1234;
+    applyTRXPrice(0.1234);
     renderMarket();
     const first = $('[data-bind="mkt-max"]')?.textContent;
-    MarketState.trxUSD = 0.2345;
+    const firstMid = $('[data-bind="mkt-rate"]')?.textContent;
+    const firstSave = $('[data-bind="save-vs-max"]')?.textContent;
+    applyTRXPrice(0.2345);
     renderMarket();
     const second = $('[data-bind="mkt-max"]')?.textContent;
+    const secondMid = $('[data-bind="mkt-rate"]')?.textContent;
+    const secondSave = $('[data-bind="save-vs-max"]')?.textContent;
     Object.assign(MarketState, previous);
     renderMarket();
-    return first && second && first !== second;
+    return Boolean(first && second && first !== second && firstMid !== secondMid && firstSave !== secondSave);
   }
 
   function openChannel(channel, message){

@@ -7,7 +7,6 @@
   const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
   const fmtN = (n, d=2) => Number.isFinite(n) ? n.toLocaleString(LANG==='es'?'es-ES':'en-US',{minimumFractionDigits:d,maximumFractionDigits:d}) : '—';
   const fmtInt = n => Number.isFinite(n) ? n.toLocaleString(LANG==='es'?'es-ES':'en-US',{maximumFractionDigits:0}) : '—';
-  const money = n => Number.isFinite(n) ? `<span data-bind="mkt-max">${fmtN(n,2)}</span>` : '<span data-bind="mkt-max">—</span>';
   const enc = encodeURIComponent;
   const clamp = (n, min, max) => Math.min(max, Math.max(min, n));
   function toast(msg){

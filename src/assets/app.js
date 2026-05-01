@@ -1,5 +1,6 @@
 (() => {
-  const { CES_FEE, CONTACT, I18N } = window.TWOCES_CONFIG;
+  const CFG = window.TWOCES_CONFIG;
+  let { CES_FEE, CONTACT, I18N } = CFG;
   const { MarketState, marketValues, fetchTRX, loadCachedMarket, applyTRXPrice } = window.TWOCES_PRICE_SERVICE;
   let LANG = 'es';
 

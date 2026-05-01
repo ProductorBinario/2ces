@@ -1,5 +1,6 @@
 (() => {
-  const { CES_FEE, CONTACT, I18N } = window.TWOCES_CONFIG;
+  const CFG = window.TWOCES_CONFIG;
+  let { CES_FEE, CONTACT, I18N } = CFG;
   const { MarketState, marketValues, fetchTRX, loadCachedMarket, applyTRXPrice } = window.TWOCES_PRICE_SERVICE;
   let LANG = 'es';
 
@@ -181,5 +182,204 @@
     fetchTRX().then(renderMarket);
     setInterval(() => fetchTRX().then(renderMarket), 60_000);
     marketSelfTest();
+
+    // Inside an iframe with srcDoc, location.origin is "null" — resolve to parent.
+    function apiOrigin(){
+      try{
+        if(window.location.origin && window.location.origin !== 'null') return window.location.origin;
+        if(window.parent && window.parent.location && window.parent.location.origin) return window.parent.location.origin;
+      }catch(_){}
+      return '';
+    }
+    window.__API_ORIGIN__ = apiOrigin();
+    const apiUrl = p => (window.__API_ORIGIN__ || '') + p;
+
+    // --- Live settings from server (CES_FEE, contacts) ---
+    fetch(apiUrl('/api/public/settings'), {cache:'no-store'})
+      .then(r => r.ok ? r.json() : null)
+      .then(s => {
+        if(!s) return;
+        if(Number.isFinite(s.ces_fee) && s.ces_fee > 0){
+          CES_FEE = s.ces_fee; CFG.CES_FEE = s.ces_fee;
+        }
+        if(typeof s.whatsapp === 'string' && s.whatsapp) CONTACT.wa = s.whatsapp;
+        if(typeof s.telegram === 'string' && s.telegram) CONTACT.tg = s.telegram;
+        if(typeof s.email === 'string' && s.email) CONTACT.email = s.email;
+        renderMarket();
+      })
+      .catch(()=>{});
+
+    // --- Hidden admin panel ---
+    initAdminPanel();
   });
+
+  // ===== Admin panel =====
+  function beep(kind){
+    try{
+      const Ctx = window.AudioContext || window.webkitAudioContext;
+      if(!Ctx) return;
+      const ctx = beep._ctx || (beep._ctx = new Ctx());
+      const now = ctx.currentTime;
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.connect(g); g.connect(ctx.destination);
+      if(kind === 'ok'){
+        o.type='sine'; o.frequency.setValueAtTime(880, now); o.frequency.linearRampToValueAtTime(1320, now+.18);
+        g.gain.setValueAtTime(.0001, now); g.gain.exponentialRampToValueAtTime(.18, now+.02); g.gain.exponentialRampToValueAtTime(.0001, now+.32);
+        o.start(now); o.stop(now+.34);
+      } else {
+        // failure: two short low tones
+        o.type='square'; o.frequency.setValueAtTime(220, now); o.frequency.setValueAtTime(160, now+.12);
+        g.gain.setValueAtTime(.0001, now); g.gain.exponentialRampToValueAtTime(.22, now+.02); g.gain.exponentialRampToValueAtTime(.0001, now+.30);
+        o.start(now); o.stop(now+.32);
+      }
+    }catch(_){}
+  }
+
+  async function api(path, body){
+    const origin = (typeof window !== 'undefined' && window.__API_ORIGIN__) || '';
+    const r = await fetch(origin + path, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body||{})});
+    try { return await r.json(); } catch { return {ok:false}; }
+  }
+
+  function initAdminPanel(){
+    const trigger = document.getElementById('adm-trigger');
+    const overlay = document.getElementById('adm-overlay');
+    if(!trigger || !overlay) return;
+    const closeBtn = document.getElementById('adm-close');
+    const stage1 = document.getElementById('adm-stage-1');
+    const stage2 = document.getElementById('adm-stage-2');
+    const keyInput = document.getElementById('adm-key');
+    const msg = document.getElementById('adm-msg');
+    const msg2 = document.getElementById('adm-msg2');
+    const submit = document.getElementById('adm-submit');
+    const saveBtn = document.getElementById('adm-save');
+    const title = document.getElementById('adm-title');
+    const roleLabel = document.getElementById('adm-role-label');
+
+    let role = null;          // 'master' | 'admin'
+    let phrases = [];         // collected phrases
+    let adminStep = 0;        // 0..2 for admin sequence
+
+    function reset(){
+      role = null; phrases = []; adminStep = 0;
+      stage1.hidden = false; stage2.hidden = true;
+      keyInput.value=''; msg.textContent=''; msg.className='adm-msg';
+      title.textContent = 'Acceso';
+      submit.textContent = 'Validar';
+    }
+    function open(){ reset(); overlay.hidden=false; setTimeout(()=>keyInput.focus(),20); }
+    function close(){ overlay.hidden=true; reset(); }
+
+    trigger.addEventListener('click', open);
+    closeBtn.addEventListener('click', close);
+    overlay.addEventListener('click', e => { if(e.target === overlay) close(); });
+    document.addEventListener('keydown', e => { if(e.key === 'Escape' && !overlay.hidden) close(); });
+
+    async function tryPhrase(){
+      const phrase = (keyInput.value||'').trim();
+      if(!phrase){ return; }
+      submit.disabled = true;
+      msg.textContent = 'Validando...'; msg.className='adm-msg';
+
+      // First attempt: detect role automatically.
+      if(role === null){
+        // Try master first.
+        const mr = await api('/api/public/admin-verify', {phrase, role:'master'});
+        if(mr.ok){
+          role='master'; phrases=[phrase];
+          beep('ok');
+          await enterStage2('Master');
+          submit.disabled=false; return;
+        }
+        // Try admin step 0.
+        const ar = await api('/api/public/admin-verify', {phrase, role:'admin', step:0});
+        if(ar.ok){
+          role='admin'; phrases=[phrase]; adminStep=1;
+          beep('ok');
+          msg.textContent = 'Paso 1 de 3 correcto. Continúa.'; msg.className='adm-msg ok';
+          keyInput.value=''; keyInput.focus();
+          submit.disabled=false; return;
+        }
+        beep('fail');
+        msg.textContent = '⛔ Acceso denegado.'; msg.className='adm-msg err';
+        keyInput.value=''; submit.disabled=false; return;
+      }
+
+      // Continuing admin sequence
+      if(role === 'admin'){
+        const r = await api('/api/public/admin-verify', {phrase, role:'admin', step:adminStep});
+        if(!r.ok){
+          beep('fail');
+          msg.textContent = '⛔ Frase incorrecta. Reinicia el acceso.'; msg.className='adm-msg err';
+          setTimeout(reset, 900);
+          submit.disabled=false; return;
+        }
+        phrases.push(phrase);
+        adminStep++;
+        if(adminStep < 3){
+          beep('ok');
+          msg.textContent = `Paso ${adminStep+1} de 3 correcto. Continúa.`; msg.className='adm-msg ok';
+          keyInput.value=''; keyInput.focus();
+          submit.disabled=false; return;
+        }
+        // Done — stage 2
+        beep('ok');
+        await enterStage2('Admin');
+        submit.disabled=false;
+      }
+    }
+
+    submit.addEventListener('click', tryPhrase);
+    keyInput.addEventListener('keydown', e => { if(e.key==='Enter'){ e.preventDefault(); tryPhrase(); }});
+
+    async function enterStage2(roleName){
+      stage1.hidden = true; stage2.hidden = false;
+      title.textContent = `Panel · ${roleName}`;
+      roleLabel.textContent = `Edita los valores y guarda los cambios.`;
+      // Load current values
+      try{
+        const r = await fetch((window.__API_ORIGIN__||'')+'/api/public/settings', {cache:'no-store'});
+        const s = await r.json();
+        document.getElementById('adm-cur-wa').textContent = `(actual: ${s.whatsapp})`;
+        document.getElementById('adm-cur-tg').textContent = `(actual: ${s.telegram})`;
+        document.getElementById('adm-cur-em').textContent = `(actual: ${s.email})`;
+        document.getElementById('adm-cur-fee').textContent = `(actual: ${s.ces_fee})`;
+        document.getElementById('adm-wa').value = s.whatsapp;
+        document.getElementById('adm-tg').value = s.telegram;
+        document.getElementById('adm-em').value = s.email;
+        document.getElementById('adm-fee').value = s.ces_fee;
+      }catch(_){}
+      msg2.textContent=''; msg2.className='adm-msg';
+    }
+
+    saveBtn.addEventListener('click', async () => {
+      saveBtn.disabled = true;
+      msg2.textContent = 'Guardando...'; msg2.className='adm-msg';
+      const settings = {
+        whatsapp: document.getElementById('adm-wa').value,
+        telegram: document.getElementById('adm-tg').value,
+        email:    document.getElementById('adm-em').value,
+        ces_fee:  document.getElementById('adm-fee').value,
+      };
+      const r = await api('/api/public/admin-update', {role, phrases, settings});
+      if(r.ok){
+        beep('ok');
+        msg2.textContent = '✅ Cambios guardados.'; msg2.className='adm-msg ok';
+        // Refresh live config in this page
+        try{
+          const sr = await fetch((window.__API_ORIGIN__||'')+'/api/public/settings', {cache:'no-store'});
+          const s = await sr.json();
+          if(Number.isFinite(s.ces_fee) && s.ces_fee>0){ CES_FEE = s.ces_fee; CFG.CES_FEE = s.ces_fee; }
+          CONTACT.wa = s.whatsapp; CONTACT.tg = s.telegram; CONTACT.email = s.email;
+          renderMarket();
+        }catch(_){}
+        setTimeout(close, 900);
+      } else {
+        beep('fail');
+        const err = r.error || 'error';
+        msg2.textContent = `⛔ No se pudo guardar (${err}).`; msg2.className='adm-msg err';
+      }
+      saveBtn.disabled = false;
+    });
+  }
 })();

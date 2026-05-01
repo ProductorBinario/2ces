@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import landingHtml from "../assets/landing.html?raw";
+import landingHtml from "../assets/index.html?raw";
 import landingStylesUrl from "../assets/styles.css?url";
 import landingConfigUrl from "../assets/config.js?url";
 import landingPriceServiceUrl from "../assets/priceService.js?url";

@@ -10,33 +10,76 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiPublicSettingsRouteImport } from './routes/api/public/settings'
+import { Route as ApiPublicAdminVerifyRouteImport } from './routes/api/public/admin-verify'
+import { Route as ApiPublicAdminUpdateRouteImport } from './routes/api/public/admin-update'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicSettingsRoute = ApiPublicSettingsRouteImport.update({
+  id: '/api/public/settings',
+  path: '/api/public/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicAdminVerifyRoute = ApiPublicAdminVerifyRouteImport.update({
+  id: '/api/public/admin-verify',
+  path: '/api/public/admin-verify',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicAdminUpdateRoute = ApiPublicAdminUpdateRouteImport.update({
+  id: '/api/public/admin-update',
+  path: '/api/public/admin-update',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/api/public/admin-update': typeof ApiPublicAdminUpdateRoute
+  '/api/public/admin-verify': typeof ApiPublicAdminVerifyRoute
+  '/api/public/settings': typeof ApiPublicSettingsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/api/public/admin-update': typeof ApiPublicAdminUpdateRoute
+  '/api/public/admin-verify': typeof ApiPublicAdminVerifyRoute
+  '/api/public/settings': typeof ApiPublicSettingsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/api/public/admin-update': typeof ApiPublicAdminUpdateRoute
+  '/api/public/admin-verify': typeof ApiPublicAdminVerifyRoute
+  '/api/public/settings': typeof ApiPublicSettingsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/api/public/admin-update'
+    | '/api/public/admin-verify'
+    | '/api/public/settings'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/api/public/admin-update'
+    | '/api/public/admin-verify'
+    | '/api/public/settings'
+  id:
+    | '__root__'
+    | '/'
+    | '/api/public/admin-update'
+    | '/api/public/admin-verify'
+    | '/api/public/settings'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApiPublicAdminUpdateRoute: typeof ApiPublicAdminUpdateRoute
+  ApiPublicAdminVerifyRoute: typeof ApiPublicAdminVerifyRoute
+  ApiPublicSettingsRoute: typeof ApiPublicSettingsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,12 +91,45 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/settings': {
+      id: '/api/public/settings'
+      path: '/api/public/settings'
+      fullPath: '/api/public/settings'
+      preLoaderRoute: typeof ApiPublicSettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/admin-verify': {
+      id: '/api/public/admin-verify'
+      path: '/api/public/admin-verify'
+      fullPath: '/api/public/admin-verify'
+      preLoaderRoute: typeof ApiPublicAdminVerifyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/admin-update': {
+      id: '/api/public/admin-update'
+      path: '/api/public/admin-update'
+      fullPath: '/api/public/admin-update'
+      preLoaderRoute: typeof ApiPublicAdminUpdateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApiPublicAdminUpdateRoute: ApiPublicAdminUpdateRoute,
+  ApiPublicAdminVerifyRoute: ApiPublicAdminVerifyRoute,
+  ApiPublicSettingsRoute: ApiPublicSettingsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}

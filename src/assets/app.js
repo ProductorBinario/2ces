@@ -338,7 +338,7 @@
       roleLabel.textContent = `Edita los valores y guarda los cambios.`;
       // Load current values
       try{
-        const r = await fetch('/api/public/settings', {cache:'no-store'});
+        const r = await fetch((window.__API_ORIGIN__||'')+'/api/public/settings', {cache:'no-store'});
         const s = await r.json();
         document.getElementById('adm-cur-wa').textContent = `(actual: ${s.whatsapp})`;
         document.getElementById('adm-cur-tg').textContent = `(actual: ${s.telegram})`;
@@ -367,7 +367,7 @@
         msg2.textContent = '✅ Cambios guardados.'; msg2.className='adm-msg ok';
         // Refresh live config in this page
         try{
-          const sr = await fetch('/api/public/settings', {cache:'no-store'});
+          const sr = await fetch((window.__API_ORIGIN__||'')+'/api/public/settings', {cache:'no-store'});
           const s = await sr.json();
           if(Number.isFinite(s.ces_fee) && s.ces_fee>0){ CES_FEE = s.ces_fee; CFG.CES_FEE = s.ces_fee; }
           CONTACT.wa = s.whatsapp; CONTACT.tg = s.telegram; CONTACT.email = s.email;

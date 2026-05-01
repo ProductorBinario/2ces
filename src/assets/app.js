@@ -183,8 +183,19 @@
     setInterval(() => fetchTRX().then(renderMarket), 60_000);
     marketSelfTest();
 
+    // Inside an iframe with srcDoc, location.origin is "null" — resolve to parent.
+    function apiOrigin(){
+      try{
+        if(window.location.origin && window.location.origin !== 'null') return window.location.origin;
+        if(window.parent && window.parent.location && window.parent.location.origin) return window.parent.location.origin;
+      }catch(_){}
+      return '';
+    }
+    window.__API_ORIGIN__ = apiOrigin();
+    const apiUrl = p => (window.__API_ORIGIN__ || '') + p;
+
     // --- Live settings from server (CES_FEE, contacts) ---
-    fetch('/api/public/settings', {cache:'no-store'})
+    fetch(apiUrl('/api/public/settings'), {cache:'no-store'})
       .then(r => r.ok ? r.json() : null)
       .then(s => {
         if(!s) return;

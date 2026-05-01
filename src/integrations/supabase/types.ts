@@ -14,7 +14,57 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      admin_audit: {
+        Row: {
+          action: string
+          created_at: string
+          id: number
+          ip: string | null
+          role: string
+        }
+        Insert: {
+          action: string
+          created_at?: string
+          id?: number
+          ip?: string | null
+          role: string
+        }
+        Update: {
+          action?: string
+          created_at?: string
+          id?: number
+          ip?: string | null
+          role?: string
+        }
+        Relationships: []
+      }
+      app_settings: {
+        Row: {
+          ces_fee: number
+          email: string
+          id: number
+          telegram: string
+          updated_at: string
+          whatsapp: string
+        }
+        Insert: {
+          ces_fee?: number
+          email?: string
+          id?: number
+          telegram?: string
+          updated_at?: string
+          whatsapp?: string
+        }
+        Update: {
+          ces_fee?: number
+          email?: string
+          id?: number
+          telegram?: string
+          updated_at?: string
+          whatsapp?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

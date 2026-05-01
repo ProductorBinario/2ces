@@ -236,7 +236,8 @@
   }
 
   async function api(path, body){
-    const r = await fetch(path, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body||{})});
+    const origin = (typeof window !== 'undefined' && window.__API_ORIGIN__) || '';
+    const r = await fetch(origin + path, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body||{})});
     try { return await r.json(); } catch { return {ok:false}; }
   }
 

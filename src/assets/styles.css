@@ -242,9 +242,9 @@
 
 /* Hidden admin trigger — camouflaged * inside the footer text */
 #adm-trigger{
-  background:none;border:0;padding:0 2px;margin-left:6px;cursor:default;
+  background:none;border:0;padding:0 4px;margin:0 2px;cursor:default;
   color:inherit;opacity:.55;font:inherit;line-height:1;outline:none;
-  -webkit-tap-highlight-color:transparent;user-select:none;
+  -webkit-tap-highlight-color:transparent;user-select:none;vertical-align:baseline;
 }
 #adm-trigger:focus-visible{outline:none}
 

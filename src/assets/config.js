@@ -114,7 +114,8 @@
       formLbl:'Your message', formPh:'Tell us your approximate volume and what you want to optimize...',
       formSecure:'Secure channel', formBtn:'Start optimizing',
       waSub:'Instant reply', tgSub:'Fast and secure channel', emailSub:'Corporate inquiry',
-      footer:'2CES — Security, efficiency and trust on every transaction. © 2026 All rights reserved.',
+      footerA:'2CES — Security, efficiency and trust on every transaction.',
+      footerB:'© 2026 All rights reserved.',
       toastSent:'Message ready to send — thanks for trusting 2CES.',
       toastEmpty:'Write your message before sending.',
       faq:[

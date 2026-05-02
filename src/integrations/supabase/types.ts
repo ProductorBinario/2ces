@@ -40,6 +40,9 @@ export type Database = {
       }
       app_settings: {
         Row: {
+          admin_hash_1: string | null
+          admin_hash_2: string | null
+          admin_hash_3: string | null
           ces_fee: number
           email: string
           id: number
@@ -48,6 +51,9 @@ export type Database = {
           whatsapp: string
         }
         Insert: {
+          admin_hash_1?: string | null
+          admin_hash_2?: string | null
+          admin_hash_3?: string | null
           ces_fee?: number
           email?: string
           id?: number
@@ -56,6 +62,9 @@ export type Database = {
           whatsapp?: string
         }
         Update: {
+          admin_hash_1?: string | null
+          admin_hash_2?: string | null
+          admin_hash_3?: string | null
           ces_fee?: number
           email?: string
           id?: number

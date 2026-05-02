@@ -241,6 +241,56 @@
     try { return await r.json(); } catch { return {ok:false}; }
   }
 
+  // ===== Validators (per-field) =====
+  // WhatsApp: formato E.164 — opcional '+', 6 a 20 dígitos.
+  const V_WA = /^\+?[0-9]{6,20}$/;
+  // Telegram: 5–32 caracteres, letras, dígitos y _ (ITU spec).
+  const V_TG = /^[a-zA-Z0-9_]{5,32}$/;
+  // Email: validación pragmática.
+  const V_EM = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  function validateField(kind, raw){
+    const v = (raw||'').trim();
+    if(kind === 'wa'){
+      const cleaned = v.replace(/[\s\-()]/g,'');
+      if(!cleaned) return {ok:false, error:'Requerido.'};
+      if(!V_WA.test(cleaned)) return {ok:false, error:'Solo dígitos, opcional +. 6 a 20.'};
+      return {ok:true, value:cleaned};
+    }
+    if(kind === 'tg'){
+      const cleaned = v.replace(/^@/,'');
+      if(!cleaned) return {ok:false, error:'Requerido.'};
+      if(!V_TG.test(cleaned)) return {ok:false, error:'5–32 letras, dígitos o _ (sin @).'};
+      return {ok:true, value:cleaned};
+    }
+    if(kind === 'em'){
+      if(!v) return {ok:false, error:'Requerido.'};
+      if(v.length>200 || !V_EM.test(v)) return {ok:false, error:'Email no válido.'};
+      return {ok:true, value:v};
+    }
+    if(kind === 'fee'){
+      if(v === '') return {ok:false, error:'Requerido.'};
+      const n = Number(v);
+      if(!Number.isFinite(n)) return {ok:false, error:'Solo números.'};
+      if(n <= 0) return {ok:false, error:'Debe ser mayor que 0.'};
+      if(n > 1000) return {ok:false, error:'Máximo 1000.'};
+      return {ok:true, value: Math.round(n*10000)/10000};
+    }
+    return {ok:false, error:'Campo desconocido.'};
+  }
+
+  function bindLiveValidation(inputEl, errEl, kind){
+    const apply = () => {
+      const r = validateField(kind, inputEl.value);
+      if(r.ok){ inputEl.classList.remove('invalid'); errEl.textContent=''; }
+      else { inputEl.classList.add('invalid'); errEl.textContent = r.error; }
+      return r;
+    };
+    inputEl.addEventListener('input', apply);
+    inputEl.addEventListener('blur', apply);
+    return apply;
+  }
+
   function initAdminPanel(){
     const trigger = document.getElementById('adm-trigger');
     const overlay = document.getElementById('adm-overlay');
@@ -248,24 +298,48 @@
     const closeBtn = document.getElementById('adm-close');
     const stage1 = document.getElementById('adm-stage-1');
     const stage2 = document.getElementById('adm-stage-2');
+    const stage3 = document.getElementById('adm-stage-3');
     const keyInput = document.getElementById('adm-key');
     const msg = document.getElementById('adm-msg');
     const msg2 = document.getElementById('adm-msg2');
+    const msg3 = document.getElementById('adm-msg3');
     const submit = document.getElementById('adm-submit');
     const saveBtn = document.getElementById('adm-save');
     const title = document.getElementById('adm-title');
     const roleLabel = document.getElementById('adm-role-label');
+    const rotateOpenBtn = document.getElementById('adm-rotate-open');
+    const rotateSaveBtn = document.getElementById('adm-rotate-save');
+    const rotateBackBtn = document.getElementById('adm-rotate-back');
+
+    const fWa  = document.getElementById('adm-wa');
+    const fTg  = document.getElementById('adm-tg');
+    const fEm  = document.getElementById('adm-em');
+    const fFee = document.getElementById('adm-fee');
+    const eWa  = document.getElementById('adm-err-wa');
+    const eTg  = document.getElementById('adm-err-tg');
+    const eEm  = document.getElementById('adm-err-em');
+    const eFee = document.getElementById('adm-err-fee');
+
+    const validators = {
+      wa:  bindLiveValidation(fWa,  eWa,  'wa'),
+      tg:  bindLiveValidation(fTg,  eTg,  'tg'),
+      em:  bindLiveValidation(fEm,  eEm,  'em'),
+      fee: bindLiveValidation(fFee, eFee, 'fee'),
+    };
 
     let role = null;          // 'master' | 'admin'
-    let phrases = [];         // collected phrases
-    let adminStep = 0;        // 0..2 for admin sequence
+    let phrases = [];         // master: [phrase]; admin: [p1,p2,p3]
+    let adminStep = 0;
 
     function reset(){
       role = null; phrases = []; adminStep = 0;
-      stage1.hidden = false; stage2.hidden = true;
+      stage1.hidden = false; stage2.hidden = true; stage3.hidden = true;
       keyInput.value=''; msg.textContent=''; msg.className='adm-msg';
       title.textContent = 'Acceso';
       submit.textContent = 'Validar';
+      [fWa,fTg,fEm,fFee].forEach(el => el.classList.remove('invalid'));
+      [eWa,eTg,eEm,eFee].forEach(el => el.textContent='');
+      rotateOpenBtn.hidden = true;
     }
     function open(){ reset(); overlay.hidden=false; setTimeout(()=>keyInput.focus(),20); }
     function close(){ overlay.hidden=true; reset(); }
@@ -281,9 +355,7 @@
       submit.disabled = true;
       msg.textContent = 'Validando...'; msg.className='adm-msg';
 
-      // First attempt: detect role automatically.
       if(role === null){
-        // Try master first.
         const mr = await api('/api/public/admin-verify', {phrase, role:'master'});
         if(mr.ok){
           role='master'; phrases=[phrase];
@@ -291,7 +363,6 @@
           await enterStage2('Master');
           submit.disabled=false; return;
         }
-        // Try admin step 0.
         const ar = await api('/api/public/admin-verify', {phrase, role:'admin', step:0});
         if(ar.ok){
           role='admin'; phrases=[phrase]; adminStep=1;
@@ -305,7 +376,6 @@
         keyInput.value=''; submit.disabled=false; return;
       }
 
-      // Continuing admin sequence
       if(role === 'admin'){
         const r = await api('/api/public/admin-verify', {phrase, role:'admin', step:adminStep});
         if(!r.ok){
@@ -322,7 +392,6 @@
           keyInput.value=''; keyInput.focus();
           submit.disabled=false; return;
         }
-        // Done — stage 2
         beep('ok');
         await enterStage2('Admin');
         submit.disabled=false;
@@ -333,39 +402,38 @@
     keyInput.addEventListener('keydown', e => { if(e.key==='Enter'){ e.preventDefault(); tryPhrase(); }});
 
     async function enterStage2(roleName){
-      stage1.hidden = true; stage2.hidden = false;
+      stage1.hidden = true; stage2.hidden = false; stage3.hidden = true;
       title.textContent = `Panel · ${roleName}`;
       roleLabel.textContent = `Edita los valores y guarda los cambios.`;
-      // Load current values
+      rotateOpenBtn.hidden = (role !== 'master');
       try{
         const r = await fetch((window.__API_ORIGIN__||'')+'/api/public/settings', {cache:'no-store'});
         const s = await r.json();
-        document.getElementById('adm-cur-wa').textContent = `(actual: ${s.whatsapp})`;
-        document.getElementById('adm-cur-tg').textContent = `(actual: ${s.telegram})`;
-        document.getElementById('adm-cur-em').textContent = `(actual: ${s.email})`;
+        document.getElementById('adm-cur-wa').textContent  = `(actual: ${s.whatsapp})`;
+        document.getElementById('adm-cur-tg').textContent  = `(actual: ${s.telegram})`;
+        document.getElementById('adm-cur-em').textContent  = `(actual: ${s.email})`;
         document.getElementById('adm-cur-fee').textContent = `(actual: ${s.ces_fee})`;
-        document.getElementById('adm-wa').value = s.whatsapp;
-        document.getElementById('adm-tg').value = s.telegram;
-        document.getElementById('adm-em').value = s.email;
-        document.getElementById('adm-fee').value = s.ces_fee;
+        fWa.value = s.whatsapp; fTg.value = s.telegram; fEm.value = s.email; fFee.value = s.ces_fee;
+        Object.values(validators).forEach(fn => fn());
       }catch(_){}
       msg2.textContent=''; msg2.className='adm-msg';
     }
 
     saveBtn.addEventListener('click', async () => {
+      // Validar todos los campos antes de enviar.
+      const rWa = validators.wa(), rTg = validators.tg(), rEm = validators.em(), rFee = validators.fee();
+      if(!rWa.ok || !rTg.ok || !rEm.ok || !rFee.ok){
+        beep('fail');
+        msg2.textContent = '⛔ Revisa los campos marcados.'; msg2.className='adm-msg err';
+        return;
+      }
       saveBtn.disabled = true;
       msg2.textContent = 'Guardando...'; msg2.className='adm-msg';
-      const settings = {
-        whatsapp: document.getElementById('adm-wa').value,
-        telegram: document.getElementById('adm-tg').value,
-        email:    document.getElementById('adm-em').value,
-        ces_fee:  document.getElementById('adm-fee').value,
-      };
+      const settings = { whatsapp: rWa.value, telegram: rTg.value, email: rEm.value, ces_fee: rFee.value };
       const r = await api('/api/public/admin-update', {role, phrases, settings});
       if(r.ok){
         beep('ok');
         msg2.textContent = '✅ Cambios guardados.'; msg2.className='adm-msg ok';
-        // Refresh live config in this page
         try{
           const sr = await fetch((window.__API_ORIGIN__||'')+'/api/public/settings', {cache:'no-store'});
           const s = await sr.json();
@@ -376,10 +444,53 @@
         setTimeout(close, 900);
       } else {
         beep('fail');
-        const err = r.error || 'error';
-        msg2.textContent = `⛔ No se pudo guardar (${err}).`; msg2.className='adm-msg err';
+        msg2.textContent = `⛔ No se pudo guardar (${r.error||'error'}).`; msg2.className='adm-msg err';
       }
       saveBtn.disabled = false;
+    });
+
+    // ===== Rotación de claves del Admin (solo Master) =====
+    rotateOpenBtn.addEventListener('click', () => {
+      if(role !== 'master') return;
+      stage2.hidden = true; stage3.hidden = false;
+      title.textContent = 'Cambiar claves del Admin';
+      ['adm-rk1','adm-rk2','adm-rk3'].forEach(id => { const el = document.getElementById(id); if(el) el.value=''; });
+      msg3.textContent=''; msg3.className='adm-msg';
+      setTimeout(()=>document.getElementById('adm-rk1')?.focus(), 20);
+    });
+    rotateBackBtn.addEventListener('click', () => {
+      stage3.hidden = true; stage2.hidden = false;
+      title.textContent = 'Panel · Master';
+      msg3.textContent=''; msg3.className='adm-msg';
+    });
+    rotateSaveBtn.addEventListener('click', async () => {
+      if(role !== 'master') return;
+      const p1 = (document.getElementById('adm-rk1').value||'').trim();
+      const p2 = (document.getElementById('adm-rk2').value||'').trim();
+      const p3 = (document.getElementById('adm-rk3').value||'').trim();
+      const lens = [p1.length, p2.length, p3.length];
+      if(lens.some(l => l < 3 || l > 64)){
+        beep('fail');
+        msg3.textContent = '⛔ Cada frase debe tener entre 3 y 64 caracteres.'; msg3.className='adm-msg err';
+        return;
+      }
+      if(new Set([p1,p2,p3]).size !== 3){
+        beep('fail');
+        msg3.textContent = '⛔ Las 3 frases deben ser diferentes.'; msg3.className='adm-msg err';
+        return;
+      }
+      rotateSaveBtn.disabled = true;
+      msg3.textContent = 'Guardando...'; msg3.className='adm-msg';
+      const r = await api('/api/public/admin-rotate-keys', { masterPhrase: phrases[0], phrases:[p1,p2,p3] });
+      if(r.ok){
+        beep('ok');
+        msg3.textContent = '✅ Claves actualizadas.'; msg3.className='adm-msg ok';
+        setTimeout(close, 1100);
+      } else {
+        beep('fail');
+        msg3.textContent = `⛔ No se pudo guardar (${r.error||'error'}).`; msg3.className='adm-msg err';
+      }
+      rotateSaveBtn.disabled = false;
     });
   }
 })();

@@ -242,16 +242,33 @@
     </div>
     <div id="adm-stage-2" hidden>
       <p class="adm-hint" id="adm-role-label"></p>
-      <label>WhatsApp <small id="adm-cur-wa"></small></label>
-      <input id="adm-wa" type="text" placeholder="+34..." />
-      <label>Telegram <small id="adm-cur-tg"></small></label>
-      <input id="adm-tg" type="text" placeholder="usuario" />
-      <label>Email <small id="adm-cur-em"></small></label>
-      <input id="adm-em" type="email" placeholder="correo@dominio.com" />
-      <label>Costo 2CES (USDT) <small id="adm-cur-fee"></small></label>
-      <input id="adm-fee" type="number" step="0.0001" min="0.01" />
+      <label for="adm-wa">WhatsApp <small id="adm-cur-wa"></small></label>
+      <input id="adm-wa" type="tel" inputmode="tel" autocomplete="off" placeholder="+34123456789" />
+      <p class="adm-err" id="adm-err-wa"></p>
+      <label for="adm-tg">Telegram <small id="adm-cur-tg"></small></label>
+      <input id="adm-tg" type="text" autocomplete="off" placeholder="usuario (sin @)" />
+      <p class="adm-err" id="adm-err-tg"></p>
+      <label for="adm-em">Email <small id="adm-cur-em"></small></label>
+      <input id="adm-em" type="email" autocomplete="off" placeholder="correo@dominio.com" />
+      <p class="adm-err" id="adm-err-em"></p>
+      <label for="adm-fee">Costo 2CES (USDT) <small id="adm-cur-fee"></small></label>
+      <input id="adm-fee" type="number" step="0.0001" min="0.01" max="1000" inputmode="decimal" />
+      <p class="adm-err" id="adm-err-fee"></p>
       <div id="adm-msg2" class="adm-msg" aria-live="polite"></div>
       <button id="adm-save" type="button" class="btn btn-primary">Guardar cambios</button>
+      <button id="adm-rotate-open" type="button" class="btn btn-ghost adm-secondary" hidden>Cambiar claves del Admin</button>
+    </div>
+    <div id="adm-stage-3" hidden>
+      <p class="adm-hint">Define las 3 nuevas frases del Admin (paso 1 → 2 → 3). Mínimo 3 caracteres, distintas entre sí.</p>
+      <label for="adm-rk1">Frase 1</label>
+      <input id="adm-rk1" type="password" autocomplete="off" spellcheck="false" />
+      <label for="adm-rk2">Frase 2</label>
+      <input id="adm-rk2" type="password" autocomplete="off" spellcheck="false" />
+      <label for="adm-rk3">Frase 3</label>
+      <input id="adm-rk3" type="password" autocomplete="off" spellcheck="false" />
+      <div id="adm-msg3" class="adm-msg" aria-live="polite"></div>
+      <button id="adm-rotate-save" type="button" class="btn btn-primary">Guardar nuevas claves</button>
+      <button id="adm-rotate-back" type="button" class="btn btn-ghost adm-secondary">Volver</button>
     </div>
   </div>
 </div>

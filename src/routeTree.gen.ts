@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiPublicSettingsRouteImport } from './routes/api/public/settings'
 import { Route as ApiPublicAdminVerifyRouteImport } from './routes/api/public/admin-verify'
 import { Route as ApiPublicAdminUpdateRouteImport } from './routes/api/public/admin-update'
+import { Route as ApiPublicAdminRotateKeysRouteImport } from './routes/api/public/admin-rotate-keys'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,15 +35,22 @@ const ApiPublicAdminUpdateRoute = ApiPublicAdminUpdateRouteImport.update({
   path: '/api/public/admin-update',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicAdminRotateKeysRoute = ApiPublicAdminRotateKeysRouteImport.update({
+  id: '/api/public/admin-rotate-keys',
+  path: '/api/public/admin-rotate-keys',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/api/public/admin-rotate-keys': typeof ApiPublicAdminRotateKeysRoute
   '/api/public/admin-update': typeof ApiPublicAdminUpdateRoute
   '/api/public/admin-verify': typeof ApiPublicAdminVerifyRoute
   '/api/public/settings': typeof ApiPublicSettingsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/api/public/admin-rotate-keys': typeof ApiPublicAdminRotateKeysRoute
   '/api/public/admin-update': typeof ApiPublicAdminUpdateRoute
   '/api/public/admin-verify': typeof ApiPublicAdminVerifyRoute
   '/api/public/settings': typeof ApiPublicSettingsRoute
@@ -50,6 +58,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/api/public/admin-rotate-keys': typeof ApiPublicAdminRotateKeysRoute
   '/api/public/admin-update': typeof ApiPublicAdminUpdateRoute
   '/api/public/admin-verify': typeof ApiPublicAdminVerifyRoute
   '/api/public/settings': typeof ApiPublicSettingsRoute
@@ -58,18 +67,21 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/api/public/admin-rotate-keys'
     | '/api/public/admin-update'
     | '/api/public/admin-verify'
     | '/api/public/settings'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/api/public/admin-rotate-keys'
     | '/api/public/admin-update'
     | '/api/public/admin-verify'
     | '/api/public/settings'
   id:
     | '__root__'
     | '/'
+    | '/api/public/admin-rotate-keys'
     | '/api/public/admin-update'
     | '/api/public/admin-verify'
     | '/api/public/settings'
@@ -77,6 +89,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApiPublicAdminRotateKeysRoute: typeof ApiPublicAdminRotateKeysRoute
   ApiPublicAdminUpdateRoute: typeof ApiPublicAdminUpdateRoute
   ApiPublicAdminVerifyRoute: typeof ApiPublicAdminVerifyRoute
   ApiPublicSettingsRoute: typeof ApiPublicSettingsRoute
@@ -112,11 +125,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicAdminUpdateRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/admin-rotate-keys': {
+      id: '/api/public/admin-rotate-keys'
+      path: '/api/public/admin-rotate-keys'
+      fullPath: '/api/public/admin-rotate-keys'
+      preLoaderRoute: typeof ApiPublicAdminRotateKeysRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApiPublicAdminRotateKeysRoute: ApiPublicAdminRotateKeysRoute,
   ApiPublicAdminUpdateRoute: ApiPublicAdminUpdateRoute,
   ApiPublicAdminVerifyRoute: ApiPublicAdminVerifyRoute,
   ApiPublicSettingsRoute: ApiPublicSettingsRoute,

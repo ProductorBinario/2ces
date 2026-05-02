@@ -195,7 +195,7 @@
   footer{padding:28px 0;border-top:1px solid var(--bdr);color:var(--t3);font-size:13px;overflow:hidden}
   footer .row{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;min-width:0}
   footer .brand{flex:0 0 auto;max-width:120px}
-  footer [data-i18n="footer"]{flex:1 1 260px;min-width:0}
+  footer .foot-text{flex:1 1 260px;min-width:0}
 
   #wa-float{position:fixed;right:18px;bottom:18px;z-index:50;display:inline-grid;place-items:center;width:58px;height:58px;padding:8px;border-radius:999px;background:color-mix(in oklab,var(--glass) 70%,transparent);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);border:1px solid var(--bdr);box-shadow:var(--shadow-card);transition:transform .2s var(--ease)}
   #wa-float:hover{transform:translateY(-2px)}
@@ -242,9 +242,9 @@
 
 /* Hidden admin trigger — camouflaged * inside the footer text */
 #adm-trigger{
-  background:none;border:0;padding:0 2px;margin-left:6px;cursor:default;
+  background:none;border:0;padding:0 4px;margin:0 2px;cursor:default;
   color:inherit;opacity:.55;font:inherit;line-height:1;outline:none;
-  -webkit-tap-highlight-color:transparent;user-select:none;
+  -webkit-tap-highlight-color:transparent;user-select:none;vertical-align:baseline;
 }
 #adm-trigger:focus-visible{outline:none}
 

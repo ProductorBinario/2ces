@@ -49,7 +49,8 @@
       formLbl:'Tu mensaje', formPh:'Cuéntanos tu volumen aproximado y qué quieres optimizar...',
       formSecure:'Canal seguro', formBtn:'Empezar a optimizar',
       waSub:'Respuesta inmediata', tgSub:'Canal rápido y seguro', emailSub:'Consulta corporativa',
-      footer:'2CES — Seguridad, eficiencia y confianza en cada transacción. © 2026 Todos los derechos reservados.',
+      footerA:'2CES — Seguridad, eficiencia y confianza en cada transacción.',
+      footerB:'© 2026 Todos los derechos reservados.',
       toastSent:'Mensaje listo para enviar — gracias por confiar en 2CES.',
       toastEmpty:'Escribe tu mensaje antes de enviarlo.',
       faq:[
@@ -113,7 +114,8 @@
       formLbl:'Your message', formPh:'Tell us your approximate volume and what you want to optimize...',
       formSecure:'Secure channel', formBtn:'Start optimizing',
       waSub:'Instant reply', tgSub:'Fast and secure channel', emailSub:'Corporate inquiry',
-      footer:'2CES — Security, efficiency and trust on every transaction. © 2026 All rights reserved.',
+      footerA:'2CES — Security, efficiency and trust on every transaction.',
+      footerB:'© 2026 All rights reserved.',
       toastSent:'Message ready to send — thanks for trusting 2CES.',
       toastEmpty:'Write your message before sending.',
       faq:[

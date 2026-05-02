@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
-  ADMIN_HASHES,
   MASTER_HASH,
   clientIP,
+  getAdminHashes,
   hashEq,
   rateLimit,
   sha,
@@ -48,7 +48,8 @@ export const Route = createFileRoute("/api/public/admin-verify")({
 
         const step = Number(body.step);
         if (!Number.isInteger(step) || step < 0 || step > 2) return json({ ok: false }, 400);
-        return json({ ok: hashEq(h, ADMIN_HASHES[step]) });
+        const adminHashes = await getAdminHashes();
+        return json({ ok: hashEq(h, adminHashes[step]) });
       },
     },
   },

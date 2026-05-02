@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 import {
-  ADMIN_HASHES,
   MASTER_HASH,
   clientIP,
+  getAdminHashes,
   hashEq,
   rateLimit,
   sha,
@@ -57,8 +57,9 @@ export const Route = createFileRoute("/api/public/admin-update")({
           }
         } else {
           if (phrases.length !== 3) return json({ ok: false, error: "unauthorized" }, 401);
+          const adminHashes = await getAdminHashes();
           for (let i = 0; i < 3; i++) {
-            if (!hashEq(sha(phrases[i]), ADMIN_HASHES[i])) {
+            if (!hashEq(sha(phrases[i]), adminHashes[i])) {
               return json({ ok: false, error: "unauthorized" }, 401);
             }
           }

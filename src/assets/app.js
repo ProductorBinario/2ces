@@ -450,13 +450,63 @@
     });
 
     // ===== Rotación de claves del Admin (solo Master) =====
+    const rkInputs = ['adm-rk1','adm-rk2','adm-rk3'].map(id => document.getElementById(id));
+    const rkErr   = document.getElementById('adm-err-rk');
+    const rkShow  = document.getElementById('adm-rk-show');
+    const rkConfirm = document.getElementById('adm-rk-confirm');
+    const rkAck   = document.getElementById('adm-rk-ack');
+    const rkStatus = document.getElementById('adm-rotated-status');
+    const rkHistory = document.getElementById('adm-history-list');
+
+    function validateRotation(){
+      const vals = rkInputs.map(el => (el.value||'').trim());
+      const lens = vals.map(v => v.length);
+      let err = '';
+      if(lens.some(l => l < 3 || l > 64)) err = 'Cada frase debe tener entre 3 y 64 caracteres.';
+      else if(new Set(vals).size !== 3) err = 'Las 3 frases deben ser diferentes.';
+      rkErr.textContent = err;
+      const valid = !err;
+      rkConfirm.hidden = !valid;
+      const ackOk = valid && (rkAck.value||'').trim().toLowerCase() === 'entendido';
+      rotateSaveBtn.disabled = !ackOk;
+      return valid;
+    }
+
+    rkInputs.forEach(el => el.addEventListener('input', validateRotation));
+    rkAck?.addEventListener('input', validateRotation);
+    rkShow?.addEventListener('change', () => {
+      const t = rkShow.checked ? 'text' : 'password';
+      rkInputs.forEach(el => el.type = t);
+    });
+
+    async function loadAdminInfo(){
+      rkStatus.textContent = 'Cargando estado…';
+      rkHistory.innerHTML = '';
+      const r = await api('/api/public/admin-info', { masterPhrase: phrases[0] });
+      if(!r.ok){ rkStatus.textContent = '⚠️ No se pudo cargar el estado.'; return; }
+      const labels = ['Clave 1','Clave 2','Clave 3'];
+      rkStatus.innerHTML = r.rotated.map((ok,i) =>
+        `<span class="adm-pill ${ok?'ok':'warn'}">${labels[i]}: ${ok?'rotada ✓':'por defecto'}</span>`
+      ).join('');
+      rkHistory.innerHTML = (r.history||[]).map(h => {
+        const d = new Date(h.created_at).toLocaleString();
+        return `<li><b>${h.role}</b> · ${h.action} · ${d} · <code>${h.ip||'—'}</code></li>`;
+      }).join('') || '<li class="adm-empty">Sin registros.</li>';
+    }
+
     rotateOpenBtn.addEventListener('click', () => {
       if(role !== 'master') return;
       stage2.hidden = true; stage3.hidden = false;
       title.textContent = 'Cambiar claves del Admin';
-      ['adm-rk1','adm-rk2','adm-rk3'].forEach(id => { const el = document.getElementById(id); if(el) el.value=''; });
+      rkInputs.forEach(el => { el.value=''; el.type='password'; });
+      if(rkShow) rkShow.checked = false;
+      if(rkAck) rkAck.value = '';
+      rkErr.textContent = '';
+      rkConfirm.hidden = true;
+      rotateSaveBtn.disabled = true;
       msg3.textContent=''; msg3.className='adm-msg';
-      setTimeout(()=>document.getElementById('adm-rk1')?.focus(), 20);
+      setTimeout(() => rkInputs[0]?.focus(), 20);
+      loadAdminInfo();
     });
     rotateBackBtn.addEventListener('click', () => {
       stage3.hidden = true; stage2.hidden = false;
@@ -465,20 +515,8 @@
     });
     rotateSaveBtn.addEventListener('click', async () => {
       if(role !== 'master') return;
-      const p1 = (document.getElementById('adm-rk1').value||'').trim();
-      const p2 = (document.getElementById('adm-rk2').value||'').trim();
-      const p3 = (document.getElementById('adm-rk3').value||'').trim();
-      const lens = [p1.length, p2.length, p3.length];
-      if(lens.some(l => l < 3 || l > 64)){
-        beep('fail');
-        msg3.textContent = '⛔ Cada frase debe tener entre 3 y 64 caracteres.'; msg3.className='adm-msg err';
-        return;
-      }
-      if(new Set([p1,p2,p3]).size !== 3){
-        beep('fail');
-        msg3.textContent = '⛔ Las 3 frases deben ser diferentes.'; msg3.className='adm-msg err';
-        return;
-      }
+      if(!validateRotation()) return;
+      const [p1,p2,p3] = rkInputs.map(el => el.value.trim());
       rotateSaveBtn.disabled = true;
       msg3.textContent = 'Guardando...'; msg3.className='adm-msg';
       const r = await api('/api/public/admin-rotate-keys', { masterPhrase: phrases[0], phrases:[p1,p2,p3] });
@@ -488,9 +526,11 @@
         setTimeout(close, 1100);
       } else {
         beep('fail');
-        msg3.textContent = `⛔ No se pudo guardar (${r.error||'error'}).`; msg3.className='adm-msg err';
+        const wait = r.retryAfter ? ` Espera ${r.retryAfter}s.` : '';
+        msg3.textContent = `⛔ No se pudo guardar (${r.error||'error'}).${wait}`;
+        msg3.className='adm-msg err';
+        rotateSaveBtn.disabled = false;
       }
-      rotateSaveBtn.disabled = false;
     });
   }
 })();

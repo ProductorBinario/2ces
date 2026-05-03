@@ -260,15 +260,28 @@
     </div>
     <div id="adm-stage-3" hidden>
       <p class="adm-hint">Define las 3 nuevas frases del Admin (paso 1 → 2 → 3). Mínimo 3 caracteres, distintas entre sí.</p>
+      <div class="adm-status" id="adm-rotated-status" aria-live="polite"></div>
+      <div class="adm-row-toggle">
+        <label class="adm-check"><input type="checkbox" id="adm-rk-show" /> <span>Mostrar claves</span></label>
+      </div>
       <label for="adm-rk1">Frase 1</label>
       <input id="adm-rk1" type="password" autocomplete="off" spellcheck="false" />
       <label for="adm-rk2">Frase 2</label>
       <input id="adm-rk2" type="password" autocomplete="off" spellcheck="false" />
       <label for="adm-rk3">Frase 3</label>
       <input id="adm-rk3" type="password" autocomplete="off" spellcheck="false" />
+      <p class="adm-err" id="adm-err-rk"></p>
+      <div class="adm-confirm" id="adm-rk-confirm" hidden>
+        <p class="adm-hint">Para confirmar el cambio, escribe <b>Entendido</b>.</p>
+        <input id="adm-rk-ack" type="text" autocomplete="off" spellcheck="false" placeholder="Entendido" />
+      </div>
       <div id="adm-msg3" class="adm-msg" aria-live="polite"></div>
-      <button id="adm-rotate-save" type="button" class="btn btn-primary">Guardar nuevas claves</button>
+      <button id="adm-rotate-save" type="button" class="btn btn-primary" disabled>Guardar nuevas claves</button>
       <button id="adm-rotate-back" type="button" class="btn btn-ghost adm-secondary">Volver</button>
+      <details class="adm-history">
+        <summary>Historial de auditoría (últimas 10)</summary>
+        <ul id="adm-history-list"></ul>
+      </details>
     </div>
   </div>
 </div>

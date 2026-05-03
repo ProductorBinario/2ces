@@ -20,6 +20,27 @@ const json = (body: unknown, status = 200) =>
     headers: { "Content-Type": "application/json", ...cors },
   });
 
+// Bloqueo temporal progresivo por IP tras varios fallos de Master.
+// 3 fallos: 30s · 5: 2min · 7+: 10min. Se reinicia tras éxito.
+const failMap = new Map<string, { fails: number; until: number }>();
+function checkLockout(ip: string): { locked: boolean; retryAfter: number } {
+  const e = failMap.get(ip);
+  if (!e) return { locked: false, retryAfter: 0 };
+  const now = Date.now();
+  if (e.until > now) return { locked: true, retryAfter: Math.ceil((e.until - now) / 1000) };
+  return { locked: false, retryAfter: 0 };
+}
+function registerFail(ip: string) {
+  const now = Date.now();
+  const e = failMap.get(ip) ?? { fails: 0, until: 0 };
+  e.fails += 1;
+  if (e.fails >= 7) e.until = now + 10 * 60_000;
+  else if (e.fails >= 5) e.until = now + 2 * 60_000;
+  else if (e.fails >= 3) e.until = now + 30_000;
+  failMap.set(ip, e);
+}
+function clearFails(ip: string) { failMap.delete(ip); }
+
 // Rotación de las 3 frases del Admin. Sólo el Master puede ejecutarla.
 // Las frases nunca se almacenan: solo se guarda su SHA-256.
 export const Route = createFileRoute("/api/public/admin-rotate-keys")({
@@ -30,6 +51,11 @@ export const Route = createFileRoute("/api/public/admin-rotate-keys")({
         const ip = clientIP(request);
         if (!rateLimit(ip)) return json({ ok: false, error: "rate_limited" }, 429);
 
+        const lock = checkLockout(ip);
+        if (lock.locked) {
+          return json({ ok: false, error: "locked", retryAfter: lock.retryAfter }, 429);
+        }
+
         let body: { masterPhrase?: unknown; phrases?: unknown };
         try {
           body = await request.json();
@@ -39,8 +65,11 @@ export const Route = createFileRoute("/api/public/admin-rotate-keys")({
 
         const master = typeof body.masterPhrase === "string" ? body.masterPhrase.trim() : "";
         if (!master || !hashEq(sha(master), MASTER_HASH)) {
-          return json({ ok: false, error: "unauthorized" }, 401);
+          registerFail(ip);
+          const l = checkLockout(ip);
+          return json({ ok: false, error: "unauthorized", retryAfter: l.retryAfter }, 401);
         }
+        clearFails(ip);
 
         if (!Array.isArray(body.phrases) || body.phrases.length !== 3) {
           return json({ ok: false, error: "invalid_phrases" }, 400);

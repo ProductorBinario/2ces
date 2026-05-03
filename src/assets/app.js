@@ -249,34 +249,36 @@
   // Email: validación pragmática.
   const V_EM = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
+  function tt(){ return I18N[LANG]; }
   function validateField(kind, raw){
+    const T = tt();
     const v = (raw||'').trim();
     if(kind === 'wa'){
       const cleaned = v.replace(/[\s\-()]/g,'');
-      if(!cleaned) return {ok:false, error:'Requerido.'};
-      if(!V_WA.test(cleaned)) return {ok:false, error:'Solo dígitos, opcional +. 6 a 20.'};
+      if(!cleaned) return {ok:false, error:T.admErrReq};
+      if(!V_WA.test(cleaned)) return {ok:false, error:T.admErrWa};
       return {ok:true, value:cleaned};
     }
     if(kind === 'tg'){
       const cleaned = v.replace(/^@/,'');
-      if(!cleaned) return {ok:false, error:'Requerido.'};
-      if(!V_TG.test(cleaned)) return {ok:false, error:'5–32 letras, dígitos o _ (sin @).'};
+      if(!cleaned) return {ok:false, error:T.admErrReq};
+      if(!V_TG.test(cleaned)) return {ok:false, error:T.admErrTg};
       return {ok:true, value:cleaned};
     }
     if(kind === 'em'){
-      if(!v) return {ok:false, error:'Requerido.'};
-      if(v.length>200 || !V_EM.test(v)) return {ok:false, error:'Email no válido.'};
+      if(!v) return {ok:false, error:T.admErrReq};
+      if(v.length>200 || !V_EM.test(v)) return {ok:false, error:T.admErrEm};
       return {ok:true, value:v};
     }
     if(kind === 'fee'){
-      if(v === '') return {ok:false, error:'Requerido.'};
+      if(v === '') return {ok:false, error:T.admErrReq};
       const n = Number(v);
-      if(!Number.isFinite(n)) return {ok:false, error:'Solo números.'};
-      if(n <= 0) return {ok:false, error:'Debe ser mayor que 0.'};
-      if(n > 1000) return {ok:false, error:'Máximo 1000.'};
+      if(!Number.isFinite(n)) return {ok:false, error:T.admErrFeeNum};
+      if(n <= 0) return {ok:false, error:T.admErrFeeMin};
+      if(n > 1000) return {ok:false, error:T.admErrFeeMax};
       return {ok:true, value: Math.round(n*10000)/10000};
     }
-    return {ok:false, error:'Campo desconocido.'};
+    return {ok:false, error:''};
   }
 
   function bindLiveValidation(inputEl, errEl, kind){
@@ -335,8 +337,8 @@
       role = null; phrases = []; adminStep = 0;
       stage1.hidden = false; stage2.hidden = true; stage3.hidden = true;
       keyInput.value=''; msg.textContent=''; msg.className='adm-msg';
-      title.textContent = 'Acceso';
-      submit.textContent = 'Validar';
+      title.textContent = tt().admTitleAccess;
+      submit.textContent = tt().admValidate;
       [fWa,fTg,fEm,fFee].forEach(el => el.classList.remove('invalid'));
       [eWa,eTg,eEm,eFee].forEach(el => el.textContent='');
       rotateOpenBtn.hidden = true;
@@ -353,7 +355,7 @@
       const phrase = (keyInput.value||'').trim();
       if(!phrase){ return; }
       submit.disabled = true;
-      msg.textContent = 'Validando...'; msg.className='adm-msg';
+      msg.textContent = tt().admValidating; msg.className='adm-msg';
 
       if(role === null){
         const mr = await api('/api/public/admin-verify', {phrase, role:'master'});
@@ -367,12 +369,12 @@
         if(ar.ok){
           role='admin'; phrases=[phrase]; adminStep=1;
           beep('ok');
-          msg.textContent = 'Paso 1 de 3 correcto. Continúa.'; msg.className='adm-msg ok';
+          msg.textContent = tt().admStepOk(1); msg.className='adm-msg ok';
           keyInput.value=''; keyInput.focus();
           submit.disabled=false; return;
         }
         beep('fail');
-        msg.textContent = '⛔ Acceso denegado.'; msg.className='adm-msg err';
+        msg.textContent = tt().admDenied; msg.className='adm-msg err';
         keyInput.value=''; submit.disabled=false; return;
       }
 
@@ -380,7 +382,7 @@
         const r = await api('/api/public/admin-verify', {phrase, role:'admin', step:adminStep});
         if(!r.ok){
           beep('fail');
-          msg.textContent = '⛔ Frase incorrecta. Reinicia el acceso.'; msg.className='adm-msg err';
+          msg.textContent = tt().admWrongPhrase; msg.className='adm-msg err';
           setTimeout(reset, 900);
           submit.disabled=false; return;
         }
@@ -388,7 +390,7 @@
         adminStep++;
         if(adminStep < 3){
           beep('ok');
-          msg.textContent = `Paso ${adminStep+1} de 3 correcto. Continúa.`; msg.className='adm-msg ok';
+          msg.textContent = tt().admStepOk(adminStep+1); msg.className='adm-msg ok';
           keyInput.value=''; keyInput.focus();
           submit.disabled=false; return;
         }
@@ -403,16 +405,17 @@
 
     async function enterStage2(roleName){
       stage1.hidden = true; stage2.hidden = false; stage3.hidden = true;
-      title.textContent = `Panel · ${roleName}`;
-      roleLabel.textContent = `Edita los valores y guarda los cambios.`;
+      title.textContent = `${tt().admPanel} · ${roleName}`;
+      roleLabel.textContent = tt().admEditHint;
       rotateOpenBtn.hidden = (role !== 'master');
       try{
         const r = await fetch((window.__API_ORIGIN__||'')+'/api/public/settings', {cache:'no-store'});
         const s = await r.json();
-        document.getElementById('adm-cur-wa').textContent  = `(actual: ${s.whatsapp})`;
-        document.getElementById('adm-cur-tg').textContent  = `(actual: ${s.telegram})`;
-        document.getElementById('adm-cur-em').textContent  = `(actual: ${s.email})`;
-        document.getElementById('adm-cur-fee').textContent = `(actual: ${s.ces_fee})`;
+        const A = tt().admActual;
+        document.getElementById('adm-cur-wa').textContent  = A(s.whatsapp);
+        document.getElementById('adm-cur-tg').textContent  = A(s.telegram);
+        document.getElementById('adm-cur-em').textContent  = A(s.email);
+        document.getElementById('adm-cur-fee').textContent = A(s.ces_fee);
         fWa.value = s.whatsapp; fTg.value = s.telegram; fEm.value = s.email; fFee.value = s.ces_fee;
         Object.values(validators).forEach(fn => fn());
       }catch(_){}
@@ -420,20 +423,19 @@
     }
 
     saveBtn.addEventListener('click', async () => {
-      // Validar todos los campos antes de enviar.
       const rWa = validators.wa(), rTg = validators.tg(), rEm = validators.em(), rFee = validators.fee();
       if(!rWa.ok || !rTg.ok || !rEm.ok || !rFee.ok){
         beep('fail');
-        msg2.textContent = '⛔ Revisa los campos marcados.'; msg2.className='adm-msg err';
+        msg2.textContent = tt().admReviewFields; msg2.className='adm-msg err';
         return;
       }
       saveBtn.disabled = true;
-      msg2.textContent = 'Guardando...'; msg2.className='adm-msg';
+      msg2.textContent = tt().admSaving; msg2.className='adm-msg';
       const settings = { whatsapp: rWa.value, telegram: rTg.value, email: rEm.value, ces_fee: rFee.value };
       const r = await api('/api/public/admin-update', {role, phrases, settings});
       if(r.ok){
         beep('ok');
-        msg2.textContent = '✅ Cambios guardados.'; msg2.className='adm-msg ok';
+        msg2.textContent = tt().admSaved; msg2.className='adm-msg ok';
         try{
           const sr = await fetch((window.__API_ORIGIN__||'')+'/api/public/settings', {cache:'no-store'});
           const s = await sr.json();
@@ -444,7 +446,7 @@
         setTimeout(close, 900);
       } else {
         beep('fail');
-        msg2.textContent = `⛔ No se pudo guardar (${r.error||'error'}).`; msg2.className='adm-msg err';
+        msg2.textContent = tt().admSaveFail(r.error||'error'); msg2.className='adm-msg err';
       }
       saveBtn.disabled = false;
     });
@@ -459,15 +461,17 @@
     const rkHistory = document.getElementById('adm-history-list');
 
     function validateRotation(){
+      const T = tt();
       const vals = rkInputs.map(el => (el.value||'').trim());
       const lens = vals.map(v => v.length);
       let err = '';
-      if(lens.some(l => l < 3 || l > 64)) err = 'Cada frase debe tener entre 3 y 64 caracteres.';
-      else if(new Set(vals).size !== 3) err = 'Las 3 frases deben ser diferentes.';
+      if(lens.some(l => l < 3 || l > 64)) err = T.admErrLen;
+      else if(new Set(vals).size !== 3) err = T.admErrDiff;
       rkErr.textContent = err;
       const valid = !err;
       rkConfirm.hidden = !valid;
-      const ackOk = valid && (rkAck.value||'').trim().toLowerCase() === 'entendido';
+      const ackVal = (rkAck.value||'').trim().toLowerCase();
+      const ackOk = valid && (ackVal === 'entendido' || ackVal === 'understood');
       rotateSaveBtn.disabled = !ackOk;
       return valid;
     }
@@ -480,24 +484,24 @@
     });
 
     async function loadAdminInfo(){
-      rkStatus.textContent = 'Cargando estado…';
+      const T = tt();
+      rkStatus.textContent = T.admLoadingState;
       rkHistory.innerHTML = '';
       const r = await api('/api/public/admin-info', { masterPhrase: phrases[0] });
-      if(!r.ok){ rkStatus.textContent = '⚠️ No se pudo cargar el estado.'; return; }
-      const labels = ['Clave 1','Clave 2','Clave 3'];
+      if(!r.ok){ rkStatus.textContent = T.admStateFail; return; }
       rkStatus.innerHTML = r.rotated.map((ok,i) =>
-        `<span class="adm-pill ${ok?'ok':'warn'}">${labels[i]}: ${ok?'rotada ✓':'por defecto'}</span>`
+        `<span class="adm-pill ${ok?'ok':'warn'}">${T.admKey} ${i+1}: ${ok?T.admRotatedYes:T.admRotatedNo}</span>`
       ).join('');
       rkHistory.innerHTML = (r.history||[]).map(h => {
-        const d = new Date(h.created_at).toLocaleString();
+        const d = new Date(h.created_at).toLocaleString(LANG==='es'?'es-ES':'en-US');
         return `<li><b>${h.role}</b> · ${h.action} · ${d} · <code>${h.ip||'—'}</code></li>`;
-      }).join('') || '<li class="adm-empty">Sin registros.</li>';
+      }).join('') || `<li class="adm-empty">${T.admHistEmpty}</li>`;
     }
 
     rotateOpenBtn.addEventListener('click', () => {
       if(role !== 'master') return;
       stage2.hidden = true; stage3.hidden = false;
-      title.textContent = 'Cambiar claves del Admin';
+      title.textContent = tt().admRotateOpen;
       rkInputs.forEach(el => { el.value=''; el.type='password'; });
       if(rkShow) rkShow.checked = false;
       if(rkAck) rkAck.value = '';
@@ -510,24 +514,26 @@
     });
     rotateBackBtn.addEventListener('click', () => {
       stage3.hidden = true; stage2.hidden = false;
-      title.textContent = 'Panel · Master';
+      title.textContent = `${tt().admPanel} · Master`;
       msg3.textContent=''; msg3.className='adm-msg';
     });
     rotateSaveBtn.addEventListener('click', async () => {
       if(role !== 'master') return;
       if(!validateRotation()) return;
+      const ackVal = (rkAck.value||'').trim().toLowerCase();
+      if(ackVal !== 'entendido' && ackVal !== 'understood') return;
       const [p1,p2,p3] = rkInputs.map(el => el.value.trim());
       rotateSaveBtn.disabled = true;
-      msg3.textContent = 'Guardando...'; msg3.className='adm-msg';
+      msg3.textContent = tt().admSaving; msg3.className='adm-msg';
       const r = await api('/api/public/admin-rotate-keys', { masterPhrase: phrases[0], phrases:[p1,p2,p3] });
       if(r.ok){
         beep('ok');
-        msg3.textContent = '✅ Claves actualizadas.'; msg3.className='adm-msg ok';
+        msg3.textContent = tt().admRotated; msg3.className='adm-msg ok';
         setTimeout(close, 1100);
       } else {
         beep('fail');
-        const wait = r.retryAfter ? ` Espera ${r.retryAfter}s.` : '';
-        msg3.textContent = `⛔ No se pudo guardar (${r.error||'error'}).${wait}`;
+        const wait = r.retryAfter ? tt().admWait(r.retryAfter) : '';
+        msg3.textContent = tt().admSaveFail(r.error||'error') + wait;
         msg3.className='adm-msg err';
         rotateSaveBtn.disabled = false;
       }

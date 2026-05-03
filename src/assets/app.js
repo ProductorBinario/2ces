@@ -355,7 +355,7 @@
       const phrase = (keyInput.value||'').trim();
       if(!phrase){ return; }
       submit.disabled = true;
-      msg.textContent = 'Validando...'; msg.className='adm-msg';
+      msg.textContent = tt().admValidating; msg.className='adm-msg';
 
       if(role === null){
         const mr = await api('/api/public/admin-verify', {phrase, role:'master'});
@@ -369,12 +369,12 @@
         if(ar.ok){
           role='admin'; phrases=[phrase]; adminStep=1;
           beep('ok');
-          msg.textContent = 'Paso 1 de 3 correcto. Continúa.'; msg.className='adm-msg ok';
+          msg.textContent = tt().admStepOk(1); msg.className='adm-msg ok';
           keyInput.value=''; keyInput.focus();
           submit.disabled=false; return;
         }
         beep('fail');
-        msg.textContent = '⛔ Acceso denegado.'; msg.className='adm-msg err';
+        msg.textContent = tt().admDenied; msg.className='adm-msg err';
         keyInput.value=''; submit.disabled=false; return;
       }
 
@@ -382,7 +382,7 @@
         const r = await api('/api/public/admin-verify', {phrase, role:'admin', step:adminStep});
         if(!r.ok){
           beep('fail');
-          msg.textContent = '⛔ Frase incorrecta. Reinicia el acceso.'; msg.className='adm-msg err';
+          msg.textContent = tt().admWrongPhrase; msg.className='adm-msg err';
           setTimeout(reset, 900);
           submit.disabled=false; return;
         }
@@ -390,7 +390,7 @@
         adminStep++;
         if(adminStep < 3){
           beep('ok');
-          msg.textContent = `Paso ${adminStep+1} de 3 correcto. Continúa.`; msg.className='adm-msg ok';
+          msg.textContent = tt().admStepOk(adminStep+1); msg.className='adm-msg ok';
           keyInput.value=''; keyInput.focus();
           submit.disabled=false; return;
         }

@@ -35,11 +35,12 @@ const ApiPublicAdminUpdateRoute = ApiPublicAdminUpdateRouteImport.update({
   path: '/api/public/admin-update',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiPublicAdminRotateKeysRoute = ApiPublicAdminRotateKeysRouteImport.update({
-  id: '/api/public/admin-rotate-keys',
-  path: '/api/public/admin-rotate-keys',
-  getParentRoute: () => rootRouteImport,
-} as any)
+const ApiPublicAdminRotateKeysRoute =
+  ApiPublicAdminRotateKeysRouteImport.update({
+    id: '/api/public/admin-rotate-keys',
+    path: '/api/public/admin-rotate-keys',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute

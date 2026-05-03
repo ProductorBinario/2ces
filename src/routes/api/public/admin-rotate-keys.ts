@@ -51,6 +51,11 @@ export const Route = createFileRoute("/api/public/admin-rotate-keys")({
         const ip = clientIP(request);
         if (!rateLimit(ip)) return json({ ok: false, error: "rate_limited" }, 429);
 
+        const lock = checkLockout(ip);
+        if (lock.locked) {
+          return json({ ok: false, error: "locked", retryAfter: lock.retryAfter }, 429);
+        }
+
         let body: { masterPhrase?: unknown; phrases?: unknown };
         try {
           body = await request.json();
@@ -60,8 +65,11 @@ export const Route = createFileRoute("/api/public/admin-rotate-keys")({
 
         const master = typeof body.masterPhrase === "string" ? body.masterPhrase.trim() : "";
         if (!master || !hashEq(sha(master), MASTER_HASH)) {
-          return json({ ok: false, error: "unauthorized" }, 401);
+          registerFail(ip);
+          const l = checkLockout(ip);
+          return json({ ok: false, error: "unauthorized", retryAfter: l.retryAfter }, 401);
         }
+        clearFails(ip);
 
         if (!Array.isArray(body.phrases) || body.phrases.length !== 3) {
           return json({ ok: false, error: "invalid_phrases" }, 400);

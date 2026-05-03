@@ -233,12 +233,12 @@
 <div id="adm-overlay" hidden>
   <div id="adm-modal" role="dialog" aria-modal="true" aria-labelledby="adm-title">
     <button id="adm-close" type="button" aria-label="Cerrar">×</button>
-    <h3 id="adm-title">Acceso</h3>
+    <h3 id="adm-title" data-i18n="admTitleAccess">Acceso</h3>
     <div id="adm-stage-1">
-      <p class="adm-hint">Ingresa la frase de acceso.</p>
+      <p class="adm-hint" data-i18n="admStage1Hint">Ingresa la frase de acceso.</p>
       <input id="adm-key" type="password" autocomplete="off" spellcheck="false" />
       <div id="adm-msg" class="adm-msg" aria-live="polite"></div>
-      <button id="adm-submit" type="button" class="btn btn-primary">Validar</button>
+      <button id="adm-submit" type="button" class="btn btn-primary" data-i18n="admValidate">Validar</button>
     </div>
     <div id="adm-stage-2" hidden>
       <p class="adm-hint" id="adm-role-label"></p>
@@ -251,35 +251,35 @@
       <label for="adm-em">Email <small id="adm-cur-em"></small></label>
       <input id="adm-em" type="email" autocomplete="off" placeholder="correo@dominio.com" />
       <p class="adm-err" id="adm-err-em"></p>
-      <label for="adm-fee">Costo 2CES (USDT) <small id="adm-cur-fee"></small></label>
+      <label for="adm-fee"><span data-i18n="admFee">Costo 2CES (USDT)</span> <small id="adm-cur-fee"></small></label>
       <input id="adm-fee" type="number" step="0.0001" min="0.01" max="1000" inputmode="decimal" />
       <p class="adm-err" id="adm-err-fee"></p>
       <div id="adm-msg2" class="adm-msg" aria-live="polite"></div>
-      <button id="adm-save" type="button" class="btn btn-primary">Guardar cambios</button>
-      <button id="adm-rotate-open" type="button" class="btn btn-ghost adm-secondary" hidden>Cambiar claves del Admin</button>
+      <button id="adm-save" type="button" class="btn btn-primary" data-i18n="admSave">Guardar cambios</button>
+      <button id="adm-rotate-open" type="button" class="btn btn-ghost adm-secondary" data-i18n="admRotateOpen" hidden>Cambiar claves del Admin</button>
     </div>
     <div id="adm-stage-3" hidden>
-      <p class="adm-hint">Define las 3 nuevas frases del Admin (paso 1 → 2 → 3). Mínimo 3 caracteres, distintas entre sí.</p>
+      <p class="adm-hint" data-i18n="admStage3Hint">Define las 3 nuevas frases del Admin (paso 1 → 2 → 3). Mínimo 3 caracteres, distintas entre sí.</p>
       <div class="adm-status" id="adm-rotated-status" aria-live="polite"></div>
       <div class="adm-row-toggle">
-        <label class="adm-check"><input type="checkbox" id="adm-rk-show" /> <span>Mostrar claves</span></label>
+        <label class="adm-check"><input type="checkbox" id="adm-rk-show" /> <span data-i18n="admShowKeys">Mostrar claves</span></label>
       </div>
-      <label for="adm-rk1">Frase 1</label>
+      <label for="adm-rk1"><span data-i18n="admPhrase">Frase</span> 1</label>
       <input id="adm-rk1" type="password" autocomplete="off" spellcheck="false" />
-      <label for="adm-rk2">Frase 2</label>
+      <label for="adm-rk2"><span data-i18n="admPhrase">Frase</span> 2</label>
       <input id="adm-rk2" type="password" autocomplete="off" spellcheck="false" />
-      <label for="adm-rk3">Frase 3</label>
+      <label for="adm-rk3"><span data-i18n="admPhrase">Frase</span> 3</label>
       <input id="adm-rk3" type="password" autocomplete="off" spellcheck="false" />
       <p class="adm-err" id="adm-err-rk"></p>
       <div class="adm-confirm" id="adm-rk-confirm" hidden>
-        <p class="adm-hint">Para confirmar el cambio, escribe <b>Entendido</b>.</p>
-        <input id="adm-rk-ack" type="text" autocomplete="off" spellcheck="false" placeholder="Entendido" />
+        <p class="adm-hint" data-i18n-html="admAckHint">Para confirmar el cambio, escribe <b>Entendido</b>.</p>
+        <input id="adm-rk-ack" type="text" autocomplete="off" spellcheck="false" placeholder="Entendido" data-i18n-attr="placeholder|admAckPh" />
       </div>
       <div id="adm-msg3" class="adm-msg" aria-live="polite"></div>
-      <button id="adm-rotate-save" type="button" class="btn btn-primary" disabled>Guardar nuevas claves</button>
-      <button id="adm-rotate-back" type="button" class="btn btn-ghost adm-secondary">Volver</button>
+      <button id="adm-rotate-save" type="button" class="btn btn-primary" data-i18n="admRotateSave" disabled>Guardar nuevas claves</button>
+      <button id="adm-rotate-back" type="button" class="btn btn-ghost adm-secondary" data-i18n="admBack">Volver</button>
       <details class="adm-history">
-        <summary>Historial de auditoría (últimas 10)</summary>
+        <summary data-i18n="admHistory">Historial de auditoría (últimas 10)</summary>
         <ul id="adm-history-list"></ul>
       </details>
     </div>

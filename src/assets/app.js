@@ -405,16 +405,17 @@
 
     async function enterStage2(roleName){
       stage1.hidden = true; stage2.hidden = false; stage3.hidden = true;
-      title.textContent = `Panel · ${roleName}`;
-      roleLabel.textContent = `Edita los valores y guarda los cambios.`;
+      title.textContent = `${tt().admPanel} · ${roleName}`;
+      roleLabel.textContent = tt().admEditHint;
       rotateOpenBtn.hidden = (role !== 'master');
       try{
         const r = await fetch((window.__API_ORIGIN__||'')+'/api/public/settings', {cache:'no-store'});
         const s = await r.json();
-        document.getElementById('adm-cur-wa').textContent  = `(actual: ${s.whatsapp})`;
-        document.getElementById('adm-cur-tg').textContent  = `(actual: ${s.telegram})`;
-        document.getElementById('adm-cur-em').textContent  = `(actual: ${s.email})`;
-        document.getElementById('adm-cur-fee').textContent = `(actual: ${s.ces_fee})`;
+        const A = tt().admActual;
+        document.getElementById('adm-cur-wa').textContent  = A(s.whatsapp);
+        document.getElementById('adm-cur-tg').textContent  = A(s.telegram);
+        document.getElementById('adm-cur-em').textContent  = A(s.email);
+        document.getElementById('adm-cur-fee').textContent = A(s.ces_fee);
         fWa.value = s.whatsapp; fTg.value = s.telegram; fEm.value = s.email; fFee.value = s.ces_fee;
         Object.values(validators).forEach(fn => fn());
       }catch(_){}
@@ -422,20 +423,19 @@
     }
 
     saveBtn.addEventListener('click', async () => {
-      // Validar todos los campos antes de enviar.
       const rWa = validators.wa(), rTg = validators.tg(), rEm = validators.em(), rFee = validators.fee();
       if(!rWa.ok || !rTg.ok || !rEm.ok || !rFee.ok){
         beep('fail');
-        msg2.textContent = '⛔ Revisa los campos marcados.'; msg2.className='adm-msg err';
+        msg2.textContent = tt().admReviewFields; msg2.className='adm-msg err';
         return;
       }
       saveBtn.disabled = true;
-      msg2.textContent = 'Guardando...'; msg2.className='adm-msg';
+      msg2.textContent = tt().admSaving; msg2.className='adm-msg';
       const settings = { whatsapp: rWa.value, telegram: rTg.value, email: rEm.value, ces_fee: rFee.value };
       const r = await api('/api/public/admin-update', {role, phrases, settings});
       if(r.ok){
         beep('ok');
-        msg2.textContent = '✅ Cambios guardados.'; msg2.className='adm-msg ok';
+        msg2.textContent = tt().admSaved; msg2.className='adm-msg ok';
         try{
           const sr = await fetch((window.__API_ORIGIN__||'')+'/api/public/settings', {cache:'no-store'});
           const s = await sr.json();
@@ -446,7 +446,7 @@
         setTimeout(close, 900);
       } else {
         beep('fail');
-        msg2.textContent = `⛔ No se pudo guardar (${r.error||'error'}).`; msg2.className='adm-msg err';
+        msg2.textContent = tt().admSaveFail(r.error||'error'); msg2.className='adm-msg err';
       }
       saveBtn.disabled = false;
     });

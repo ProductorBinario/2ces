@@ -249,34 +249,36 @@
   // Email: validación pragmática.
   const V_EM = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
+  function tt(){ return I18N[LANG]; }
   function validateField(kind, raw){
+    const T = tt();
     const v = (raw||'').trim();
     if(kind === 'wa'){
       const cleaned = v.replace(/[\s\-()]/g,'');
-      if(!cleaned) return {ok:false, error:'Requerido.'};
-      if(!V_WA.test(cleaned)) return {ok:false, error:'Solo dígitos, opcional +. 6 a 20.'};
+      if(!cleaned) return {ok:false, error:T.admErrReq};
+      if(!V_WA.test(cleaned)) return {ok:false, error:T.admErrWa};
       return {ok:true, value:cleaned};
     }
     if(kind === 'tg'){
       const cleaned = v.replace(/^@/,'');
-      if(!cleaned) return {ok:false, error:'Requerido.'};
-      if(!V_TG.test(cleaned)) return {ok:false, error:'5–32 letras, dígitos o _ (sin @).'};
+      if(!cleaned) return {ok:false, error:T.admErrReq};
+      if(!V_TG.test(cleaned)) return {ok:false, error:T.admErrTg};
       return {ok:true, value:cleaned};
     }
     if(kind === 'em'){
-      if(!v) return {ok:false, error:'Requerido.'};
-      if(v.length>200 || !V_EM.test(v)) return {ok:false, error:'Email no válido.'};
+      if(!v) return {ok:false, error:T.admErrReq};
+      if(v.length>200 || !V_EM.test(v)) return {ok:false, error:T.admErrEm};
       return {ok:true, value:v};
     }
     if(kind === 'fee'){
-      if(v === '') return {ok:false, error:'Requerido.'};
+      if(v === '') return {ok:false, error:T.admErrReq};
       const n = Number(v);
-      if(!Number.isFinite(n)) return {ok:false, error:'Solo números.'};
-      if(n <= 0) return {ok:false, error:'Debe ser mayor que 0.'};
-      if(n > 1000) return {ok:false, error:'Máximo 1000.'};
+      if(!Number.isFinite(n)) return {ok:false, error:T.admErrFeeNum};
+      if(n <= 0) return {ok:false, error:T.admErrFeeMin};
+      if(n > 1000) return {ok:false, error:T.admErrFeeMax};
       return {ok:true, value: Math.round(n*10000)/10000};
     }
-    return {ok:false, error:'Campo desconocido.'};
+    return {ok:false, error:''};
   }
 
   function bindLiveValidation(inputEl, errEl, kind){

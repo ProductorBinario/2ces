@@ -337,8 +337,8 @@
       role = null; phrases = []; adminStep = 0;
       stage1.hidden = false; stage2.hidden = true; stage3.hidden = true;
       keyInput.value=''; msg.textContent=''; msg.className='adm-msg';
-      title.textContent = 'Acceso';
-      submit.textContent = 'Validar';
+      title.textContent = tt().admTitleAccess;
+      submit.textContent = tt().admValidate;
       [fWa,fTg,fEm,fFee].forEach(el => el.classList.remove('invalid'));
       [eWa,eTg,eEm,eFee].forEach(el => el.textContent='');
       rotateOpenBtn.hidden = true;

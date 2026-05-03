@@ -461,15 +461,17 @@
     const rkHistory = document.getElementById('adm-history-list');
 
     function validateRotation(){
+      const T = tt();
       const vals = rkInputs.map(el => (el.value||'').trim());
       const lens = vals.map(v => v.length);
       let err = '';
-      if(lens.some(l => l < 3 || l > 64)) err = 'Cada frase debe tener entre 3 y 64 caracteres.';
-      else if(new Set(vals).size !== 3) err = 'Las 3 frases deben ser diferentes.';
+      if(lens.some(l => l < 3 || l > 64)) err = T.admErrLen;
+      else if(new Set(vals).size !== 3) err = T.admErrDiff;
       rkErr.textContent = err;
       const valid = !err;
       rkConfirm.hidden = !valid;
-      const ackOk = valid && (rkAck.value||'').trim().toLowerCase() === 'entendido';
+      const ackVal = (rkAck.value||'').trim().toLowerCase();
+      const ackOk = valid && (ackVal === 'entendido' || ackVal === 'understood');
       rotateSaveBtn.disabled = !ackOk;
       return valid;
     }
@@ -482,24 +484,24 @@
     });
 
     async function loadAdminInfo(){
-      rkStatus.textContent = 'Cargando estado…';
+      const T = tt();
+      rkStatus.textContent = T.admLoadingState;
       rkHistory.innerHTML = '';
       const r = await api('/api/public/admin-info', { masterPhrase: phrases[0] });
-      if(!r.ok){ rkStatus.textContent = '⚠️ No se pudo cargar el estado.'; return; }
-      const labels = ['Clave 1','Clave 2','Clave 3'];
+      if(!r.ok){ rkStatus.textContent = T.admStateFail; return; }
       rkStatus.innerHTML = r.rotated.map((ok,i) =>
-        `<span class="adm-pill ${ok?'ok':'warn'}">${labels[i]}: ${ok?'rotada ✓':'por defecto'}</span>`
+        `<span class="adm-pill ${ok?'ok':'warn'}">${T.admKey} ${i+1}: ${ok?T.admRotatedYes:T.admRotatedNo}</span>`
       ).join('');
       rkHistory.innerHTML = (r.history||[]).map(h => {
-        const d = new Date(h.created_at).toLocaleString();
+        const d = new Date(h.created_at).toLocaleString(LANG==='es'?'es-ES':'en-US');
         return `<li><b>${h.role}</b> · ${h.action} · ${d} · <code>${h.ip||'—'}</code></li>`;
-      }).join('') || '<li class="adm-empty">Sin registros.</li>';
+      }).join('') || `<li class="adm-empty">${T.admHistEmpty}</li>`;
     }
 
     rotateOpenBtn.addEventListener('click', () => {
       if(role !== 'master') return;
       stage2.hidden = true; stage3.hidden = false;
-      title.textContent = 'Cambiar claves del Admin';
+      title.textContent = tt().admRotateOpen;
       rkInputs.forEach(el => { el.value=''; el.type='password'; });
       if(rkShow) rkShow.checked = false;
       if(rkAck) rkAck.value = '';
@@ -512,24 +514,26 @@
     });
     rotateBackBtn.addEventListener('click', () => {
       stage3.hidden = true; stage2.hidden = false;
-      title.textContent = 'Panel · Master';
+      title.textContent = `${tt().admPanel} · Master`;
       msg3.textContent=''; msg3.className='adm-msg';
     });
     rotateSaveBtn.addEventListener('click', async () => {
       if(role !== 'master') return;
       if(!validateRotation()) return;
+      const ackVal = (rkAck.value||'').trim().toLowerCase();
+      if(ackVal !== 'entendido' && ackVal !== 'understood') return;
       const [p1,p2,p3] = rkInputs.map(el => el.value.trim());
       rotateSaveBtn.disabled = true;
-      msg3.textContent = 'Guardando...'; msg3.className='adm-msg';
+      msg3.textContent = tt().admSaving; msg3.className='adm-msg';
       const r = await api('/api/public/admin-rotate-keys', { masterPhrase: phrases[0], phrases:[p1,p2,p3] });
       if(r.ok){
         beep('ok');
-        msg3.textContent = '✅ Claves actualizadas.'; msg3.className='adm-msg ok';
+        msg3.textContent = tt().admRotated; msg3.className='adm-msg ok';
         setTimeout(close, 1100);
       } else {
         beep('fail');
-        const wait = r.retryAfter ? ` Espera ${r.retryAfter}s.` : '';
-        msg3.textContent = `⛔ No se pudo guardar (${r.error||'error'}).${wait}`;
+        const wait = r.retryAfter ? tt().admWait(r.retryAfter) : '';
+        msg3.textContent = tt().admSaveFail(r.error||'error') + wait;
         msg3.className='adm-msg err';
         rotateSaveBtn.disabled = false;
       }

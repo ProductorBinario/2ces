@@ -93,8 +93,19 @@
       url = `mailto:${CONTACT.email}?subject=${enc(subject)}&body=${enc(body)}`;
     }
     if(!url) return;
-    if(channel === 'email') window.location.href = url;
-    else window.open(url, '_blank', 'noopener,noreferrer');
+    if(channel === 'email'){
+      // mailto must escape the iframe to trigger the OS mail client
+      const a = document.createElement('a');
+      a.href = url;
+      a.target = '_top';
+      a.rel = 'noopener';
+      a.style.display = 'none';
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(() => a.remove(), 0);
+    } else {
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
   }
 
   function ctaHandler(e){

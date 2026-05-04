@@ -46,6 +46,12 @@ export type Database = {
           ces_fee: number
           email: string
           id: number
+          msg_email_body: string
+          msg_email_subject: string
+          msg_hero1: string
+          msg_hero2: string
+          msg_tg: string
+          msg_wa: string
           telegram: string
           updated_at: string
           whatsapp: string
@@ -57,6 +63,12 @@ export type Database = {
           ces_fee?: number
           email?: string
           id?: number
+          msg_email_body?: string
+          msg_email_subject?: string
+          msg_hero1?: string
+          msg_hero2?: string
+          msg_tg?: string
+          msg_wa?: string
           telegram?: string
           updated_at?: string
           whatsapp?: string
@@ -68,6 +80,12 @@ export type Database = {
           ces_fee?: number
           email?: string
           id?: number
+          msg_email_body?: string
+          msg_email_subject?: string
+          msg_hero1?: string
+          msg_hero2?: string
+          msg_tg?: string
+          msg_wa?: string
           telegram?: string
           updated_at?: string
           whatsapp?: string

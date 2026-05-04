@@ -425,6 +425,15 @@
     submit.addEventListener('click', tryPhrase);
     keyInput.addEventListener('keydown', e => { if(e.key==='Enter'){ e.preventDefault(); tryPhrase(); }});
 
+    // Message textareas (prefilled messages editor)
+    const fMsgHero1 = document.getElementById('adm-msg-hero1');
+    const fMsgHero2 = document.getElementById('adm-msg-hero2');
+    const fMsgWa    = document.getElementById('adm-msg-wa');
+    const fMsgTg    = document.getElementById('adm-msg-tg');
+    const fMsgEmSub = document.getElementById('adm-msg-em-sub');
+    const fMsgEmBody= document.getElementById('adm-msg-em-body');
+    const eMsgs     = document.getElementById('adm-err-msgs');
+
     async function enterStage2(roleName){
       stage1.hidden = true; stage2.hidden = false; stage3.hidden = true;
       title.textContent = `${tt().admPanel} · ${roleName}`;
@@ -439,8 +448,16 @@
         document.getElementById('adm-cur-em').textContent  = A(s.email);
         document.getElementById('adm-cur-fee').textContent = A(s.ces_fee);
         fWa.value = s.whatsapp; fTg.value = s.telegram; fEm.value = s.email; fFee.value = s.ces_fee;
+        // Prefilled messages
+        fMsgHero1.value = s.msg_hero1 || '';
+        fMsgHero2.value = s.msg_hero2 || '';
+        fMsgWa.value    = s.msg_wa || '';
+        fMsgTg.value    = s.msg_tg || '';
+        fMsgEmSub.value = s.msg_email_subject || '';
+        fMsgEmBody.value= s.msg_email_body || '';
         Object.values(validators).forEach(fn => fn());
       }catch(_){}
+      if(eMsgs) eMsgs.textContent = '';
       msg2.textContent=''; msg2.className='adm-msg';
     }
 
@@ -451,9 +468,29 @@
         msg2.textContent = tt().admReviewFields; msg2.className='adm-msg err';
         return;
       }
+      // Validate messages: non-empty trimmed, length cap.
+      const msgVals = {
+        msg_hero1: (fMsgHero1.value||'').trim(),
+        msg_hero2: (fMsgHero2.value||'').trim(),
+        msg_wa: (fMsgWa.value||'').trim(),
+        msg_tg: (fMsgTg.value||'').trim(),
+        msg_email_subject: (fMsgEmSub.value||'').trim(),
+        msg_email_body: (fMsgEmBody.value||'').trim(),
+      };
+      const anyEmpty = Object.values(msgVals).some(v => !v);
+      if(anyEmpty){
+        beep('fail');
+        if(eMsgs) eMsgs.textContent = tt().admErrMsgReq;
+        msg2.textContent = tt().admReviewFields; msg2.className='adm-msg err';
+        return;
+      }
+      if(eMsgs) eMsgs.textContent = '';
       saveBtn.disabled = true;
       msg2.textContent = tt().admSaving; msg2.className='adm-msg';
-      const settings = { whatsapp: rWa.value, telegram: rTg.value, email: rEm.value, ces_fee: rFee.value };
+      const settings = {
+        whatsapp: rWa.value, telegram: rTg.value, email: rEm.value, ces_fee: rFee.value,
+        ...msgVals,
+      };
       const r = await api('/api/public/admin-update', {role, phrases, settings});
       if(r.ok){
         beep('ok');
@@ -463,6 +500,12 @@
           const s = await sr.json();
           if(Number.isFinite(s.ces_fee) && s.ces_fee>0){ CES_FEE = s.ces_fee; CFG.CES_FEE = s.ces_fee; }
           CONTACT.wa = s.whatsapp; CONTACT.tg = s.telegram; CONTACT.email = s.email;
+          MSGS.hero1 = s.msg_hero1 || '';
+          MSGS.hero2 = s.msg_hero2 || '';
+          MSGS.wa = s.msg_wa || '';
+          MSGS.tg = s.msg_tg || '';
+          MSGS.emailSub = s.msg_email_subject || '';
+          MSGS.emailBody = s.msg_email_body || '';
           renderMarket();
         }catch(_){}
         setTimeout(close, 900);

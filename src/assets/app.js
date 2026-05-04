@@ -221,6 +221,12 @@
         if(typeof s.whatsapp === 'string' && s.whatsapp) CONTACT.wa = s.whatsapp;
         if(typeof s.telegram === 'string' && s.telegram) CONTACT.tg = s.telegram;
         if(typeof s.email === 'string' && s.email) CONTACT.email = s.email;
+        if(typeof s.msg_hero1 === 'string') MSGS.hero1 = s.msg_hero1;
+        if(typeof s.msg_hero2 === 'string') MSGS.hero2 = s.msg_hero2;
+        if(typeof s.msg_wa === 'string') MSGS.wa = s.msg_wa;
+        if(typeof s.msg_tg === 'string') MSGS.tg = s.msg_tg;
+        if(typeof s.msg_email_subject === 'string') MSGS.emailSub = s.msg_email_subject;
+        if(typeof s.msg_email_body === 'string') MSGS.emailBody = s.msg_email_body;
         renderMarket();
       })
       .catch(()=>{});

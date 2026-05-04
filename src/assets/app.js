@@ -181,7 +181,7 @@
     const msg = $('#msg'), counter = $('#msg-counter');
     msg?.addEventListener('input', () => { counter.textContent = `${msg.value.length} / 1000`; });
 
-    $('#wa-float')?.addEventListener('click', (e) => { e.preventDefault(); openChannel('wa', I18N[LANG].msg.wa); });
+    $('#wa-float')?.addEventListener('click', (e) => { e.preventDefault(); openChannel('wa', MSGS.wa || I18N[LANG].msg.wa); });
     const footer = $('footer'), waFloat = $('#wa-float');
     function keepFloatAboveFooter(){
       if(!footer || !waFloat) return;

@@ -263,12 +263,22 @@
 #adm-modal h3{margin:0 0 12px;font-size:18px;letter-spacing:.2px}
 #adm-modal label{display:block;font-size:12px;opacity:.85;margin:10px 0 4px}
 #adm-modal label small{opacity:.6;font-weight:400;margin-left:6px}
-#adm-modal input{
+#adm-modal input,
+#adm-modal textarea{
   width:100%;box-sizing:border-box;padding:10px 12px;border-radius:10px;
   border:1px solid color-mix(in oklab, var(--fg,#e6edf7) 14%, transparent);
   background:rgba(255,255,255,.04);color:inherit;font:inherit;outline:none;
 }
-#adm-modal input:focus{border-color:var(--primary,#1d5cff)}
+#adm-modal textarea{resize:vertical;min-height:60px;line-height:1.4}
+#adm-modal input:focus,
+#adm-modal textarea:focus{border-color:var(--primary,#1d5cff)}
+#adm-modal textarea.invalid{border-color:#ff6b6b}
+#adm-modal .adm-section-title{
+  font-size:13px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;
+  margin:18px 0 6px;color:var(--primary,#1d5cff);
+  border-top:1px solid color-mix(in oklab, var(--fg,#e6edf7) 10%, transparent);
+  padding-top:14px;
+}
 #adm-modal .btn{width:100%;margin-top:14px}
 #adm-modal .adm-secondary{margin-top:8px;opacity:.85}
 #adm-modal .adm-hint{font-size:13px;opacity:.78;margin:0 0 10px}

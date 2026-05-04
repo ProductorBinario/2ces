@@ -26,7 +26,22 @@ type Settings = {
   telegram?: unknown;
   email?: unknown;
   ces_fee?: unknown;
+  msg_wa?: unknown;
+  msg_tg?: unknown;
+  msg_email_subject?: unknown;
+  msg_email_body?: unknown;
+  msg_hero1?: unknown;
+  msg_hero2?: unknown;
 };
+
+const MSG_MAX = 2000;
+const SUBJ_MAX = 200;
+function validMsg(v: unknown, max: number): string | null {
+  if (typeof v !== "string") return null;
+  const t = v.trim();
+  if (!t || t.length > max) return null;
+  return t;
+}
 
 export const Route = createFileRoute("/api/public/admin-update")({
   server: {
@@ -91,6 +106,22 @@ export const Route = createFileRoute("/api/public/admin-update")({
           if (!Number.isFinite(fee) || fee <= 0 || fee > 1000)
             return json({ ok: false, error: "invalid_ces_fee" }, 400);
           patch.ces_fee = Math.round(fee * 10000) / 10000;
+        }
+
+        const msgFields: Array<[keyof Settings, string, number]> = [
+          ["msg_wa", "msg_wa", MSG_MAX],
+          ["msg_tg", "msg_tg", MSG_MAX],
+          ["msg_email_subject", "msg_email_subject", SUBJ_MAX],
+          ["msg_email_body", "msg_email_body", MSG_MAX],
+          ["msg_hero1", "msg_hero1", MSG_MAX],
+          ["msg_hero2", "msg_hero2", MSG_MAX],
+        ];
+        for (const [key, col, max] of msgFields) {
+          const raw = s[key];
+          if (raw === undefined) continue;
+          const v = validMsg(raw, max);
+          if (v === null) return json({ ok: false, error: `invalid_${col}` }, 400);
+          patch[col] = v;
         }
 
         if (Object.keys(patch).length === 0)

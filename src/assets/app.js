@@ -3,6 +3,8 @@
   let { CES_FEE, CONTACT, I18N } = CFG;
   const { MarketState, marketValues, fetchTRX, loadCachedMarket, applyTRXPrice } = window.TWOCES_PRICE_SERVICE;
   let LANG = 'es';
+  // Server-managed prefilled messages. Empty string => fall back to I18N defaults.
+  const MSGS = { hero1:'', hero2:'', wa:'', tg:'', emailSub:'', emailBody:'' };
 
   const $  = (s, r=document) => r.querySelector(s);
   const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));

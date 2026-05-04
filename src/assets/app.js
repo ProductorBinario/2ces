@@ -90,8 +90,8 @@
       url = `https://t.me/${handle}` + (m ? `?text=${enc(m)}` : '');
     } else if(channel === 'email'){
       const dict = I18N[LANG].msg;
-      const subject = dict.emailSub;
-      const body = m || dict.emailBody;
+      const subject = MSGS.emailSub || dict.emailSub;
+      const body = m || MSGS.emailBody || dict.emailBody;
       url = `mailto:${CONTACT.email}?subject=${enc(subject)}&body=${enc(body)}`;
     }
     if(!url) return;
@@ -115,13 +115,16 @@
     e.preventDefault();
     const dict = I18N[LANG].msg;
     const kind = btn.dataset.cta;
-    if(kind === 'hero1') return openChannel('wa', dict.hero1);
+    if(kind === 'hero1') return openChannel('wa', MSGS.hero1 || dict.hero1);
     if(kind === 'hero2' || kind === 'calc'){
       const tx = getTx() || 10000;
-      return openChannel('wa', dict.hero2(fmtInt(tx)));
+      const txStr = fmtInt(tx);
+      const tpl = MSGS.hero2 || '';
+      const msg = tpl ? tpl.replace(/\{n\}/g, txStr) : dict.hero2(txStr);
+      return openChannel('wa', msg);
     }
-    if(kind === 'wa') return openChannel('wa', dict.wa);
-    if(kind === 'tg') return openChannel('tg', dict.tg);
+    if(kind === 'wa') return openChannel('wa', MSGS.wa || dict.wa);
+    if(kind === 'tg') return openChannel('tg', MSGS.tg || dict.tg);
     if(kind === 'email') return openChannel('email', '');
     if(kind === 'form-wa'){
       const t = ($('#msg')?.value || '').trim();

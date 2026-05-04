@@ -108,6 +108,22 @@ export const Route = createFileRoute("/api/public/admin-update")({
           patch.ces_fee = Math.round(fee * 10000) / 10000;
         }
 
+        const msgFields: Array<[keyof Settings, string, number]> = [
+          ["msg_wa", "msg_wa", MSG_MAX],
+          ["msg_tg", "msg_tg", MSG_MAX],
+          ["msg_email_subject", "msg_email_subject", SUBJ_MAX],
+          ["msg_email_body", "msg_email_body", MSG_MAX],
+          ["msg_hero1", "msg_hero1", MSG_MAX],
+          ["msg_hero2", "msg_hero2", MSG_MAX],
+        ];
+        for (const [key, col, max] of msgFields) {
+          const raw = s[key];
+          if (raw === undefined) continue;
+          const v = validMsg(raw, max);
+          if (v === null) return json({ ok: false, error: `invalid_${col}` }, 400);
+          patch[col] = v;
+        }
+
         if (Object.keys(patch).length === 0)
           return json({ ok: false, error: "no_changes" }, 400);
 

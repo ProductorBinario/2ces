@@ -70,7 +70,7 @@
       admPanel:'Panel',
       admEditHint:'Edita los valores y guarda los cambios.',
       admMsgsTitle:'Mensajes prefijados',
-      admMsgsHint:'Edita los mensajes que se envían por cada canal. En "CTA ahorro" usa <code>{n}</code> como marcador del número de transacciones.',
+      admMsgsHint:'Edita los mensajes que se envían por cada canal. Marcadores: <code>{fee}</code>, <code>{wa}</code>, <code>{tg}</code>, <code>{email}</code> y <code>{n}</code> (nº de transacciones, solo en CTA ahorro). Se sustituyen automáticamente al actualizar los valores.',
       admMsgHero1:'Mensaje CTA principal (WhatsApp)',
       admMsgHero2:'Mensaje CTA ahorro (WhatsApp · usa {n})',
       admMsgWa:'Mensaje WhatsApp directo',

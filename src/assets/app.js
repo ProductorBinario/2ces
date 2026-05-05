@@ -79,8 +79,20 @@
     return Boolean(first && second && first !== second && firstMid !== secondMid && firstSave !== secondSave);
   }
 
+  function hydrate(tpl, extra){
+    if(typeof tpl !== 'string' || !tpl) return tpl || '';
+    const map = {
+      fee: fmtN(CES_FEE, 2),
+      wa: CONTACT.wa || '',
+      tg: CONTACT.tg ? '@'+CONTACT.tg.replace(/^@/,'') : '',
+      email: CONTACT.email || '',
+      ...(extra||{}),
+    };
+    return tpl.replace(/\{(fee|wa|tg|email|n)\}/g, (_,k) => (map[k] != null ? String(map[k]) : ''));
+  }
+
   function openChannel(channel, message){
-    const m = (message||'').trim();
+    const m = hydrate((message||'').trim());
     let url = '';
     if(channel === 'wa'){
       const num = CONTACT.wa.replace(/[^\d]/g,'');
@@ -90,8 +102,8 @@
       url = `https://t.me/${handle}` + (m ? `?text=${enc(m)}` : '');
     } else if(channel === 'email'){
       const dict = I18N[LANG].msg;
-      const subject = MSGS.emailSub || dict.emailSub;
-      const body = m || MSGS.emailBody || dict.emailBody;
+      const subject = hydrate(MSGS.emailSub || dict.emailSub);
+      const body = m || hydrate(MSGS.emailBody || dict.emailBody);
       url = `mailto:${CONTACT.email}?subject=${enc(subject)}&body=${enc(body)}`;
     }
     if(!url) return;
@@ -120,7 +132,7 @@
       const tx = getTx() || 10000;
       const txStr = fmtInt(tx);
       const tpl = MSGS.hero2 || '';
-      const msg = tpl ? tpl.replace(/\{n\}/g, txStr) : dict.hero2(txStr);
+      const msg = tpl ? hydrate(tpl, {n: txStr}) : dict.hero2(txStr);
       return openChannel('wa', msg);
     }
     if(kind === 'wa') return openChannel('wa', MSGS.wa || dict.wa);

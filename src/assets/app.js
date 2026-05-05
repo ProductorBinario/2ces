@@ -102,8 +102,8 @@
       url = `https://t.me/${handle}` + (m ? `?text=${enc(m)}` : '');
     } else if(channel === 'email'){
       const dict = I18N[LANG].msg;
-      const subject = MSGS.emailSub || dict.emailSub;
-      const body = m || MSGS.emailBody || dict.emailBody;
+      const subject = hydrate(MSGS.emailSub || dict.emailSub);
+      const body = m || hydrate(MSGS.emailBody || dict.emailBody);
       url = `mailto:${CONTACT.email}?subject=${enc(subject)}&body=${enc(body)}`;
     }
     if(!url) return;

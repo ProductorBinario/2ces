@@ -186,7 +186,7 @@
       admPanel:'Panel',
       admEditHint:'Edit the values and save changes.',
       admMsgsTitle:'Prefilled messages',
-      admMsgsHint:'Edit the messages sent through each channel. In "Savings CTA" use <code>{n}</code> as the placeholder for the number of transactions.',
+      admMsgsHint:'Edit the messages sent through each channel. Placeholders: <code>{fee}</code>, <code>{wa}</code>, <code>{tg}</code>, <code>{email}</code> and <code>{n}</code> (transaction count, savings CTA only). They are auto-replaced when you update the values.',
       admMsgHero1:'Primary CTA message (WhatsApp)',
       admMsgHero2:'Savings CTA message (WhatsApp · use {n})',
       admMsgWa:'Direct WhatsApp message',

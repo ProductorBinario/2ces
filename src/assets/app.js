@@ -132,7 +132,7 @@
       const tx = getTx() || 10000;
       const txStr = fmtInt(tx);
       const tpl = MSGS.hero2 || '';
-      const msg = tpl ? tpl.replace(/\{n\}/g, txStr) : dict.hero2(txStr);
+      const msg = tpl ? hydrate(tpl, {n: txStr}) : dict.hero2(txStr);
       return openChannel('wa', msg);
     }
     if(kind === 'wa') return openChannel('wa', MSGS.wa || dict.wa);

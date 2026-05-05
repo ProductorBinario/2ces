@@ -79,8 +79,20 @@
     return Boolean(first && second && first !== second && firstMid !== secondMid && firstSave !== secondSave);
   }
 
+  function hydrate(tpl, extra){
+    if(typeof tpl !== 'string' || !tpl) return tpl || '';
+    const map = {
+      fee: fmtN(CES_FEE, 2),
+      wa: CONTACT.wa || '',
+      tg: CONTACT.tg ? '@'+CONTACT.tg.replace(/^@/,'') : '',
+      email: CONTACT.email || '',
+      ...(extra||{}),
+    };
+    return tpl.replace(/\{(fee|wa|tg|email|n)\}/g, (_,k) => (map[k] != null ? String(map[k]) : ''));
+  }
+
   function openChannel(channel, message){
-    const m = (message||'').trim();
+    const m = hydrate((message||'').trim());
     let url = '';
     if(channel === 'wa'){
       const num = CONTACT.wa.replace(/[^\d]/g,'');

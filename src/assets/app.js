@@ -465,6 +465,7 @@
       title.textContent = `${tt().admPanel} · ${roleName}`;
       roleLabel.textContent = tt().admEditHint;
       rotateOpenBtn.hidden = (role !== 'master');
+      if(rotateMasterOpenBtn) rotateMasterOpenBtn.hidden = (role !== 'master');
       try{
         const r = await fetch((window.__API_ORIGIN__||'')+'/api/public/settings', {cache:'no-store'});
         const s = await r.json();

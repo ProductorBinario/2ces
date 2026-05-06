@@ -371,16 +371,28 @@
 
     function reset(){
       role = null; phrases = []; adminStep = 0;
+      const stage4 = document.getElementById('adm-stage-4');
       stage1.hidden = false; stage2.hidden = true; stage3.hidden = true;
-      keyInput.value=''; msg.textContent=''; msg.className='adm-msg';
+      if(stage4) stage4.hidden = true;
+      keyInput.value=''; keyInput.type='password';
+      if(keyEyeBtn) keyEyeBtn.textContent = '👁';
+      msg.textContent=''; msg.className='adm-msg';
       title.textContent = tt().admTitleAccess;
       submit.textContent = tt().admValidate;
       [fWa,fTg,fEm,fFee].forEach(el => el.classList.remove('invalid'));
       [eWa,eTg,eEm,eFee].forEach(el => el.textContent='');
       rotateOpenBtn.hidden = true;
+      if(rotateMasterOpenBtn) rotateMasterOpenBtn.hidden = true;
     }
     function open(){ reset(); overlay.hidden=false; setTimeout(()=>keyInput.focus(),20); }
     function close(){ overlay.hidden=true; reset(); }
+
+    keyEyeBtn?.addEventListener('click', () => {
+      const isPass = keyInput.type === 'password';
+      keyInput.type = isPass ? 'text' : 'password';
+      keyEyeBtn.textContent = isPass ? '🙈' : '👁';
+      keyInput.focus();
+    });
 
     trigger.addEventListener('click', open);
     closeBtn.addEventListener('click', close);

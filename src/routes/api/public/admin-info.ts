@@ -2,8 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 import {
   ADMIN_HASHES_DEFAULT,
-  MASTER_HASH,
   clientIP,
+  getMasterHash,
   hashEq,
   rateLimit,
   sha,

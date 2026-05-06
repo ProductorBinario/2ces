@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
-  MASTER_HASH,
   clientIP,
   getAdminHashes,
+  getMasterHash,
   hashEq,
   rateLimit,
   sha,

@@ -236,7 +236,10 @@
     <h3 id="adm-title" data-i18n="admTitleAccess">Acceso</h3>
     <div id="adm-stage-1">
       <p class="adm-hint" data-i18n="admStage1Hint">Ingresa la frase de acceso.</p>
-      <input id="adm-key" type="password" autocomplete="off" spellcheck="false" />
+      <div class="adm-pass-wrap">
+        <input id="adm-key" type="password" autocomplete="off" spellcheck="false" />
+        <button id="adm-key-eye" type="button" class="adm-eye" aria-label="Mostrar/Ocultar" data-i18n-attr="aria-label|admShowPass">👁</button>
+      </div>
       <div id="adm-msg" class="adm-msg" aria-live="polite"></div>
       <button id="adm-submit" type="button" class="btn btn-primary" data-i18n="admValidate">Validar</button>
     </div>
@@ -280,6 +283,7 @@
       <div id="adm-msg2" class="adm-msg" aria-live="polite"></div>
       <button id="adm-save" type="button" class="btn btn-primary" data-i18n="admSave">Guardar cambios</button>
       <button id="adm-rotate-open" type="button" class="btn btn-ghost adm-secondary" data-i18n="admRotateOpen" hidden>Cambiar claves del Admin</button>
+      <button id="adm-rotate-master-open" type="button" class="btn btn-ghost adm-secondary" data-i18n="admRotateMasterOpen" hidden>Cambiar clave Master</button>
     </div>
     <div id="adm-stage-3" hidden>
       <p class="adm-hint" data-i18n="admStage3Hint">Define las 3 nuevas frases del Admin (paso 1 → 2 → 3). Mínimo 3 caracteres, distintas entre sí.</p>
@@ -305,6 +309,25 @@
         <summary data-i18n="admHistory">Historial de auditoría (últimas 10)</summary>
         <ul id="adm-history-list"></ul>
       </details>
+    </div>
+    <div id="adm-stage-4" hidden>
+      <p class="adm-hint" data-i18n="admStage4Hint">Define la nueva frase Master. Mínimo 3 caracteres y distinta a la actual.</p>
+      <div class="adm-status" id="adm-master-status" aria-live="polite"></div>
+      <div class="adm-row-toggle">
+        <label class="adm-check"><input type="checkbox" id="adm-mk-show" /> <span data-i18n="admShowKeys">Mostrar claves</span></label>
+      </div>
+      <label for="adm-mk-new" data-i18n="admMasterNew">Nueva frase Master</label>
+      <input id="adm-mk-new" type="password" autocomplete="off" spellcheck="false" />
+      <label for="adm-mk-new2" data-i18n="admMasterNew2">Repite la nueva frase</label>
+      <input id="adm-mk-new2" type="password" autocomplete="off" spellcheck="false" />
+      <p class="adm-err" id="adm-err-mk"></p>
+      <div class="adm-confirm" id="adm-mk-confirm" hidden>
+        <p class="adm-hint" data-i18n-html="admAckHint">Para confirmar el cambio, escribe <b>Entendido</b>.</p>
+        <input id="adm-mk-ack" type="text" autocomplete="off" spellcheck="false" placeholder="Entendido" data-i18n-attr="placeholder|admAckPh" />
+      </div>
+      <div id="adm-msg4" class="adm-msg" aria-live="polite"></div>
+      <button id="adm-master-save" type="button" class="btn btn-primary" data-i18n="admMasterSave" disabled>Guardar nueva clave Master</button>
+      <button id="adm-master-back" type="button" class="btn btn-ghost adm-secondary" data-i18n="admBack">Volver</button>
     </div>
   </div>
 </div>

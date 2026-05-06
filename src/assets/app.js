@@ -346,6 +346,8 @@
     const rotateOpenBtn = document.getElementById('adm-rotate-open');
     const rotateSaveBtn = document.getElementById('adm-rotate-save');
     const rotateBackBtn = document.getElementById('adm-rotate-back');
+    const rotateMasterOpenBtn = document.getElementById('adm-rotate-master-open');
+    const keyEyeBtn = document.getElementById('adm-key-eye');
 
     const fWa  = document.getElementById('adm-wa');
     const fTg  = document.getElementById('adm-tg');
@@ -369,16 +371,28 @@
 
     function reset(){
       role = null; phrases = []; adminStep = 0;
+      const stage4 = document.getElementById('adm-stage-4');
       stage1.hidden = false; stage2.hidden = true; stage3.hidden = true;
-      keyInput.value=''; msg.textContent=''; msg.className='adm-msg';
+      if(stage4) stage4.hidden = true;
+      keyInput.value=''; keyInput.type='password';
+      if(keyEyeBtn) keyEyeBtn.textContent = '👁';
+      msg.textContent=''; msg.className='adm-msg';
       title.textContent = tt().admTitleAccess;
       submit.textContent = tt().admValidate;
       [fWa,fTg,fEm,fFee].forEach(el => el.classList.remove('invalid'));
       [eWa,eTg,eEm,eFee].forEach(el => el.textContent='');
       rotateOpenBtn.hidden = true;
+      if(rotateMasterOpenBtn) rotateMasterOpenBtn.hidden = true;
     }
     function open(){ reset(); overlay.hidden=false; setTimeout(()=>keyInput.focus(),20); }
     function close(){ overlay.hidden=true; reset(); }
+
+    keyEyeBtn?.addEventListener('click', () => {
+      const isPass = keyInput.type === 'password';
+      keyInput.type = isPass ? 'text' : 'password';
+      keyEyeBtn.textContent = isPass ? '🙈' : '👁';
+      keyInput.focus();
+    });
 
     trigger.addEventListener('click', open);
     closeBtn.addEventListener('click', close);
@@ -451,6 +465,7 @@
       title.textContent = `${tt().admPanel} · ${roleName}`;
       roleLabel.textContent = tt().admEditHint;
       rotateOpenBtn.hidden = (role !== 'master');
+      if(rotateMasterOpenBtn) rotateMasterOpenBtn.hidden = (role !== 'master');
       try{
         const r = await fetch((window.__API_ORIGIN__||'')+'/api/public/settings', {cache:'no-store'});
         const s = await r.json();
@@ -613,6 +628,96 @@
         msg3.textContent = tt().admSaveFail(r.error||'error') + wait;
         msg3.className='adm-msg err';
         rotateSaveBtn.disabled = false;
+      }
+    });
+
+    // ===== Rotación de la frase Master (solo Master) =====
+    const stage4 = document.getElementById('adm-stage-4');
+    const mkNew  = document.getElementById('adm-mk-new');
+    const mkNew2 = document.getElementById('adm-mk-new2');
+    const mkErr  = document.getElementById('adm-err-mk');
+    const mkShow = document.getElementById('adm-mk-show');
+    const mkConfirm = document.getElementById('adm-mk-confirm');
+    const mkAck  = document.getElementById('adm-mk-ack');
+    const mkStatus = document.getElementById('adm-master-status');
+    const msg4   = document.getElementById('adm-msg4');
+    const masterSaveBtn = document.getElementById('adm-master-save');
+    const masterBackBtn = document.getElementById('adm-master-back');
+
+    function validateMaster(){
+      const T = tt();
+      const a = (mkNew?.value||'').trim();
+      const b = (mkNew2?.value||'').trim();
+      const cur = phrases[0] || '';
+      let err = '';
+      if(a.length < 3 || a.length > 64) err = T.admErrLen;
+      else if(a !== b) err = T.admErrMasterMatch;
+      else if(a === cur) err = T.admErrMasterSame;
+      if(mkErr) mkErr.textContent = err;
+      const valid = !err;
+      if(mkConfirm) mkConfirm.hidden = !valid;
+      const ackVal = (mkAck?.value||'').trim().toLowerCase();
+      const ackOk = valid && (ackVal === 'entendido' || ackVal === 'understood');
+      if(masterSaveBtn) masterSaveBtn.disabled = !ackOk;
+      return valid;
+    }
+
+    [mkNew, mkNew2, mkAck].forEach(el => el?.addEventListener('input', validateMaster));
+    mkShow?.addEventListener('change', () => {
+      const t = mkShow.checked ? 'text' : 'password';
+      [mkNew, mkNew2].forEach(el => { if(el) el.type = t; });
+    });
+
+    rotateMasterOpenBtn?.addEventListener('click', async () => {
+      if(role !== 'master' || !stage4) return;
+      stage2.hidden = true; stage3.hidden = true; stage4.hidden = false;
+      title.textContent = tt().admRotateMasterOpen;
+      [mkNew, mkNew2].forEach(el => { if(el){ el.value=''; el.type='password'; } });
+      if(mkShow) mkShow.checked = false;
+      if(mkAck) mkAck.value = '';
+      if(mkErr) mkErr.textContent = '';
+      if(mkConfirm) mkConfirm.hidden = true;
+      if(masterSaveBtn) masterSaveBtn.disabled = true;
+      if(msg4){ msg4.textContent=''; msg4.className='adm-msg'; }
+      const T = tt();
+      if(mkStatus){
+        mkStatus.textContent = T.admLoadingState;
+        const r = await api('/api/public/admin-info', { masterPhrase: phrases[0] });
+        if(r.ok){
+          mkStatus.innerHTML = `<span class="adm-pill ${r.masterRotated?'ok':'warn'}">${T.admMasterLabel}: ${r.masterRotated?T.admMasterRotated:T.admMasterDefault}</span>`;
+        } else {
+          mkStatus.textContent = T.admStateFail;
+        }
+      }
+      setTimeout(() => mkNew?.focus(), 20);
+    });
+
+    masterBackBtn?.addEventListener('click', () => {
+      if(!stage4) return;
+      stage4.hidden = true; stage2.hidden = false;
+      title.textContent = `${tt().admPanel} · Master`;
+      if(msg4){ msg4.textContent=''; msg4.className='adm-msg'; }
+    });
+
+    masterSaveBtn?.addEventListener('click', async () => {
+      if(role !== 'master') return;
+      if(!validateMaster()) return;
+      const newPhrase = (mkNew?.value||'').trim();
+      masterSaveBtn.disabled = true;
+      if(msg4){ msg4.textContent = tt().admSaving; msg4.className='adm-msg'; }
+      const r = await api('/api/public/admin-rotate-master', { masterPhrase: phrases[0], newPhrase });
+      if(r.ok){
+        beep('ok');
+        if(msg4){ msg4.textContent = tt().admRotated; msg4.className='adm-msg ok'; }
+        setTimeout(close, 1100);
+      } else {
+        beep('fail');
+        const wait = r.retryAfter ? tt().admWait(r.retryAfter) : '';
+        if(msg4){
+          msg4.textContent = tt().admSaveFail(r.error||'error') + wait;
+          msg4.className='adm-msg err';
+        }
+        masterSaveBtn.disabled = false;
       }
     });
   }

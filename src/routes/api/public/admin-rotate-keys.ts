@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 import {
-  MASTER_HASH,
   clientIP,
+  getMasterHash,
   hashEq,
   rateLimit,
   sha,
@@ -64,7 +64,8 @@ export const Route = createFileRoute("/api/public/admin-rotate-keys")({
         }
 
         const master = typeof body.masterPhrase === "string" ? body.masterPhrase.trim() : "";
-        if (!master || !hashEq(sha(master), MASTER_HASH)) {
+        const masterHash = await getMasterHash();
+        if (!master || !hashEq(sha(master), masterHash)) {
           registerFail(ip);
           const l = checkLockout(ip);
           return json({ ok: false, error: "unauthorized", retryAfter: l.retryAfter }, 401);

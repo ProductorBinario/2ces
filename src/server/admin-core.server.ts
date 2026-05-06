@@ -30,6 +30,21 @@ export const hashEq = (a: string, b: string) => {
 const isHex64 = (s: unknown): s is string =>
   typeof s === "string" && /^[a-f0-9]{64}$/.test(s);
 
+// Lee el hash vigente del Master (rotado o por defecto).
+export async function getMasterHash(): Promise<string> {
+  try {
+    const { data } = await supabaseAdmin
+      .from("app_settings")
+      .select("master_hash")
+      .eq("id", 1)
+      .maybeSingle();
+    const v = (data as { master_hash?: unknown } | null)?.master_hash;
+    return isHex64(v) ? v : MASTER_HASH;
+  } catch {
+    return MASTER_HASH;
+  }
+}
+
 // Lee los hashes vigentes del Admin (rotados o por defecto).
 export async function getAdminHashes(): Promise<[string, string, string]> {
   try {

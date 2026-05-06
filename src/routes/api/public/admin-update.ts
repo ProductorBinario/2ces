@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 import {
-  MASTER_HASH,
   clientIP,
   getAdminHashes,
+  getMasterHash,
   hashEq,
   rateLimit,
   sha,
@@ -67,7 +67,8 @@ export const Route = createFileRoute("/api/public/admin-update")({
 
         // Re-verify auth server-side, never trust the client.
         if (role === "master") {
-          if (phrases.length !== 1 || !hashEq(sha(phrases[0]), MASTER_HASH)) {
+          const masterHash = await getMasterHash();
+          if (phrases.length !== 1 || !hashEq(sha(phrases[0]), masterHash)) {
             return json({ ok: false, error: "unauthorized" }, 401);
           }
         } else {

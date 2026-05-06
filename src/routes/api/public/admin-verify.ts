@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
-  MASTER_HASH,
   clientIP,
   getAdminHashes,
+  getMasterHash,
   hashEq,
   rateLimit,
   sha,
@@ -43,7 +43,8 @@ export const Route = createFileRoute("/api/public/admin-verify")({
         const h = sha(phrase);
 
         if (role === "master") {
-          return json({ ok: hashEq(h, MASTER_HASH) });
+          const masterHash = await getMasterHash();
+          return json({ ok: hashEq(h, masterHash) });
         }
 
         const step = Number(body.step);

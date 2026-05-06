@@ -2,8 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 import {
   ADMIN_HASHES_DEFAULT,
-  MASTER_HASH,
   clientIP,
+  getMasterHash,
   hashEq,
   rateLimit,
   sha,
@@ -30,13 +30,14 @@ export const Route = createFileRoute("/api/public/admin-info")({
         try { body = await request.json(); } catch { return json({ ok: false, error: "invalid_json" }, 400); }
 
         const master = typeof body.masterPhrase === "string" ? body.masterPhrase.trim() : "";
-        if (!master || !hashEq(sha(master), MASTER_HASH)) {
+        const masterHash = await getMasterHash();
+        if (!master || !hashEq(sha(master), masterHash)) {
           return json({ ok: false, error: "unauthorized" }, 401);
         }
 
         const { data: s } = await supabaseAdmin
           .from("app_settings")
-          .select("admin_hash_1,admin_hash_2,admin_hash_3")
+          .select("admin_hash_1,admin_hash_2,admin_hash_3,master_hash")
           .eq("id", 1)
           .maybeSingle();
 
@@ -49,6 +50,7 @@ export const Route = createFileRoute("/api/public/admin-info")({
           isRotated(s?.admin_hash_2, 1),
           isRotated(s?.admin_hash_3, 2),
         ];
+        const masterRotated = !!(s as { master_hash?: string } | null)?.master_hash;
 
         const { data: hist } = await supabaseAdmin
           .from("admin_audit")
@@ -56,7 +58,7 @@ export const Route = createFileRoute("/api/public/admin-info")({
           .order("created_at", { ascending: false })
           .limit(10);
 
-        return json({ ok: true, rotated, history: hist ?? [] });
+        return json({ ok: true, rotated, masterRotated, history: hist ?? [] });
       },
     },
   },

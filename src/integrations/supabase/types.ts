@@ -46,6 +46,7 @@ export type Database = {
           ces_fee: number
           email: string
           id: number
+          master_hash: string | null
           msg_email_body: string
           msg_email_subject: string
           msg_hero1: string
@@ -63,6 +64,7 @@ export type Database = {
           ces_fee?: number
           email?: string
           id?: number
+          master_hash?: string | null
           msg_email_body?: string
           msg_email_subject?: string
           msg_hero1?: string
@@ -80,6 +82,7 @@ export type Database = {
           ces_fee?: number
           email?: string
           id?: number
+          master_hash?: string | null
           msg_email_body?: string
           msg_email_subject?: string
           msg_hero1?: string

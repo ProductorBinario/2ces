@@ -346,6 +346,8 @@
     const rotateOpenBtn = document.getElementById('adm-rotate-open');
     const rotateSaveBtn = document.getElementById('adm-rotate-save');
     const rotateBackBtn = document.getElementById('adm-rotate-back');
+    const rotateMasterOpenBtn = document.getElementById('adm-rotate-master-open');
+    const keyEyeBtn = document.getElementById('adm-key-eye');
 
     const fWa  = document.getElementById('adm-wa');
     const fTg  = document.getElementById('adm-tg');

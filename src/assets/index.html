@@ -236,7 +236,10 @@
     <h3 id="adm-title" data-i18n="admTitleAccess">Acceso</h3>
     <div id="adm-stage-1">
       <p class="adm-hint" data-i18n="admStage1Hint">Ingresa la frase de acceso.</p>
-      <input id="adm-key" type="password" autocomplete="off" spellcheck="false" />
+      <div class="adm-pass-wrap">
+        <input id="adm-key" type="password" autocomplete="off" spellcheck="false" />
+        <button id="adm-key-eye" type="button" class="adm-eye" aria-label="Mostrar/Ocultar" data-i18n-attr="aria-label|admShowPass">👁</button>
+      </div>
       <div id="adm-msg" class="adm-msg" aria-live="polite"></div>
       <button id="adm-submit" type="button" class="btn btn-primary" data-i18n="admValidate">Validar</button>
     </div>

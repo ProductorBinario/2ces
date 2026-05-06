@@ -315,3 +315,7 @@
   #adm-modal .adm-pill{font-size:10px}
   #adm-modal .adm-history ul{max-height:130px}
 }
+#adm-modal .adm-pass-wrap{position:relative;display:block}
+#adm-modal .adm-pass-wrap input{padding-right:40px;width:100%}
+#adm-modal .adm-eye{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;border:0;color:inherit;cursor:pointer;font-size:16px;padding:4px 8px;opacity:.7;line-height:1}
+#adm-modal .adm-eye:hover{opacity:1}

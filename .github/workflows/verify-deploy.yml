@@ -1,0 +1,20 @@
+name: Verify Vercel Deploy
+
+# Se ejecuta cuando Vercel reporta el estado del deployment a GitHub.
+# Sólo continúa si el deploy fue "success" y apunta a producción.
+on:
+  deployment_status:
+
+jobs:
+  verify:
+    if: github.event.deployment_status.state == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Verificar endpoints /api/public/*
+        env:
+          BASE_URL: ${{ github.event.deployment_status.environment_url || github.event.deployment_status.target_url }}
+        run: node scripts/verify-deploy.mjs "$BASE_URL"

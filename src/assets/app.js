@@ -375,7 +375,7 @@
       stage1.hidden = false; stage2.hidden = true; stage3.hidden = true;
       if(stage4) stage4.hidden = true;
       keyInput.value=''; keyInput.type='password';
-      if(keyEyeBtn) keyEyeBtn.textContent = '👁';
+      if(keyEyeBtn){ keyEyeBtn.setAttribute('aria-pressed','false'); setEyeIcon(keyEyeBtn, false); }
       msg.textContent=''; msg.className='adm-msg';
       title.textContent = tt().admTitleAccess;
       submit.textContent = tt().admValidate;
@@ -387,10 +387,16 @@
     function open(){ reset(); overlay.hidden=false; setTimeout(()=>keyInput.focus(),20); }
     function close(){ overlay.hidden=true; reset(); }
 
+    function setEyeIcon(btn, shown){
+      const on = btn.querySelector('.eye-on'); const off = btn.querySelector('.eye-off');
+      if(on) on.style.display = shown ? 'none' : '';
+      if(off) off.style.display = shown ? '' : 'none';
+    }
     keyEyeBtn?.addEventListener('click', () => {
       const isPass = keyInput.type === 'password';
       keyInput.type = isPass ? 'text' : 'password';
-      keyEyeBtn.textContent = isPass ? '🙈' : '👁';
+      setEyeIcon(keyEyeBtn, isPass);
+      keyEyeBtn.setAttribute('aria-pressed', isPass ? 'true' : 'false');
       keyInput.focus();
     });
 

@@ -3,6 +3,9 @@
   "framework": "vite",
   "buildCommand": "bun run build",
   "installCommand": "bun install",
-  "outputDirectory": ".output/public",
-  "trailingSlash": false
+  "outputDirectory": "dist/client",
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
 }
